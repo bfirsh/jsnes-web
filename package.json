@@ -4,6 +4,7 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
+    "jsnes": "git://github.com/bfirsh/jsnes.git#split-out-ui",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "ringbufferjs": "git://github.com/bfirsh/ringbufferjs.git#add-peek-count"
