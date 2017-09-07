@@ -5,11 +5,6 @@ class Screen extends Component {
   constructor(props) {
     super(props);
 
-    // buffer to write on next animation frame
-    this.buffer = null;
-
-    // buffer written in previous animation frame
-    this.prevBuffer = new Array(256 * 240);
   }
 
   render() {
@@ -41,34 +36,31 @@ class Screen extends Component {
     // set alpha to opaque
     this.context.fillRect(0, 0, 256, 240);
 
+    // buffer to write on next animation frame
+    this.buf = new ArrayBuffer(this.imageData.data.length);
+    // Get the canvas buffer in 8bit and 32bit
+    this.buf8 = new Uint8ClampedArray(this.buf);
+    this.buf32 = new Uint32Array(this.buf);
+
     // Set alpha
-    for (var i = 3; i < this.imageData.data.length - 3; i += 4) {
-      this.imageData.data[i] = 0xff;
+    for (var i = 0; i < this.buf32.length; ++i) {
+      this.buf32[i] = 0xff000000;
     }
   }
 
   setBuffer = buffer => {
-    this.buffer = buffer;
+    var i = 0;
+    for (var y = 0; y < 240; ++y) {
+      for (var x = 0; x < 256; ++x) {
+        i = y * 256 + x;
+        // Convert pixel from NES BGR to canvas ABGR
+        this.buf32[i] = 0xff000000 | buffer[i]; // Full alpha
+      }
+    }
   };
 
   writeBuffer = () => {
-    if (this.buffer === null) return;
-
-    var imageData = this.imageData.data;
-    var pixel, i, j;
-
-    for (i = 0; i < 256 * 240; i++) {
-      pixel = this.buffer[i];
-
-      if (pixel !== this.prevBuffer[i]) {
-        j = i * 4;
-        imageData[j] = pixel & 0xff;
-        imageData[j + 1] = (pixel >> 8) & 0xff;
-        imageData[j + 2] = (pixel >> 16) & 0xff;
-        this.prevBuffer[i] = pixel;
-      }
-    }
-
+    this.imageData.data.set(this.buf8);
     this.context.putImageData(this.imageData, 0, 0);
   };
 
