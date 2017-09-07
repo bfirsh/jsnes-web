@@ -7,6 +7,10 @@ export default class Speakers {
   }
 
   start() {
+    // Audio is not supported
+    if (!window.AudioContext) {
+      return;
+    }
     this.audioCtx = new window.AudioContext();
     this.scriptNode = this.audioCtx.createScriptProcessor(0, 0, 2);
     this.scriptNode.onaudioprocess = this.onaudioprocess;
