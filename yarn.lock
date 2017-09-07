@@ -3043,9 +3043,9 @@ jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
 
-"jsnes@git://github.com/bfirsh/jsnes.git#split-out-ui":
+"jsnes@git://github.com/bfirsh/jsnes.git":
   version "0.1.0"
-  resolved "git://github.com/bfirsh/jsnes.git#50c56f93e1e017a9f79f7d7e8de52b5247cb0744"
+  resolved "git://github.com/bfirsh/jsnes.git#29bfceaed63b3b91cfca6ca80abca40cdc286620"
 
 json-loader@0.5.4:
   version "0.5.4"
