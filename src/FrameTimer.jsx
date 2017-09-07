@@ -31,12 +31,19 @@ export default class FrameTimer {
     this.calibrationStartTime = null;
     this.calibrationCurrentFrames = null;
 
-    // wait a sec for it to settle down
-    setTimeout(() => {
-      this.calibrating = true;
-    }, this.calibrationDelay);
+    if (window.requestAnimationFrame) {
+      // wait a sec for it to settle down
+      setTimeout(() => {
+        this.calibrating = true;
+      }, this.calibrationDelay);
 
-    this.requestAnimationFrame();
+      this.requestAnimationFrame();
+    } else {
+      // If window.requestAnimationFrame is not supported, just go straight
+      // into bodge mode
+      this.enableBodgeMode();
+    }
+
   }
 
   start() {
