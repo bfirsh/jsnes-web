@@ -6,7 +6,7 @@
   "dependencies": {
     "jsnes": "git://github.com/bfirsh/jsnes.git",
     "react": "^15.6.1",
-    "react-dom": "^15.5.4",
+    "react-dom": "^15.6.1",
     "ringbufferjs": "git://github.com/bfirsh/ringbufferjs.git#add-peek-count"
   },
   "devDependencies": {
