@@ -10,6 +10,7 @@
     "ringbufferjs": "git://github.com/bfirsh/ringbufferjs.git#add-peek-count"
   },
   "devDependencies": {
+    "canvas-prebuilt": "1.6.0",
     "react-scripts": "0.9.5"
   },
   "scripts": {
