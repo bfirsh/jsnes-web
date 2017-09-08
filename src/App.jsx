@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Container } from "reactstrap";
 import "./App.css";
 import Controls from "./Controls";
 import FrameTimer from "./FrameTimer";
@@ -20,66 +21,68 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Load
-          roms={{
-            "https://d3cto2l652k3y0.cloudfront.net/Bubble Bobble (U).nes":
-              "Bubble Bobble",
-            "roms/croom/croom.nes": "Concentration Room",
-            "https://d3cto2l652k3y0.cloudfront.net/Contra (U) [!].nes":
-              "Contra",
-            "https://d3cto2l652k3y0.cloudfront.net/Donkey Kong (JU).nes":
-              "Donkey Kong",
-            "https://d3cto2l652k3y0.cloudfront.net/Dr. Mario (JU).nes":
-              "Dr. Mario",
-            "https://d3cto2l652k3y0.cloudfront.net/Golf (JU).nes": "Golf",
-            "https://d3cto2l652k3y0.cloudfront.net/Legend of Zelda, The (U) (PRG1).nes":
-              "The Legend of Zelda",
-            "https://d3cto2l652k3y0.cloudfront.net/Lemmings (U).nes":
-              "Lemmings",
-            "https://d3cto2l652k3y0.cloudfront.net/Lifeforce (U).nes":
-              "Lifeforce",
-            "roms/lj65/lj65.nes": "LJ65",
-            "https://d3cto2l652k3y0.cloudfront.net/Mario Bros. (JU) [!].nes":
-              "Mario Bros.",
-            "https://d3cto2l652k3y0.cloudfront.net/Mega Man (U).nes":
-              "Mega Man",
-            "https://d3cto2l652k3y0.cloudfront.net/Pac-Man (U) [!].nes":
-              "Pac-Man",
-            "https://d3cto2l652k3y0.cloudfront.net/Super Mario Bros. (JU) (PRG0) [!].nes":
-              "Super Mario Bros.",
-            "https://d3cto2l652k3y0.cloudfront.net/Super Mario Bros. 3 (U) (PRG1) [!].nes":
-              "Super Mario Bros. 3",
-            "https://d3cto2l652k3y0.cloudfront.net/Tennis (JU) [!].nes":
-              "Tennis",
-            "https://d3cto2l652k3y0.cloudfront.net/Tetris (U) [!].nes":
-              "Tetris",
-            "https://d3cto2l652k3y0.cloudfront.net/Tetris 2 (U) [!].nes":
-              "Tetris 2",
-            "https://d3cto2l652k3y0.cloudfront.net/Zelda II - The Adventure of Link (U).nes":
-              "Zelda II - The Adventure of Link"
-          }}
-          onLoading={path => this.setStatus(`Loading ${path}...`)}
-          onLoaded={this.handleLoaded}
-          onError={msg => this.setStatus(`Error loading ROM: ${msg}`)}
-        />
-
-        <Screen
-          ref={screen => {
-            this.screen = screen;
-          }}
-          onGenerateFrame={() => {
-            this.nes.frame();
-          }}
-        />
-
-        {this.state.running && (
-          <Controls
-            paused={this.state.paused}
-            onPauseResume={this.handlePauseResume}
-            onRestart={this.handleRestart}
+        <Container>
+          <Screen
+            ref={screen => {
+              this.screen = screen;
+            }}
+            onGenerateFrame={() => {
+              this.nes.frame();
+            }}
           />
-        )}
-        <p>{this.state.status}</p>
+
+          <Load
+            roms={{
+              "https://d3cto2l652k3y0.cloudfront.net/Bubble Bobble (U).nes":
+                "Bubble Bobble",
+              "roms/croom/croom.nes": "Concentration Room",
+              "https://d3cto2l652k3y0.cloudfront.net/Contra (U) [!].nes":
+                "Contra",
+              "https://d3cto2l652k3y0.cloudfront.net/Donkey Kong (JU).nes":
+                "Donkey Kong",
+              "https://d3cto2l652k3y0.cloudfront.net/Dr. Mario (JU).nes":
+                "Dr. Mario",
+              "https://d3cto2l652k3y0.cloudfront.net/Golf (JU).nes": "Golf",
+              "https://d3cto2l652k3y0.cloudfront.net/Legend of Zelda, The (U) (PRG1).nes":
+                "The Legend of Zelda",
+              "https://d3cto2l652k3y0.cloudfront.net/Lemmings (U).nes":
+                "Lemmings",
+              "https://d3cto2l652k3y0.cloudfront.net/Lifeforce (U).nes":
+                "Lifeforce",
+              "roms/lj65/lj65.nes": "LJ65",
+              "https://d3cto2l652k3y0.cloudfront.net/Mario Bros. (JU) [!].nes":
+                "Mario Bros.",
+              "https://d3cto2l652k3y0.cloudfront.net/Mega Man (U).nes":
+                "Mega Man",
+              "https://d3cto2l652k3y0.cloudfront.net/Pac-Man (U) [!].nes":
+                "Pac-Man",
+              "https://d3cto2l652k3y0.cloudfront.net/Super Mario Bros. (JU) (PRG0) [!].nes":
+                "Super Mario Bros.",
+              "https://d3cto2l652k3y0.cloudfront.net/Super Mario Bros. 3 (U) (PRG1) [!].nes":
+                "Super Mario Bros. 3",
+              "https://d3cto2l652k3y0.cloudfront.net/Tennis (JU) [!].nes":
+                "Tennis",
+              "https://d3cto2l652k3y0.cloudfront.net/Tetris (U) [!].nes":
+                "Tetris",
+              "https://d3cto2l652k3y0.cloudfront.net/Tetris 2 (U) [!].nes":
+                "Tetris 2",
+              "https://d3cto2l652k3y0.cloudfront.net/Zelda II - The Adventure of Link (U).nes":
+                "Zelda II - The Adventure of Link"
+            }}
+            onLoading={path => this.setStatus(`Loading ${path}...`)}
+            onLoaded={this.handleLoaded}
+            onError={msg => this.setStatus(`Error loading ROM: ${msg}`)}
+          />
+
+          {this.state.running && (
+            <Controls
+              paused={this.state.paused}
+              onPauseResume={this.handlePauseResume}
+              onRestart={this.handleRestart}
+            />
+          )}
+          <p>{this.state.status}</p>
+        </Container>
       </div>
     );
   }

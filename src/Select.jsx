@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Input } from "reactstrap";
 
 class Select extends Component {
   constructor(props) {
@@ -13,12 +14,12 @@ class Select extends Component {
 
   render() {
     return (
-      <select value={this.state.value} onChange={this.handleChange}>
+      <Input type="select" value={this.state.value} onChange={this.handleChange}>
         <option value="">{this.props.placeholder}</option>
         {Object.keys(this.props.options).map(key =>
           <option key={key} value={key}>{this.props.options[key]}</option>
         )}
-      </select>
+      </Input>
     );
   }
 }
