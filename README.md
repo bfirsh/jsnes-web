@@ -1,6 +1,6 @@
 # JSNES Web UI
 
-A React-based web UI for JSNES.
+A React-based web UI for [JSNES](https://github.com/bfirsh/jsnes).
 
 ## Running
 
