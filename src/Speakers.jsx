@@ -37,6 +37,10 @@ export default class Speakers {
       if (bufferSize > 0) {
         console.log(`Buffer underrun (needed ${size}, got ${bufferSize})`);
       }
+      for (var j = 0; j < size; j++) {
+        left[j] = 0;
+        right[j] = 0;
+      }
       return;
     }
     for (var i = 0; i < size; i++) {
