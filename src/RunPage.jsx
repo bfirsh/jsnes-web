@@ -31,7 +31,6 @@ class RunPage extends Component {
     this.state = {
       running: false,
       paused: false,
-      status: "Booting..."
     };
   }
 
@@ -54,7 +53,6 @@ class RunPage extends Component {
             onRestart={this.handleRestart}
           />
         )}
-        <p>{this.state.status}</p>
       </Container>
     );
   }
@@ -88,7 +86,7 @@ class RunPage extends Component {
     });
     this.nes = new NES({
       onFrame: this.screen.setBuffer,
-      onStatusUpdate: this.setStatus,
+      onStatusUpdate: console.log,
       onAudioSample: this.speakers.writeSample
     });
 
@@ -115,7 +113,7 @@ class RunPage extends Component {
     const path = config.BASE_ROM_URL + this.props.match.params.rom;
     loadBinary(path, (err, data) => {
       if (err) {
-        this.setStatus(`Error loading ROM: ${err.toString()}`)
+        window.alert(`Error loading ROM: ${err.toString()}`);
       } else {
         this.handleLoaded(data);
       }
@@ -123,7 +121,6 @@ class RunPage extends Component {
   };
 
   handleLoaded = data => {
-    this.setStatus("Loaded.");
     this.setState({ uiEnabled: true, running: true });
     this.nes.loadROM(data);
     this.start();
@@ -143,18 +140,12 @@ class RunPage extends Component {
     clearInterval(this.fpsInterval);
   };
 
-  setStatus = msg => {
-    this.setState({ status: msg });
-  };
-
   handlePauseResume = () => {
     if (this.state.paused) {
       this.setState({ paused: false });
-      this.setStatus("Running");
       this.start();
     } else {
       this.setState({ paused: true });
-      this.setStatus("Paused");
       this.stop();
     }
   };
