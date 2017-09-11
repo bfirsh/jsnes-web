@@ -31,14 +31,15 @@ export default class FrameTimer {
     this.calibrationStartTime = null;
     this.calibrationCurrentFrames = null;
 
-    if (window.requestAnimationFrame) {
-      // wait a sec for it to settle down
-      setTimeout(() => {
-        this.calibrating = true;
-      }, this.calibrationDelay);
-    } else {
-      console.log("requestAnimationFrame is not supported");
-    }
+    // FIXME: disable bodge mode entirely. it's not really working.
+    // if (window.requestAnimationFrame) {
+    //   // wait a sec for it to settle down
+    //   setTimeout(() => {
+    //     this.calibrating = true;
+    //   }, this.calibrationDelay);
+    // } else {
+    //   console.log("requestAnimationFrame is not supported");
+    // }
 
   }
 
