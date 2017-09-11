@@ -3,6 +3,7 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./RunPage.css";
 import config from "./config";
+import ControlsModal from "./ControlsModal";
 import FrameTimer from "./FrameTimer";
 import Screen from "./Screen";
 import Speakers from "./Speakers";
@@ -31,6 +32,7 @@ class RunPage extends Component {
     this.state = {
       running: false,
       paused: false,
+      controlsModal: false
     };
   }
 
@@ -50,6 +52,9 @@ class RunPage extends Component {
               </Link>
             </li>
           </ul>
+          <Button outline color="primary" onClick={this.toggleControlsModal} className="mr-3">
+            Controls
+          </Button>
           <Button
             outline
             color="primary"
@@ -73,6 +78,10 @@ class RunPage extends Component {
             onGenerateFrame={() => {
               this.nes.frame();
             }}
+          />
+          <ControlsModal
+            isOpen={this.state.controlsModal}
+            toggle={this.toggleControlsModal}
           />
         </div>
       </div>
@@ -181,6 +190,10 @@ class RunPage extends Component {
     this.screenContainer.style.height = `${window.innerHeight -
       navbarHeight}px`;
     this.screen.fitInParent();
+  };
+
+  toggleControlsModal = () => {
+    this.setState({ controlsModal: !this.state.controlsModal });
   };
 }
 
