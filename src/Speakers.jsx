@@ -1,8 +1,9 @@
 import RingBuffer from "ringbufferjs";
 
 export default class Speakers {
-  constructor() {
-    this.bufferSize = 8196;
+  constructor({onBufferUnderrun}) {
+    this.onBufferUnderrun = onBufferUnderrun;
+    this.bufferSize = 8192;
     this.buffer = new RingBuffer(this.bufferSize * 2);
   }
 
@@ -12,7 +13,7 @@ export default class Speakers {
       return;
     }
     this.audioCtx = new window.AudioContext();
-    this.scriptNode = this.audioCtx.createScriptProcessor(0, 0, 2);
+    this.scriptNode = this.audioCtx.createScriptProcessor(1024, 0, 2);
     this.scriptNode.onaudioprocess = this.onaudioprocess;
     this.scriptNode.connect(this.audioCtx.destination);
   }
@@ -29,9 +30,18 @@ export default class Speakers {
     var left = e.outputBuffer.getChannelData(0);
     var right = e.outputBuffer.getChannelData(1);
     var size = left.length;
+
+    // We're going to buffer underrun. Attempt to fill the buffer.
+    if (this.buffer.size() < size * 2 && this.onBufferUnderrun) {
+      this.onBufferUnderrun(this.buffer.size(), size * 2);
+    }
+
     try {
       var samples = this.buffer.deqN(size * 2);
     } catch (e) {
+      // onBufferUnderrun failed to fill the buffer, so handle a real buffer
+      // underrun
+
       // ignore empty buffers... assume audio has just stopped
       var bufferSize = this.buffer.size() / 2;
       if (bufferSize > 0) {
