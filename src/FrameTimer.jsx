@@ -39,9 +39,7 @@ export default class FrameTimer {
 
       this.requestAnimationFrame();
     } else {
-      // If window.requestAnimationFrame is not supported, just go straight
-      // into bodge mode
-      this.enableBodgeMode();
+      console.log("requestAnimationFrame is not supported");
     }
 
   }
