@@ -60,7 +60,12 @@ class RunPage extends Component {
           </Button>
         </nav>
 
-        <div className="screen-container" ref={el => {this.screenContainer = el}}>
+        <div
+          className="screen-container"
+          ref={el => {
+            this.screenContainer = el;
+          }}
+        >
           <Screen
             ref={screen => {
               this.screen = screen;
@@ -172,8 +177,9 @@ class RunPage extends Component {
   };
 
   layout = () => {
-    let navbarHeight = parseFloat(window.getComputedStyle(this.navbar).height)
-    this.screenContainer.style.height = `${window.innerHeight - navbarHeight}px`;
+    let navbarHeight = parseFloat(window.getComputedStyle(this.navbar).height);
+    this.screenContainer.style.height = `${window.innerHeight -
+      navbarHeight}px`;
     this.screen.fitInParent();
   };
 }
