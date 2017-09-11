@@ -1,0 +1,7 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+$body-bg: $black;
+$body-color: $gray-300;
+$enable-rounded: false;
+$enable-print-styles: false;
+@import "node_modules/bootstrap/scss/bootstrap";
