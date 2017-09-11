@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./ListPage.css";
-import { Container, ListGroup } from "reactstrap";
+import { ListGroup } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class ListPage extends Component {
@@ -27,24 +27,31 @@ class ListPage extends Component {
     };
 
     return (
-      <Container className="ListPage">
-        <header className="mt-3">
-          <h1>JSNES</h1>
-          <p>A JavaScript NES emulator.</p>
-        </header>
-        <ListGroup>
-          {Object.keys(roms).map(key => (
-            <Link
-              key={ key }
-              to={ "/run/" + encodeURIComponent(key) }
-              className="list-group-item"
-            >
-              {roms[key]}
-              <span className="float-right">&rsaquo;</span>
-            </Link>
-          ))}
-        </ListGroup>
-      </Container>
+      <div className="container ListPage my-4">
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <header className="mb-4">
+              <h1 className="mb-3">JSNES</h1>
+              <p>A JavaScript NES emulator.</p>
+              <p>
+                By <a href="https://fir.sh">Ben Firshman</a>. Source on <a href="https://github.com/bfirsh/jsnes">GitHub</a>.
+              </p>
+            </header>
+            <ListGroup>
+              {Object.keys(roms).map(key => (
+                <Link
+                  key={key}
+                  to={"/run/" + encodeURIComponent(key)}
+                  className="list-group-item"
+                >
+                  {roms[key]}
+                  <span className="float-right">&rsaquo;</span>
+                </Link>
+              ))}
+            </ListGroup>
+          </div>
+        </div>
+      </div>
     );
   }
 }
