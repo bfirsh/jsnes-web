@@ -1,6 +1,7 @@
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 
+// Bootstrap customization, where we're supposed to
 $enable-rounded: false;
 $enable-print-styles: false;
 
@@ -18,7 +19,18 @@ $theme-colors: map-merge($theme-colors, (
 $list-group-bg: $black;
 $list-group-border-color: $gray-300;
 
+$table-border-color: $gray-900;
+
+$modal-content-bg: $black;
+$modal-header-border-width: 0;
+$modal-footer-border-width: 0;
+
+$close-color: $white;
+$close-text-shadow: none;
+
 @import "node_modules/bootstrap/scss/bootstrap";
+
+// Bootstrap customization, where we're not supposed to
 
 // Fix hover color being white
 @each $color, $value in $theme-colors {
@@ -33,4 +45,13 @@ $list-group-border-color: $gray-300;
 
 .list-group-item {
   text-decoration: none;
+}
+
+.table thead th {
+  border-bottom: 2px solid white;
+  border-top: none;
+}
+
+.close {
+  opacity: 1;
 }
