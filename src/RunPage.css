@@ -1,2 +1,7 @@
 .RunPage {
+  overflow: hidden;
+}
+
+.RunPage .screen-container {
+  text-align: center;
 }

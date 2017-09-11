@@ -20,10 +20,6 @@ class Screen extends Component {
   }
 
   initCanvas() {
-    // scale with CSS
-    this.canvas.style.width = `${256 * 2}px`;
-    this.canvas.style.height = `${240 * 2}px`;
-
     this.context = this.canvas.getContext("2d");
     this.imageData = this.context.getImageData(0, 0, 256, 240);
 
@@ -57,6 +53,21 @@ class Screen extends Component {
   writeBuffer = () => {
     this.imageData.data.set(this.buf8);
     this.context.putImageData(this.imageData, 0, 0);
+  };
+
+  fitInParent = () => {
+    let parent = this.canvas.parentNode;
+    let parentWidth = parent.clientWidth;
+    let parentHeight = parent.clientHeight;
+    let parentRatio = parentWidth / parentHeight;
+    let desiredRatio = 256 / 240;
+    if (desiredRatio < parentRatio) {
+      this.canvas.style.width = `${Math.round(parentHeight * desiredRatio)}px`;
+      this.canvas.style.height = `${parentHeight}px`;
+    } else {
+      this.canvas.style.width = `${parentWidth}px`;
+      this.canvas.style.height = `${Math.round(parentWidth / desiredRatio)}px`;
+    }
   };
 
   screenshot() {

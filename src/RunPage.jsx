@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
+import { Button } from "reactstrap";
+import { Link } from "react-router-dom";
 import "./RunPage.css";
 import config from "./config";
-import Controls from "./Controls";
 import FrameTimer from "./FrameTimer";
 import Screen from "./Screen";
 import Speakers from "./Speakers";
@@ -36,24 +36,41 @@ class RunPage extends Component {
 
   render() {
     return (
-      <Container className="RunPage">
-        <Screen
-          ref={screen => {
-            this.screen = screen;
+      <div className="RunPage">
+        <nav
+          className="navbar navbar-expand"
+          ref={el => {
+            this.navbar = el;
           }}
-          onGenerateFrame={() => {
-            this.nes.frame();
-          }}
-        />
+        >
+          <ul className="navbar-nav mr-auto">
+            <li className="navitem">
+              <Link to="/" className="nav-link">
+                &lsaquo; Back
+              </Link>
+            </li>
+          </ul>
+          <Button
+            outline
+            color="primary"
+            onClick={this.handlePauseResume}
+            disabled={!this.state.running}
+          >
+            {this.state.paused ? "Resume" : "Pause"}
+          </Button>
+        </nav>
 
-        {this.state.running && (
-          <Controls
-            paused={this.state.paused}
-            onPauseResume={this.handlePauseResume}
-            onRestart={this.handleRestart}
+        <div className="screen-container" ref={el => {this.screenContainer = el}}>
+          <Screen
+            ref={screen => {
+              this.screen = screen;
+            }}
+            onGenerateFrame={() => {
+              this.nes.frame();
+            }}
           />
-        )}
-      </Container>
+        </div>
+      </div>
     );
   }
 
@@ -99,6 +116,9 @@ class RunPage extends Component {
     document.addEventListener("keyup", this.nes.keyboard.keyUp);
     document.addEventListener("keypress", this.nes.keyboard.keyPress);
 
+    window.addEventListener("resize", this.layout);
+    this.layout();
+
     this.load();
   }
 
@@ -107,6 +127,7 @@ class RunPage extends Component {
     document.removeEventListener("keydown", this.nes.keyboard.keyDown);
     document.removeEventListener("keyup", this.nes.keyboard.keyUp);
     document.removeEventListener("keypress", this.nes.keyboard.keyPress);
+    window.removeEventListener("resize", this.layout);
   }
 
   load = () => {
@@ -150,8 +171,10 @@ class RunPage extends Component {
     }
   };
 
-  handleRestart = () => {
-    this.nes.reloadROM();
+  layout = () => {
+    let navbarHeight = parseFloat(window.getComputedStyle(this.navbar).height)
+    this.screenContainer.style.height = `${window.innerHeight - navbarHeight}px`;
+    this.screen.fitInParent();
   };
 }
 
