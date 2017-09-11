@@ -19,9 +19,13 @@ export default class Speakers {
   }
 
   stop() {
-    this.scriptNode.disconnect(this.audioCtx.destination);
-    this.scriptNode.onaudioprocess = null;
-    this.audioCtx.close();
+    if (this.scriptNode) {
+      this.scriptNode.disconnect(this.audioCtx.destination);
+      this.scriptNode.onaudioprocess = null;
+    }
+    if (this.audioCtx) {
+      this.audioCtx.close();
+    }
   }
 
   writeSample = (left, right) => {
