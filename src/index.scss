@@ -10,7 +10,23 @@ $link-color: $gray-100;
 $link-decoration: underline;
 $link-hover-color: $gray-500;
 $link-hover-decoration: underline;
+
+$theme-colors: map-merge($theme-colors, (
+  primary: $white,
+));
+
 $list-group-bg: $black;
 $list-group-border-color: $gray-300;
 
 @import "node_modules/bootstrap/scss/bootstrap";
+
+// Fix hover color being white
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    @include button-outline-variant($value, $black);
+  }
+}
+
+.nav-link {
+  text-decoration: none;
+}
