@@ -18,6 +18,12 @@ export default class Speakers {
     this.scriptNode.connect(this.audioCtx.destination);
   }
 
+  stop() {
+    this.scriptNode.disconnect(this.audioCtx.destination);
+    this.scriptNode.onaudioprocess = null;
+    this.audioCtx.close();
+  }
+
   writeSample = (left, right) => {
     if (this.buffer.size() / 2 >= this.bufferSize) {
       console.log(`Buffer overrun`);

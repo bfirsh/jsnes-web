@@ -36,8 +36,6 @@ export default class FrameTimer {
       setTimeout(() => {
         this.calibrating = true;
       }, this.calibrationDelay);
-
-      this.requestAnimationFrame();
     } else {
       console.log("requestAnimationFrame is not supported");
     }
@@ -46,10 +44,14 @@ export default class FrameTimer {
 
   start() {
     this.running = true;
+    this.requestAnimationFrame();
+    if (this.bodgeMode) this.startBodgeMode();
   }
 
   stop() {
     this.running = false;
+    if (this._requestID) window.cancelAnimationFrame(this._requestID);
+    if (this.bodgeInterval) clearInterval(this.bodgeInterval);
   }
 
   requestAnimationFrame() {
@@ -80,7 +82,7 @@ export default class FrameTimer {
           console.log(
             `Enabling bodge mode. (Desired FPS is ${this.desiredFPS}, actual FPS is ${fps})`
           );
-          this.enableBodgeMode();
+          this.startBodgeMode();
         }
       }
     }
@@ -95,9 +97,9 @@ export default class FrameTimer {
     }
   };
 
-  enableBodgeMode = () => {
+  startBodgeMode = () => {
     this.bodgeMode = true;
-    setInterval(this.onBodge, 1000 / this.desiredFPS);
+    this.bodgeInterval = setInterval(this.onBodge, 1000 / this.desiredFPS);
   };
 
   onBodge = () => {

@@ -86,7 +86,6 @@ class RunPage extends Component {
         }
       }
     });
-    this.speakers.start();
     this.nes = new NES({
       onFrame: this.screen.setBuffer,
       onStatusUpdate: this.setStatus,
@@ -98,11 +97,18 @@ class RunPage extends Component {
       onWriteFrame: this.screen.writeBuffer
     });
 
-    document.addEventListener("keydown", e => this.nes.keyboard.keyDown(e));
-    document.addEventListener("keyup", e => this.nes.keyboard.keyUp(e));
-    document.addEventListener("keypress", e => this.nes.keyboard.keyPress(e));
+    document.addEventListener("keydown", this.nes.keyboard.keyDown);
+    document.addEventListener("keyup", this.nes.keyboard.keyUp);
+    document.addEventListener("keypress", this.nes.keyboard.keyPress);
 
     this.load();
+  }
+
+  componentWillUnmount() {
+    this.stop();
+    document.removeEventListener("keydown", this.nes.keyboard.keyDown);
+    document.removeEventListener("keyup", this.nes.keyboard.keyUp);
+    document.removeEventListener("keypress", this.nes.keyboard.keyPress);
   }
 
   load = () => {
@@ -125,13 +131,16 @@ class RunPage extends Component {
 
   start = () => {
     this.frameTimer.start();
-    setInterval(() => {
+    this.speakers.start();
+    this.fpsInterval = setInterval(() => {
       console.log(`FPS: ${this.nes.getFPS()}`);
     }, 1000);
   };
 
   stop = () => {
     this.frameTimer.stop();
+    this.speakers.stop();
+    clearInterval(this.fpsInterval);
   };
 
   setStatus = msg => {
