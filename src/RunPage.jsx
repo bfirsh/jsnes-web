@@ -5,6 +5,7 @@ import "./RunPage.css";
 import config from "./config";
 import ControlsModal from "./ControlsModal";
 import FrameTimer from "./FrameTimer";
+import KeyboardController from "./KeyboardController";
 import Screen from "./Screen";
 import Speakers from "./Speakers";
 import { NES } from "jsnes";
@@ -126,9 +127,13 @@ class RunPage extends Component {
       onWriteFrame: this.screen.writeBuffer
     });
 
-    document.addEventListener("keydown", this.nes.keyboard.keyDown);
-    document.addEventListener("keyup", this.nes.keyboard.keyUp);
-    document.addEventListener("keypress", this.nes.keyboard.keyPress);
+    this.keyboardController = new KeyboardController({
+      onButtonDown: this.nes.buttonDown,
+      onButtonUp: this.nes.buttonUp,
+    });
+    document.addEventListener("keydown", this.keyboardController.handleKeyDown);
+    document.addEventListener("keyup", this.keyboardController.handleKeyUp);
+    document.addEventListener("keypress", this.keyboardController.handleKeyPress);
 
     window.addEventListener("resize", this.layout);
     this.layout();
@@ -138,9 +143,9 @@ class RunPage extends Component {
 
   componentWillUnmount() {
     this.stop();
-    document.removeEventListener("keydown", this.nes.keyboard.keyDown);
-    document.removeEventListener("keyup", this.nes.keyboard.keyUp);
-    document.removeEventListener("keypress", this.nes.keyboard.keyPress);
+    document.removeEventListener("keydown", this.keyboardController.handleKeyDown);
+    document.removeEventListener("keyup", this.keyboardController.handleKeyUp);
+    document.removeEventListener("keypress", this.keyboardController.handleKeyPress);
     window.removeEventListener("resize", this.layout);
   }
 
