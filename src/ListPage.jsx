@@ -18,6 +18,7 @@ class ListPage extends Component {
       "Mega Man (U).nes": "Mega Man",
       "Pac-Man (U) [!].nes": "Pac-Man",
       "Super Mario Bros. (JU) (PRG0) [!].nes": "Super Mario Bros.",
+      "Super Mario Bros. 2 (U) (PRG0) [!].nes": "Super Mario Bros. 2",
       "Super Mario Bros. 3 (U) (PRG1) [!].nes": "Super Mario Bros. 3",
       "Tennis (JU) [!].nes": "Tennis",
       "Tetris (U) [!].nes": "Tetris",
