@@ -28,7 +28,6 @@ export default class KeyboardController {
   }
 
   handleKeyDown = e => {
-    console.log("keydown", e.keyCode)
     var key = KEYS[e.keyCode];
     if (key) {
       this.onButtonDown(key[0], key[1]);
