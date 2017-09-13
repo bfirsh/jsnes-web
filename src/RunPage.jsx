@@ -53,7 +53,12 @@ class RunPage extends Component {
               </Link>
             </li>
           </ul>
-          <Button outline color="primary" onClick={this.toggleControlsModal} className="mr-3">
+          <Button
+            outline
+            color="primary"
+            onClick={this.toggleControlsModal}
+            className="mr-3"
+          >
             Controls
           </Button>
           <Button
@@ -129,11 +134,14 @@ class RunPage extends Component {
 
     this.keyboardController = new KeyboardController({
       onButtonDown: this.nes.buttonDown,
-      onButtonUp: this.nes.buttonUp,
+      onButtonUp: this.nes.buttonUp
     });
     document.addEventListener("keydown", this.keyboardController.handleKeyDown);
     document.addEventListener("keyup", this.keyboardController.handleKeyUp);
-    document.addEventListener("keypress", this.keyboardController.handleKeyPress);
+    document.addEventListener(
+      "keypress",
+      this.keyboardController.handleKeyPress
+    );
 
     window.addEventListener("resize", this.layout);
     this.layout();
@@ -143,9 +151,15 @@ class RunPage extends Component {
 
   componentWillUnmount() {
     this.stop();
-    document.removeEventListener("keydown", this.keyboardController.handleKeyDown);
+    document.removeEventListener(
+      "keydown",
+      this.keyboardController.handleKeyDown
+    );
     document.removeEventListener("keyup", this.keyboardController.handleKeyUp);
-    document.removeEventListener("keypress", this.keyboardController.handleKeyPress);
+    document.removeEventListener(
+      "keypress",
+      this.keyboardController.handleKeyPress
+    );
     window.removeEventListener("resize", this.layout);
   }
 
