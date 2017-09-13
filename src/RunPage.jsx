@@ -150,14 +150,24 @@ class RunPage extends Component {
   }
 
   load = () => {
-    const path = config.BASE_ROM_URL + this.props.match.params.rom;
-    loadBinary(path, (err, data) => {
-      if (err) {
-        window.alert(`Error loading ROM: ${err.toString()}`);
-      } else {
-        this.handleLoaded(data);
-      }
-    });
+    if (this.props.match.params.rom) {
+      const path = config.BASE_ROM_URL + this.props.match.params.rom;
+      loadBinary(path, (err, data) => {
+        if (err) {
+          window.alert(`Error loading ROM: ${err.toString()}`);
+        } else {
+          this.handleLoaded(data);
+        }
+      });
+    } else if (this.props.location.state && this.props.location.state.file) {
+      let reader = new FileReader();
+      reader.readAsBinaryString(this.props.location.state.file);
+      reader.onload = e => {
+        this.handleLoaded(e.target.result);
+      };
+    } else {
+      window.alert("No ROM provided");
+    }
   };
 
   handleLoaded = data => {

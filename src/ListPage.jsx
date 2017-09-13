@@ -28,7 +28,11 @@ class ListPage extends Component {
     };
 
     return (
-      <div className="container ListPage my-4">
+      <div
+        className="container ListPage my-4"
+        onDragOver={this.handleDragOver}
+        onDrop={this.handleDrop}
+      >
         <div className="row justify-content-center">
           <div className="col-md-8">
             <header className="mb-4">
@@ -38,7 +42,7 @@ class ListPage extends Component {
                 By <a href="https://fir.sh">Ben Firshman</a>. Source on <a href="https://github.com/bfirsh/jsnes">GitHub</a>.
               </p>
             </header>
-            <ListGroup>
+            <ListGroup className="mb-4">
               {Object.keys(roms).map(key => (
                 <Link
                   key={key}
@@ -50,11 +54,28 @@ class ListPage extends Component {
                 </Link>
               ))}
             </ListGroup>
+            <p>Or, drag and drop a ROM file onto the page.</p>
           </div>
         </div>
       </div>
     );
   }
+
+  handleDragOver = e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
+  };
+
+  handleDrop = e => {
+    e.preventDefault();
+    let file;
+    if (e.dataTransfer.items) {
+      file = e.dataTransfer.items[0].getAsFile();
+    } else {
+      file = e.dataTransfer.files[0];
+    }
+    this.props.history.push({ pathname: "/run", state: { file: file } });
+  };
 }
 
 export default ListPage;
