@@ -39,7 +39,8 @@ class ListPage extends Component {
               <h1 className="mb-3">JSNES</h1>
               <p>A JavaScript NES emulator.</p>
               <p>
-                By <a href="https://fir.sh">Ben Firshman</a>. Source on <a href="https://github.com/bfirsh/jsnes">GitHub</a>.
+                By <a href="https://fir.sh">Ben Firshman</a>. Source on{" "}
+                <a href="https://github.com/bfirsh/jsnes">GitHub</a>.
               </p>
             </header>
             <ListGroup className="mb-4">
