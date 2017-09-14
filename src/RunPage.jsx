@@ -84,6 +84,15 @@ class RunPage extends Component {
             onGenerateFrame={() => {
               this.nes.frame();
             }}
+            onMouseDown={(x, y) => {
+              // console.log("mouseDown")
+              this.nes.zapperMove(x, y);
+              this.nes.zapperFireDown();
+            }}
+            onMouseUp={() => {
+              // console.log("mouseUp")
+              this.nes.zapperFireUp();
+            }}
           />
           <ControlsModal
             isOpen={this.state.controlsModal}

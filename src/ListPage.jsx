@@ -10,6 +10,7 @@ class ListPage extends Component {
       "Contra (U) [!].nes": "Contra",
       "Donkey Kong (JU).nes": "Donkey Kong",
       "Dr. Mario (JU).nes": "Dr. Mario",
+      "Duck Hunt (JUE) [!].nes": "Duck Hunt",
       "Golf (JU).nes": "Golf",
       "Legend of Zelda, The (U) (PRG1).nes": "The Legend of Zelda",
       "Lemmings (U).nes": "Lemmings",
