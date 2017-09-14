@@ -19,6 +19,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Route exact path="/" component={ListPage} />
+          <Route exact path="/run" component={RunPage} />
           <Route exact path="/run/:rom" component={RunPage} />
           <Route path="/" render={this.recordPageview} />
         </div>
