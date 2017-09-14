@@ -8,6 +8,8 @@ class Screen extends Component {
         className="Screen"
         width="256"
         height="240"
+        onMouseDown={this.handleMouseDown}
+        onMouseUp={this.props.onMouseUp}
         ref={canvas => {
           this.canvas = canvas;
         }}
@@ -75,6 +77,16 @@ class Screen extends Component {
     img.src = this.canvas.toDataURL("image/png");
     return img;
   }
+
+  handleMouseDown = (e) => {
+    if (!this.props.onMouseDown) return;
+    // Make coordinates unscaled
+    let scale = 256 / parseFloat(this.canvas.style.width);
+    let rect = this.canvas.getBoundingClientRect();
+    let x = Math.round((e.clientX - rect.left) * scale);
+    let y = Math.round((e.clientY - rect.top) * scale);
+    this.props.onMouseDown(x, y);
+  };
 }
 
 export default Screen;
