@@ -3786,7 +3786,7 @@ jsesc@~0.5.0:
 
 "jsnes@git://github.com/bfirsh/jsnes.git":
   version "0.1.0"
-  resolved "git://github.com/bfirsh/jsnes.git#6460473b5bcc09fb22d3db3e024047c412d45c5f"
+  resolved "git://github.com/bfirsh/jsnes.git#548124a4a19a7d9d438391c85db886e18d5103b6"
 
 json-loader@^0.5.4:
   version "0.5.7"
