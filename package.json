@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "canvas-prebuilt": "1.6.0",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.16"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
