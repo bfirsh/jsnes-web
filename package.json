@@ -12,7 +12,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-transition-group": "^15.6.2",
     "react-dom": "^15.6.2",
-    "react-ga": "^2.2.0",
+    "react-ga": "^2.4.0",
     "react-router-dom": "^4.2.2",
     "reactstrap": "^4.8.0",
     "ringbufferjs": "git://github.com/bfirsh/ringbufferjs.git#add-peek-count"
