@@ -5748,9 +5748,9 @@ rimraf@2, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.6.1:
   dependencies:
     glob "^7.0.5"
 
-"ringbufferjs@git://github.com/bfirsh/ringbufferjs.git#add-peek-count":
-  version "0.0.1"
-  resolved "git://github.com/bfirsh/ringbufferjs.git#43dfc368c97f000f6ac816ee8da34b8ac649943f"
+ringbufferjs@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ringbufferjs/-/ringbufferjs-1.1.0.tgz#83f78108cf5dd95d2f3ab4a84352ad15829721d3"
 
 ripemd160@^2.0.0, ripemd160@^2.0.1:
   version "2.0.1"

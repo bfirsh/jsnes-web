@@ -15,7 +15,7 @@
     "react-ga": "^2.2.0",
     "react-router-dom": "^4.2.2",
     "reactstrap": "^4.8.0",
-    "ringbufferjs": "git://github.com/bfirsh/ringbufferjs.git#add-peek-count"
+    "ringbufferjs": "^1.1.0"
   },
   "devDependencies": {
     "canvas-prebuilt": "1.6.0",
