@@ -3787,8 +3787,8 @@ jsesc@~0.5.0:
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
 
 "jsnes@git://github.com/bfirsh/jsnes.git":
-  version "0.1.0"
-  resolved "git://github.com/bfirsh/jsnes.git#548124a4a19a7d9d438391c85db886e18d5103b6"
+  version "1.0.0"
+  resolved "git://github.com/bfirsh/jsnes.git#0f87926b1cd701576c8d22e6d1f054eab04f4acc"
 
 json-loader@^0.5.4:
   version "0.5.7"
