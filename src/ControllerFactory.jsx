@@ -1,3 +1,4 @@
+import {tryCreateGamepadController} from "./GamepadController";
 import KeyboardController from "./KeyboardController";
 
 /**
@@ -8,9 +9,14 @@ import KeyboardController from "./KeyboardController";
  *   and a button ID such as Controller.BUTTON_A.
  */
 export function createControllers(options) {
-  const keyboardController = new KeyboardController(options);
-  document.addEventListener("keydown", keyboardController.handleKeyDown);
-  document.addEventListener("keyup", keyboardController.handleKeyUp);
-  document.addEventListener("keypress", keyboardController.handleKeyPress);
-  return keyboardController;
+  const gamepadController = tryCreateGamepadController(options);
+
+  if (gamepadController != null) {
+    // TODO: Listen for the "gamepaddisconnected" event.
+    console.info('Using GamepadController.');
+    return gamepadController;
+  } else {
+    console.info('Using KeyboardController.');
+    return new KeyboardController(options);
+  }
 }

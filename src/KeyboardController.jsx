@@ -25,6 +25,10 @@ export default class KeyboardController {
   constructor(options) {
     this.onButtonDown = options.onButtonDown;
     this.onButtonUp = options.onButtonUp;
+
+    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener("keyup", this.handleKeyUp);
+    document.addEventListener("keypress", this.handleKeyPress);
   }
 
   handleKeyDown = e => {
@@ -46,4 +50,10 @@ export default class KeyboardController {
   handleKeyPress = e => {
     e.preventDefault();
   };
+
+  dispose() {
+    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener("keyup", this.handleKeyUp);
+    document.removeEventListener("keypress", this.handleKeyPress);
+  }
 }

@@ -154,15 +154,7 @@ class RunPage extends Component {
 
   componentWillUnmount() {
     this.stop();
-    document.removeEventListener(
-      "keydown",
-      this.keyboardController.handleKeyDown
-    );
-    document.removeEventListener("keyup", this.keyboardController.handleKeyUp);
-    document.removeEventListener(
-      "keypress",
-      this.keyboardController.handleKeyPress
-    );
+    this.keyboardController.dispose();
     window.removeEventListener("resize", this.layout);
   }
 
