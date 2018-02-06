@@ -3,9 +3,9 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./RunPage.css";
 import config from "./config";
+import { createControllers } from "./ControllerFactory";
 import ControlsModal from "./ControlsModal";
 import FrameTimer from "./FrameTimer";
-import KeyboardController from "./KeyboardController";
 import Screen from "./Screen";
 import Speakers from "./Speakers";
 import { NES } from "jsnes";
@@ -141,16 +141,10 @@ class RunPage extends Component {
       onWriteFrame: this.screen.writeBuffer
     });
 
-    this.keyboardController = new KeyboardController({
+    this.keyboardController = createControllers({
       onButtonDown: this.nes.buttonDown,
       onButtonUp: this.nes.buttonUp
     });
-    document.addEventListener("keydown", this.keyboardController.handleKeyDown);
-    document.addEventListener("keyup", this.keyboardController.handleKeyUp);
-    document.addEventListener(
-      "keypress",
-      this.keyboardController.handleKeyPress
-    );
 
     window.addEventListener("resize", this.layout);
     this.layout();
