@@ -182,15 +182,19 @@ class RunPage extends Component {
           this.handleLoaded(data);
         }
       });
-    } else if (this.props.location.state && this.props.location.state.file) {
+      return;
+    }
+
+    if (this.props.location.state && this.props.location.state.file) {
       let reader = new FileReader();
       reader.readAsBinaryString(this.props.location.state.file);
       reader.onload = e => {
         this.handleLoaded(e.target.result);
       };
-    } else {
-      window.alert("No ROM provided");
+      return;
     }
+
+    window.alert("No ROM provided");
   };
 
   handleLoaded = data => {
@@ -217,10 +221,11 @@ class RunPage extends Component {
     if (this.state.paused) {
       this.setState({ paused: false });
       this.start();
-    } else {
-      this.setState({ paused: true });
-      this.stop();
+      return;
     }
+
+    this.setState({ paused: true });
+    this.stop();
   };
 
   layout = () => {
