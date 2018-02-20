@@ -79,13 +79,12 @@ class ListPage extends Component {
 
   handleDrop = e => {
     e.preventDefault();
-    let file;
-    if (e.dataTransfer.items) {
-      file = e.dataTransfer.items[0].getAsFile();
-    } else {
-      file = e.dataTransfer.files[0];
-    }
-    this.props.history.push({ pathname: "/run", state: { file: file } });
+
+    const file = e.dataTransfer.items
+      ? e.dataTransfer.items[0].getAsFile()
+      : e.dataTransfer.files[0];
+
+    this.props.history.push({ pathname: "/run", state: { file } });
   };
 }
 
