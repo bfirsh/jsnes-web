@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./RunPage.css";
 import config from "./config";
 import ControlsModal from "./ControlsModal";
+import ControlMobile from './ControlMobile';
 import FrameTimer from "./FrameTimer";
 import KeyboardController from "./KeyboardController";
 import Screen from "./Screen";
@@ -33,7 +34,8 @@ class RunPage extends Component {
     this.state = {
       running: false,
       paused: false,
-      controlsModal: false
+      controlsModal: false,
+      isMobile:false
     };
   }
 
@@ -53,6 +55,14 @@ class RunPage extends Component {
               </Link>
             </li>
           </ul>
+          <Button
+            outline
+            color="primary"
+            onClick={this.toggleMobileMode}
+            className="mr-3"
+          >
+          {this.state.isMobile ? "Desktop mode" : "Mobile mode"}
+          </Button>
           <Button
             outline
             color="primary"
@@ -98,6 +108,8 @@ class RunPage extends Component {
             isOpen={this.state.controlsModal}
             toggle={this.toggleControlsModal}
           />
+
+          { this.state.isMobile && <ControlMobile onButtonDown={this.keyboardController && this.keyboardController.onButtonDown} onButtonUp={this.keyboardController && this.keyboardController.onButtonUp} />}
         </div>
       </div>
     );
@@ -136,6 +148,8 @@ class RunPage extends Component {
       onAudioSample: this.speakers.writeSample
     });
 
+
+
     this.frameTimer = new FrameTimer({
       onGenerateFrame: this.nes.frame,
       onWriteFrame: this.screen.writeBuffer
@@ -145,11 +159,12 @@ class RunPage extends Component {
       onButtonDown: this.nes.buttonDown,
       onButtonUp: this.nes.buttonUp
     });
+
     document.addEventListener("keydown", this.keyboardController.handleKeyDown);
     document.addEventListener("keyup", this.keyboardController.handleKeyUp);
     document.addEventListener(
-      "keypress",
-      this.keyboardController.handleKeyPress
+        "keypress",
+        this.keyboardController.handleKeyPress
     );
 
     window.addEventListener("resize", this.layout);
@@ -232,6 +247,10 @@ class RunPage extends Component {
 
   toggleControlsModal = () => {
     this.setState({ controlsModal: !this.state.controlsModal });
+  };
+
+  toggleMobileMode = () => {
+    this.setState({isMobile : !this.state.isMobile});
   };
 }
 
