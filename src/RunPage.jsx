@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button } from "reactstrap";
+import { Button, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./RunPage.css";
 import config from "./config";
@@ -15,14 +15,14 @@ function loadBinary(path, callback) {
   var req = new XMLHttpRequest();
   req.open("GET", path);
   req.overrideMimeType("text/plain; charset=x-user-defined");
-  req.onload = function() {
+  req.onload = function () {
     if (this.status === 200) {
       callback(null, this.responseText);
     } else {
       callback(new Error(req.statusText));
     }
   };
-  req.onerror = function() {
+  req.onerror = function () {
     callback(new Error(req.statusText));
   };
   req.send();
@@ -35,7 +35,7 @@ class RunPage extends Component {
       running: false,
       paused: false,
       controlsModal: false,
-      isMobile:false
+      isMobile: false
     };
   }
 
@@ -48,6 +48,7 @@ class RunPage extends Component {
             this.navbar = el;
           }}
         >
+
           <ul className="navbar-nav mr-auto">
             <li className="navitem">
               <Link to="/" className="nav-link">
@@ -55,30 +56,32 @@ class RunPage extends Component {
               </Link>
             </li>
           </ul>
-          <Button
-            outline
-            color="primary"
-            onClick={this.toggleMobileMode}
-            className="mr-3"
-          >
-          {this.state.isMobile ? "Desktop mode" : "Mobile mode"}
+          <Row>
+            <Button
+              outline
+              color="primary"
+              onClick={this.toggleMobileMode}
+              className="mr-3"
+            >
+              {this.state.isMobile ? "Desktop" : "Mobile"}
+            </Button>
+            <Button
+              outline
+              color="primary"
+              onClick={this.toggleControlsModal}
+              className="mr-3"
+            >
+              Controls
           </Button>
-          <Button
-            outline
-            color="primary"
-            onClick={this.toggleControlsModal}
-            className="mr-3"
-          >
-            Controls
-          </Button>
-          <Button
-            outline
-            color="primary"
-            onClick={this.handlePauseResume}
-            disabled={!this.state.running}
-          >
-            {this.state.paused ? "Resume" : "Pause"}
-          </Button>
+            <Button
+              outline
+              color="primary"
+              onClick={this.handlePauseResume}
+              disabled={!this.state.running}
+            >
+              {this.state.paused ? "Resume" : "Pause"}
+            </Button>
+          </Row>
         </nav>
 
         <div
@@ -109,7 +112,11 @@ class RunPage extends Component {
             toggle={this.toggleControlsModal}
           />
 
-          { this.state.isMobile && <ControlMobile onButtonDown={this.keyboardController && this.keyboardController.onButtonDown} onButtonUp={this.keyboardController && this.keyboardController.onButtonUp} />}
+          {this.state.isMobile &&
+            <ControlMobile
+              //if keyboardController is defined
+              onButtonDown={this.keyboardController && this.keyboardController.onButtonDown}
+              onButtonUp={this.keyboardController && this.keyboardController.onButtonUp} />}
         </div>
       </div>
     );
@@ -163,8 +170,8 @@ class RunPage extends Component {
     document.addEventListener("keydown", this.keyboardController.handleKeyDown);
     document.addEventListener("keyup", this.keyboardController.handleKeyUp);
     document.addEventListener(
-        "keypress",
-        this.keyboardController.handleKeyPress
+      "keypress",
+      this.keyboardController.handleKeyPress
     );
 
     window.addEventListener("resize", this.layout);
@@ -250,7 +257,7 @@ class RunPage extends Component {
   };
 
   toggleMobileMode = () => {
-    this.setState({isMobile : !this.state.isMobile});
+    this.setState({ isMobile: !this.state.isMobile });
   };
 }
 

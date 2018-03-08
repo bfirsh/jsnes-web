@@ -1,0 +1,248 @@
+
+ul, li {
+  list-style: none;
+}
+/* controller global */
+.controller {
+  position: relative;
+  -webkit-3d-transform: rotate(0deg) scale(1);
+}
+/* GBASP BASE */
+.gbasp {
+  margin: 0 auto;
+  width: 310px;
+  letter-spacing: -1px;
+  -webkit-3d-transform: rotate(0deg) scale(0.8);
+}
+.gbasp .controller {
+  width: 310px;
+  height: 152px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  border: solid 4px rgba(74, 74, 74, 0.5);
+  background: #dedede;
+  -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+}
+.gbasp .controller .inner {
+  margin: 5px auto auto auto;
+  width: 300px;
+  height: 135px;
+  border: solid 1px rgba(0, 0, 0, 0.16);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background: #4a4a4a;
+}
+.gbasp .controller .inner .controlpad {
+  float: left;
+  clear: none;
+  width: 110px;
+  height: 117px;
+}
+.gbasp .controller .inner .controlpad .outer {
+  position: absolute;
+  left: 20px;
+  top: 15px;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 82px;
+  height: 82px;
+  border: solid 5px #AAA;
+  -webkit-border-radius: 82px;
+  -moz-border-radius: 82px;
+  border-radius: 82px;
+  background: #e7e4e5;
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.gbasp .controller .inner .controlpad .outer .dpad_outer {
+  display: block;
+  margin: 7px auto;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  border-radius: 60px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3e3e3e), to(#3e3e3e));
+  background: -moz-linear-gradient(top, #3e3e3e, #3e3e3e);
+  /* -webkit-box-shadow: 0 -1px 2px rgba(0,0,0,0.2); */
+
+}
+.gbasp .controller .inner .controlpad .outer .dpad_mask {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+}
+.gbasp .controller .inner .controlpad .outer .dpad_mask .dpad_corner {
+  float: left;
+  clear: none;
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-top-left-radius: 20px;
+  -moz-border-radius-topright: 0;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-topleft: 20px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 20px;
+  background: #e7e4e5;
+}
+.gbasp .controller .inner .controlpad .outer .dpad_mask .tl {
+  -webkit-transform: rotate(0deg) scale(1);
+}
+.gbasp .controller .inner .controlpad .outer .dpad_mask .tr {
+  -webkit-transform: rotate(90deg) scale(1);
+}
+.gbasp .controller .inner .controlpad .outer .dpad_mask .bl {
+  -webkit-transform: rotate(-90deg) scale(1);
+}
+.gbasp .controller .inner .controlpad .outer .dpad_mask .br {
+  -webkit-transform: rotate(180deg) scale(1);
+}
+.gbasp .controller .inner .controlpad .outer .dpad_bt {
+  float: left;
+  clear: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+.gbasp .controller .inner .controlpad .outer .up:hover {
+  -webkit-transform: rotate(0deg) scale(1);
+}
+.gbasp .controller .inner .controlpad .outer .down:hover {
+  -webkit-transform: rotate(180deg) scale(1);
+}
+.gbasp .controller .inner .controlpad .outer .dpad_inner {
+  float: left;
+  clear: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#333333), to(#444444));
+}
+.gbasp .controller .inner .startstop {
+  float: left;
+  clear: none;
+  margin: 0;
+  width: 80px;
+  height: 119px;
+  border: none;
+}
+.gbasp .controller .inner .startstop ul {
+  margin: 0;
+  padding: 0;
+}
+.gbasp .controller .inner .startstop ul li {
+  margin: 7px 0 0 0;
+  width: 100%;
+  height: 14px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  background: rgba(160, 160, 160, 0.5);
+}
+.gbasp .controller .inner .startstop ul li.buttons {
+  margin: 4px 0 0 0;
+  width: 100%;
+  height: 36px;
+  padding: 0;
+  background: none;
+}
+.gbasp .controller .inner .startstop ul li.buttons ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.gbasp .controller .inner .startstop ul li.buttons ul li {
+  float: left;
+  clear: none;
+  margin: 0;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  -webkit-border-radius: 36px;
+  -moz-border-radius: 36px;
+  border-radius: 36px;
+  background: rgba(231, 228, 229, 0.8);
+}
+.gbasp .controller .inner .startstop ul li.buttons ul li div {
+  display: block;
+  margin: 10px 0 0 10px;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  background: #3e3e3e;
+}
+.gbasp .controller .inner .startstop ul li.buttons ul li div:hover {
+  background: rgba(62, 62, 62, 0.8);
+}
+.gbasp .controller .inner .startstop ul li.buttons ul li:first-child {
+  margin: 0 6px 0 0;
+}
+.gbasp .controller .inner .ab {
+  float: left;
+  clear: none;
+  width: 80px;
+  height: 117px;
+}
+.gbasp .controller .inner .ab ul {
+  position: absolute;
+  right: 20px;
+  top: 35px;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 82px;
+  height: 36px;
+  border: solid 5px #AAA;
+  -webkit-border-radius: 36px;
+  -moz-border-radius: 36px;
+  border-radius: 36px;
+  background: rgba(231, 228, 229, 0.9);
+  -webkit-transform: rotate(-15deg) scale(1);
+}
+.gbasp .controller .inner .ab ul li {
+  float: left;
+  clear: none;
+  margin-top: 1px;
+  margin-left: 8px;
+}
+.gbasp .controller .inner .ab ul li div {
+  float: left;
+  clear: none;
+  display: block;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  background: #910000;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.gbasp .controller .inner .ab ul li div:hover {
+  background: #870000;
+}
+.gbasp .controller .inner .ab ul li:first-child {
+}
+.gbasp .controller .inner .ab ul li:last-child {
+}
