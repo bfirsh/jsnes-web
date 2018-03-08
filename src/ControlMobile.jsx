@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import {
-  Button,
-} from "reactstrap";
 import { Controller } from "jsnes";
 import "./ControlMobile.css";
 
 export default class ControlMobile extends Component {
+  constructor() {
+    super();
+    this.touchedPadButtonTag = null;
+  }
+
   handleKeyDown = (p_button) => {
     this.props.onButtonDown(1, p_button);
   };
@@ -14,54 +16,85 @@ export default class ControlMobile extends Component {
     this.props.onButtonUp(1, p_button);
   };
 
+  /**
+   * Touchpad fluidity 
+   * Enable the user to move between control pad arrows
+   * without getting his finger up.
+   */
+  padTouchMove = (e) => {
+    const currentElement = document.elementFromPoint(e.touches[0].pageX, e.touches[0].pageY);
+    let lastTag = this.touchedPadButtonTag;
+    this.touchedPadButtonTag = this.getTagFromElement(currentElement);
+
+    if (lastTag !== this.touchedPadButtonTag) {
+      if (lastTag) {
+        this.handleKeyUp(lastTag);
+      }
+      if (this.touchedPadButtonTag) {
+        this.handleKeyDown(this.touchedPadButtonTag);
+      }
+    }
+  };
+
+  padTouchStart = (e) => {
+    this.touchedPadButtonTag = this.getTagFromElement(e.target);
+
+    if (this.touchedPadButtonTag) {
+      this.handleKeyDown(this.touchedPadButtonTag);
+    }
+  }
+
+  padTouchEnd = (e) => {
+    if (this.touchedPadButtonTag) {
+      this.handleKeyUp(this.touchedPadButtonTag);
+    }
+  }
+
+  getTagFromElement = (p_element) => {
+    let tag = null;
+
+    if (p_element.classList.contains('up')) {
+      tag = Controller.BUTTON_UP;
+    } else if (p_element.classList.contains('down')) {
+      tag = Controller.BUTTON_DOWN;
+    } else if (p_element.classList.contains('left')) {
+      tag = Controller.BUTTON_LEFT;
+    } else if (p_element.classList.contains('right')) {
+      tag = Controller.BUTTON_RIGHT;
+    }
+
+    return tag;
+  }
+
   render() {
     return (
-
-
-      // <div>
-      //   <Button  color="secondary" size="lg">A</Button>
-      //   <Button onTouchStart={() => this.handleKeyDown(Controller.BUTTON_B)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_B)} color="secondary" size="lg">B</Button>
-      //   <div classNameName="pad">
-      //     <Button classNameName="up" onTouchStart={() => this.handleKeyDown(Controller.BUTTON_UP)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_UP)} color="secondary" size="lg"></Button>
-      //     <Button classNameName="down" onTouchStart={() => this.handleKeyDown(Controller.BUTTON_DOWN)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_DOWN)} color="secondary" size="lg"></Button>
-      //     <Button classNameName="left" onTouchStart={() => this.handleKeyDown(Controller.BUTTON_LEFT)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_LEFT)} color="secondary" size="lg"></Button>
-      //     <Button classNameName="right" onTouchStart={() => this.handleKeyDown(Controller.BUTTON_RIGHT)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_RIGHT)} color="secondary" size="lg"></Button>
-      //   </div>
-      //   <Button onTouchStart={() => this.handleKeyDown(Controller.BUTTON_SELECT)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_SELECT)} color="secondary" size="lg">SELECT</Button>
-
-      //   <Button onTouchStart={() => this.handleKeyDown(Controller.BUTTON_START)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_START)} color="secondary" size="lg">START</Button>
-      // </div>
-
       <div className="gbasp">
-
         <div className="controller">
           <div className="inner">
             <div className="controlpad">
-              <div className="outer">
+              <div className="outer" onTouchStart={this.padTouchStart} onTouchEnd={this.padTouchEnd} onTouchMove={this.padTouchMove}>
                 <div className="dpad_outer">
-                  <div className="dpad_mask">
-                    <div className="dpad_corner tl"></div>
+                  <div className="dpad_corner tl"></div>
 
-                    {/* <!-- D-Pad Up --> */}
-                    <div className="dpad_bt up" onTouchStart={() => this.handleKeyDown(Controller.BUTTON_UP)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_UP)}></div>
+                  {/* <!-- D-Pad Up --> */}
+                  <div className="dpad_bt up"></div>
 
-                    <div className="dpad_corner tr"></div>
+                  <div className="dpad_corner tr"></div>
 
-                    {/* <!-- D-Pad Left --> */}
-                    <div className="dpad_bt left" onTouchStart={() => this.handleKeyDown(Controller.BUTTON_LEFT)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_LEFT)}></div>
+                  {/* <!-- D-Pad Left --> */}
+                  <div className="dpad_bt left"></div>
 
-                    <div className="dpad_inner"></div>
+                  <div className="dpad_inner"></div>
 
-                    {/* <!-- D-Pad Right --> */}
-                    <div className="dpad_bt right" onTouchStart={() => this.handleKeyDown(Controller.BUTTON_RIGHT)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_RIGHT)}></div>
+                  {/* <!-- D-Pad Right --> */}
+                  <div className="dpad_bt right" ></div>
 
-                    <div className="dpad_corner bl"></div>
+                  <div className="dpad_corner bl"></div>
 
-                    {/* <!-- D-Pad Down --> */}
-                    <div className="dpad_bt down" onTouchStart={() => this.handleKeyDown(Controller.BUTTON_DOWN)} onTouchEnd={() => this.handleKeyUp(Controller.BUTTON_DOWN)}></div>
+                  {/* <!-- D-Pad Down --> */}
+                  <div className="dpad_bt down"></div>
 
-                    <div className="dpad_corner br"></div>
-                  </div>
+                  <div className="dpad_corner br"></div>
                 </div>
               </div>
             </div>

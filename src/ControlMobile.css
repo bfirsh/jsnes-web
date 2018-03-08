@@ -10,12 +10,12 @@ ul, li {
 /* GBASP BASE */
 .gbasp {
   margin: 0 auto;
-  width: 310px;
+  width: 350px;
   letter-spacing: -1px;
   -webkit-3d-transform: rotate(0deg) scale(0.8);
 }
 .gbasp .controller {
-  width: 310px;
+  width: 366px;
   height: 152px;
   -webkit-border-radius: 16px;
   -moz-border-radius: 16px;
@@ -27,7 +27,7 @@ ul, li {
 }
 .gbasp .controller .inner {
   margin: 5px auto auto auto;
-  width: 300px;
+  width: 350px;
   height: 135px;
   border: solid 1px rgba(0, 0, 0, 0.16);
   -webkit-border-radius: 10px;
@@ -38,18 +38,18 @@ ul, li {
 .gbasp .controller .inner .controlpad {
   float: left;
   clear: none;
-  width: 110px;
+  width: 135px;
   height: 117px;
 }
 .gbasp .controller .inner .controlpad .outer {
   position: absolute;
-  left: 20px;
-  top: 15px;
+  left: 10px;
+  top: 12px;
   display: block;
   margin: 0;
   padding: 0;
-  width: 82px;
-  height: 82px;
+  width: 120px;
+  height: 120px;
   border: solid 5px #AAA;
   -webkit-border-radius: 82px;
   -moz-border-radius: 82px;
@@ -59,53 +59,46 @@ ul, li {
 }
 .gbasp .controller .inner .controlpad .outer .dpad_outer {
   display: block;
-  margin: 7px auto;
+  margin: 9px auto;
   padding: 0;
-  width: 60px;
-  height: 60px;
-  -webkit-border-radius: 60px;
-  -moz-border-radius: 60px;
-  border-radius: 60px;
+  width: 90px;
+  height: 90px;
+  -webkit-border-radius: 90px;
+  -moz-border-radius: 90px;
+  border-radius: 90px;
   background: -webkit-gradient(linear, left top, left bottom, from(#3e3e3e), to(#3e3e3e));
   background: -moz-linear-gradient(top, #3e3e3e, #3e3e3e);
   /* -webkit-box-shadow: 0 -1px 2px rgba(0,0,0,0.2); */
 
 }
-.gbasp .controller .inner .controlpad .outer .dpad_mask {
-  display: block;
-  margin: 0;
-  padding: 0;
-  width: 60px;
-  height: 60px;
-}
-.gbasp .controller .inner .controlpad .outer .dpad_mask .dpad_corner {
+.gbasp .controller .inner .controlpad .outer .dpad_corner {
   float: left;
   clear: none;
   margin: 0;
   padding: 0;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   -webkit-border-top-right-radius: 0;
-  -webkit-border-bottom-right-radius: 5px;
-  -webkit-border-top-left-radius: 20px;
+  -webkit-border-bottom-right-radius: 16px;
+  -webkit-border-top-left-radius: 60px;
   -moz-border-radius-topright: 0;
-  -moz-border-radius-bottomright: 5px;
-  -moz-border-radius-topleft: 20px;
+  -moz-border-radius-bottomright: 16px;
+  -moz-border-radius-topleft: 60px;
   border-top-right-radius: 0;
-  border-bottom-right-radius: 5px;
-  border-top-left-radius: 20px;
+  border-bottom-right-radius: 16px;
+  border-top-left-radius: 60px;
   background: #e7e4e5;
 }
-.gbasp .controller .inner .controlpad .outer .dpad_mask .tl {
+.gbasp .controller .inner .controlpad .outer .tl {
   -webkit-transform: rotate(0deg) scale(1);
 }
-.gbasp .controller .inner .controlpad .outer .dpad_mask .tr {
+.gbasp .controller .inner .controlpad .outer .tr {
   -webkit-transform: rotate(90deg) scale(1);
 }
-.gbasp .controller .inner .controlpad .outer .dpad_mask .bl {
+.gbasp .controller .inner .controlpad .outer .bl {
   -webkit-transform: rotate(-90deg) scale(1);
 }
-.gbasp .controller .inner .controlpad .outer .dpad_mask .br {
+.gbasp .controller .inner .controlpad .outer .br {
   -webkit-transform: rotate(180deg) scale(1);
 }
 .gbasp .controller .inner .controlpad .outer .dpad_bt {
@@ -114,8 +107,8 @@ ul, li {
   display: block;
   margin: 0;
   padding: 0;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 .gbasp .controller .inner .controlpad .outer .up:hover {
   -webkit-transform: rotate(0deg) scale(1);
@@ -129,8 +122,8 @@ ul, li {
   display: block;
   margin: 0;
   padding: 0;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
@@ -140,7 +133,6 @@ ul, li {
   float: left;
   clear: none;
   margin: 0;
-  width: 80px;
   height: 119px;
   border: none;
 }
@@ -201,7 +193,7 @@ ul, li {
 .gbasp .controller .inner .ab {
   float: left;
   clear: none;
-  width: 80px;
+  width: 135px;
   height: 117px;
 }
 .gbasp .controller .inner .ab ul {
@@ -211,8 +203,8 @@ ul, li {
   display: block;
   margin: 0;
   padding: 0;
-  width: 82px;
-  height: 36px;
+  width: 100px;
+  height: 50px;
   border: solid 5px #AAA;
   -webkit-border-radius: 36px;
   -moz-border-radius: 36px;
@@ -223,19 +215,19 @@ ul, li {
 .gbasp .controller .inner .ab ul li {
   float: left;
   clear: none;
-  margin-top: 1px;
-  margin-left: 8px;
+  margin-top: 2px;
+  margin-left: 6px;
 }
 .gbasp .controller .inner .ab ul li div {
   float: left;
   clear: none;
   display: block;
   padding: 0;
-  width: 24px;
-  height: 24px;
-  -webkit-border-radius: 12px;
-  -moz-border-radius: 12px;
-  border-radius: 12px;
+  width: 35px;
+  height: 35px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  border-radius: 18px;
   background: #910000;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
