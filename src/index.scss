@@ -1,5 +1,5 @@
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/functions.scss";
+@import "node_modules/bootstrap/scss/variables.scss";
 
 // Bootstrap customization, where we're supposed to
 $enable-rounded: false;
@@ -28,7 +28,7 @@ $modal-footer-border-width: 0;
 $close-color: $white;
 $close-text-shadow: none;
 
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap.scss";
 
 // Bootstrap customization, where we're not supposed to
 
