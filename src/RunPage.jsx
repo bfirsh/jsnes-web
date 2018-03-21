@@ -35,7 +35,8 @@ class RunPage extends Component {
       running: false,
       paused: false,
       controlsModal: false,
-	  controlsModalAlt: false
+	  controlsModalAlt: false,
+	  controlsModalAltEnabled: false
     };
   }
 
@@ -250,11 +251,12 @@ class RunPage extends Component {
   };
   toggleControlsModalAlt = () => {
 	this.setState({ controlsModalAlt: !this.state.controlsModalAlt 	});
+	this.keyboardController.toggleControls();
 	
   };
   toggleControls = () =>{
-	this.toggleControlsModalAlt;
-	this.keyboardController.toggleControls();
+	
+	
   }
 }
 
