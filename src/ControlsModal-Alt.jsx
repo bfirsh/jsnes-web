@@ -59,12 +59,12 @@ class ControlsModal extends Component {
               </tr>
               <tr>
                 <td>Start</td>
-                <td>CTRL</td>
+                <td>Enter</td>
                 <td>.</td>
               </tr>
               <tr>
                 <td>Select</td>
-                <td>Alt</td>
+                <td>CTRL</td>
                 <td>/</td>
               </tr>
             </tbody>

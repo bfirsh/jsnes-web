@@ -58,7 +58,7 @@ class RunPage extends Component {
 		  <Button
             outline
             color="primary"
-            onClick={this.toggleControlsModalAlt}
+            onClick={this.toggleControls}
             className="mr-3"
           >
 		  Alt Controls
@@ -107,6 +107,7 @@ class RunPage extends Component {
           <ControlsModal
             isOpen={this.state.controlsModal}
             toggle={this.toggleControlsModal}
+			
           />
 		  <ControlsModalAlt
             isOpen={this.state.controlsModalAlt}
@@ -248,8 +249,13 @@ class RunPage extends Component {
     this.setState({ controlsModal: !this.state.controlsModal });
   };
   toggleControlsModalAlt = () => {
-	this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
-};
+	this.setState({ controlsModalAlt: !this.state.controlsModalAlt 	});
+	
+  };
+  toggleControls = () =>{
+	this.toggleControlsModalAlt;
+	this.keyboardController.toggleControls();
+  }
 }
 
 export default RunPage;
