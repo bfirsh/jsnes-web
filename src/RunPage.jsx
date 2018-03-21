@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./RunPage.css";
 import config from "./config";
 import ControlsModal from "./ControlsModal";
+import ControlsModalAlt from "./ControlsModal-Alt";
 import FrameTimer from "./FrameTimer";
 import KeyboardController from "./KeyboardController";
 import Screen from "./Screen";
@@ -33,7 +34,8 @@ class RunPage extends Component {
     this.state = {
       running: false,
       paused: false,
-      controlsModal: false
+      controlsModal: false,
+	  controlsModalAlt: false
     };
   }
 
@@ -53,6 +55,14 @@ class RunPage extends Component {
               </Link>
             </li>
           </ul>
+		  <Button
+            outline
+            color="primary"
+            onClick={this.toggleControlsModalAlt}
+            className="mr-3"
+          >
+		  Alt Controls
+		  </Button>
           <Button
             outline
             color="primary"
@@ -97,6 +107,10 @@ class RunPage extends Component {
           <ControlsModal
             isOpen={this.state.controlsModal}
             toggle={this.toggleControlsModal}
+          />
+		  <ControlsModalAlt
+            isOpen={this.state.controlsModalAlt}
+            toggle={this.toggleControlsModalAlt}
           />
         </div>
       </div>
@@ -233,6 +247,9 @@ class RunPage extends Component {
   toggleControlsModal = () => {
     this.setState({ controlsModal: !this.state.controlsModal });
   };
+  toggleControlsModalAlt = () => {
+	this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
+};
 }
 
 export default RunPage;
