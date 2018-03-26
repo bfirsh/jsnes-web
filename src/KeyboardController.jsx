@@ -74,6 +74,6 @@ export default class KeyboardController {
   };
   
   toggleControls = e => {
-    this.altButtons ? this.altButtons = false : this.altButtons = true;
-}
+      this.altButtons ? this.altButtons = false : this.altButtons = true;
+  };
 }

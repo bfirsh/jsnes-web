@@ -59,7 +59,7 @@ class RunPage extends Component {
 		  <Button
             outline
             color="primary"
-            onClick={this.toggleControls}
+            onClick={this.toggleControlsModalAlt }
             className="mr-3"
           >
 		  Alt Controls
@@ -250,13 +250,23 @@ class RunPage extends Component {
     this.setState({ controlsModal: !this.state.controlsModal });
   };
   toggleControlsModalAlt = () => {
-	this.setState({ controlsModalAlt: !this.state.controlsModalAlt 	});
-	this.keyboardController.toggleControls();
-	
-  };
+      if(!this.state.controlsModalAlt) {
+          this.state.controlsModalAltEnabled ? this.state.controlsModalAltEnabled = false : this.state.controlsModalAltEnabled = true;
+          if (this.state.controlsModalAltEnabled) {
+              this.toggleControls();
+              this.setState({controlsModalAlt: !this.state.controlsModalAlt});
+          }
+          else {
+              this.toggleControls();
+          }
+      }
+      else{
+          this.setState({controlsModalAlt: !this.state.controlsModalAlt});
+      }
+  }
+  ;
   toggleControls = () =>{
-	
-	
+      this.keyboardController.toggleControls();
   }
 }
 
