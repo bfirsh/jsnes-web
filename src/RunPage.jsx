@@ -37,7 +37,7 @@ class RunPage extends Component {
       controlsModal: false,
       controlsModalAlt: false,
       altButtonsEnabled: false,
-      altButtons: false
+      altCheckbox: false
     };
   }
 
@@ -110,11 +110,13 @@ class RunPage extends Component {
             isOpen={this.state.controlsModal}
             toggle={this.toggleControlsModal}
             altControls={this.toggleControls}
-            ischecked={this.state.altButtons}
+            ischecked={this.state.altCheckbox}
           />
           <ControlsModalAlt
             isOpen={this.state.controlsModalAlt}
             toggle={this.toggleControlsModalAlt}
+            altControls={this.toggleControls}
+            ischecked={this.state.altCheckbox}
           />
         </div>
       </div>
@@ -248,37 +250,27 @@ class RunPage extends Component {
     this.screen.fitInParent();
   };
 
-  togglWeControlsModal = () => {
-    console.log(this.state);
-    if (!this.state.altButtonsEnabled) {
+  toggleControlsModal = () => {
+    if (!this.state.altCheckbox)
       this.setState({ controlsModal: !this.state.controlsModal });
-    } else {
-      this.toggleControlsModalAlt();
+    else {
+      this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
     }
   };
-  toggleControlsModalAlt = input => {
-    controlsModalAlt: !this.state.controlsModalAlt;
-
-    // if (this.state.altButtons && !this.state.controlsModalAlt) {
-    //   this.toggleControls();
-    //   this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
-    //   this.setState({ controlsModalAlt: !this.state.altButtons });
-    // } else if (!this.state.altButtons) {
-    //   this.toggleControls();
-    //   this.setState({ controlsModalAlt: !this.state.altButtons });
-    //   this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
-    // }
+  toggleControlsModalAlt = () => {
+    this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
   };
   toggleControls = () => {
-    if (this.altButtons && !this.altButtonsEnabled) {
-      this.toggleControlsModal();
-      this.toggleControls();
-      this.setState({ controlsModal: !this.state.altButtonsEnabled });
-      this.toggleControlsModal();
+    this.keyboardController.toggleControls(this.state.altCheckbox);
+    console.log(this.state);
+    if (this.state.altCheckbox) {
+      this.state.altCheckbox = false;
+      this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
+      this.setState({ controlsModal: !this.state.controlsModal });
     } else {
-      //this.setState({ controlsModal: !this.state.altButtons });
-      this.setState({ controlsModal: !this.state.altButtonsEnabled });
-      this.keyboardController.toggleControls();
+      this.state.altCheckbox = true;
+      this.setState({ controlsModal: !this.state.controlsModal });
+      this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
     }
   };
 }
