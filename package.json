@@ -8,7 +8,7 @@
     "jsnes": "git://github.com/bfirsh/jsnes.git",
     "node-sass-chokidar": "^1.2.0",
     "npm-run-all": "^4.1.2",
-    "raven-js": "^3.24.0",
+    "raven-js": "^3.24.1",
     "react": "^15.6.2",
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-transition-group": "^15.6.2",
