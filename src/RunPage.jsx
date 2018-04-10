@@ -60,14 +60,6 @@ class RunPage extends Component {
           <Button
             outline
             color="primary"
-            onClick={this.toggleControlsModalAlt}
-            className="mr-3"
-          >
-            Alt Controls
-          </Button>
-          <Button
-            outline
-            color="primary"
             onClick={this.toggleControlsModal}
             className="mr-3"
           >
