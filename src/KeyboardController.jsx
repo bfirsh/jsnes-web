@@ -20,7 +20,7 @@ const KEYS = {
   100: [2, Controller.BUTTON_LEFT], // Num-4
   102: [2, Controller.BUTTON_RIGHT] // Num-6
 };
-const ALT = {
+const ALT_KEYS = {
   //Alternative Controls (Don't currently conflict with current ones)
   //P1
   70: [1, Controller.BUTTON_A], //F
@@ -51,7 +51,7 @@ export default class KeyboardController {
 
   handleKeyDown = e => {
     var key = null;
-    if (this.altButtons) key = ALT[e.keyCode];
+    if (this.altButtons) key = ALT_KEYS[e.keyCode];
     else key = KEYS[e.keyCode];
     if (key) {
       this.onButtonDown(key[0], key[1]);
@@ -61,8 +61,9 @@ export default class KeyboardController {
 
   handleKeyUp = e => {
     var key = null;
-    if (this.altButtons) key = ALT[e.keyCode];
-    else key = KEYS[e.keyCode];
+    if (this.altButtons) {
+      key = ALT_KEYS[e.keyCode];
+    } else key = KEYS[e.keyCode];
     if (key) {
       this.onButtonUp(key[0], key[1]);
       e.preventDefault();

@@ -14,6 +14,8 @@ class ControlsModal extends Component {
       <Modal
         isOpen={this.props.isOpen}
         toggle={this.props.toggle}
+        altControls={this.props.altControls}
+        ischecked={this.props.ischecked}
         className="ControlsModal"
       >
         <ModalHeader toggle={this.props.toggle}>Controls</ModalHeader>
@@ -74,6 +76,14 @@ class ControlsModal extends Component {
           <Button outline color="primary" onClick={this.props.toggle}>
             Close
           </Button>
+          <label>
+            Whould you like to use the alternate controls?
+            <input
+              type="checkbox"
+              onClick={this.props.altControls}
+              checked={this.props.ischecked}
+            />
+          </label>
         </ModalFooter>
       </Modal>
     );

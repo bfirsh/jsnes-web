@@ -35,8 +35,9 @@ class RunPage extends Component {
       running: false,
       paused: false,
       controlsModal: false,
-	  controlsModalAlt: false,
-	  controlsModalAltEnabled: false
+      controlsModalAlt: false,
+      altButtonsEnabled: false,
+      altButtons: false
     };
   }
 
@@ -56,14 +57,14 @@ class RunPage extends Component {
               </Link>
             </li>
           </ul>
-		  <Button
+          <Button
             outline
             color="primary"
-            onClick={this.toggleControlsModalAlt }
+            onClick={this.toggleControlsModalAlt}
             className="mr-3"
           >
-		  Alt Controls
-		  </Button>
+            Alt Controls
+          </Button>
           <Button
             outline
             color="primary"
@@ -108,9 +109,10 @@ class RunPage extends Component {
           <ControlsModal
             isOpen={this.state.controlsModal}
             toggle={this.toggleControlsModal}
-			
+            altControls={this.toggleControls}
+            ischecked={this.state.altButtons}
           />
-		  <ControlsModalAlt
+          <ControlsModalAlt
             isOpen={this.state.controlsModalAlt}
             toggle={this.toggleControlsModalAlt}
           />
@@ -246,28 +248,39 @@ class RunPage extends Component {
     this.screen.fitInParent();
   };
 
-  toggleControlsModal = () => {
-    this.setState({ controlsModal: !this.state.controlsModal });
+  togglWeControlsModal = () => {
+    console.log(this.state);
+    if (!this.state.altButtonsEnabled) {
+      this.setState({ controlsModal: !this.state.controlsModal });
+    } else {
+      this.toggleControlsModalAlt();
+    }
   };
-  toggleControlsModalAlt = () => {
-      if(!this.state.controlsModalAlt) {
-          this.state.controlsModalAltEnabled ? this.state.controlsModalAltEnabled = false : this.state.controlsModalAltEnabled = true;
-          if (this.state.controlsModalAltEnabled) {
-              this.toggleControls();
-              this.setState({controlsModalAlt: !this.state.controlsModalAlt});
-          }
-          else {
-              this.toggleControls();
-          }
-      }
-      else{
-          this.setState({controlsModalAlt: !this.state.controlsModalAlt});
-      }
-  }
-  ;
-  toggleControls = () =>{
+  toggleControlsModalAlt = input => {
+    controlsModalAlt: !this.state.controlsModalAlt;
+
+    // if (this.state.altButtons && !this.state.controlsModalAlt) {
+    //   this.toggleControls();
+    //   this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
+    //   this.setState({ controlsModalAlt: !this.state.altButtons });
+    // } else if (!this.state.altButtons) {
+    //   this.toggleControls();
+    //   this.setState({ controlsModalAlt: !this.state.altButtons });
+    //   this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
+    // }
+  };
+  toggleControls = () => {
+    if (this.altButtons && !this.altButtonsEnabled) {
+      this.toggleControlsModal();
+      this.toggleControls();
+      this.setState({ controlsModal: !this.state.altButtonsEnabled });
+      this.toggleControlsModal();
+    } else {
+      //this.setState({ controlsModal: !this.state.altButtons });
+      this.setState({ controlsModal: !this.state.altButtonsEnabled });
       this.keyboardController.toggleControls();
-  }
+    }
+  };
 }
 
 export default RunPage;
