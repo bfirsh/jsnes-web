@@ -254,13 +254,13 @@ class RunPage extends Component {
   };
   toggleControls = () => {
     this.keyboardController.toggleControls(this.state.altCheckbox);
-    console.log(this.state);
+    //console.log(this.state);
     if (this.state.altCheckbox) {
-      this.state.altCheckbox = false;
+      this.setState({altCheckbox: false});
       this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
       this.setState({ controlsModal: !this.state.controlsModal });
     } else {
-      this.state.altCheckbox = true;
+      this.setState({altCheckbox: true});
       this.setState({ controlsModal: !this.state.controlsModal });
       this.setState({ controlsModalAlt: !this.state.controlsModalAlt });
     }
