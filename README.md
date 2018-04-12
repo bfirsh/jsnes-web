@@ -10,4 +10,3 @@ A React-based web UI for [JSNES](https://github.com/bfirsh/jsnes).
 ## Running tests
 
     $ yarn test
-    
