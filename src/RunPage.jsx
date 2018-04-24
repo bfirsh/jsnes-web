@@ -36,7 +36,7 @@ class RunPage extends Component {
       paused: false,
       controlsModal: false,
       loading: true,
-      loadedPercent: 0
+      loadedPercent: 3
     };
   }
 
@@ -81,7 +81,15 @@ class RunPage extends Component {
           }}
         >
           {this.state.loading ? (
-            <Progress value={this.state.loadedPercent || 3} />
+            <Progress
+              value={this.state.loadedPercent}
+              style={{
+                width: "70%",
+                "margin-left": "auto",
+                "margin-right": "auto",
+                "margin-top": "30px"
+              }}
+            />
           ) : null}
           <Screen
             ref={screen => {
