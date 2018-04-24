@@ -26,7 +26,12 @@ class Screen extends Component {
 
   initCanvas() {
     this.context = this.canvas.getContext("2d");
-    this.imageData = this.context.getImageData(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    this.imageData = this.context.getImageData(
+      0,
+      0,
+      SCREEN_WIDTH,
+      SCREEN_HEIGHT
+    );
 
     this.context.fillStyle = "black";
     // set alpha to opaque
@@ -81,7 +86,7 @@ class Screen extends Component {
     return img;
   }
 
-  handleMouseDown = (e) => {
+  handleMouseDown = e => {
     if (!this.props.onMouseDown) return;
     // Make coordinates unscaled
     let scale = SCREEN_WIDTH / parseFloat(this.canvas.style.width);
