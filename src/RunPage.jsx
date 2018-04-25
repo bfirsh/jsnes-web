@@ -84,10 +84,10 @@ class RunPage extends Component {
             <Progress
               value={this.state.loadedPercent}
               style={{
+                position: "absolute",
                 width: "70%",
-                "margin-left": "auto",
-                "margin-right": "auto",
-                "margin-top": "30px"
+                "left": "15%",
+                "top": "48%"
               }}
             />
           ) : null}
