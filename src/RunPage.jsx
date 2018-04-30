@@ -17,6 +17,8 @@ function loadBinary(path, callback, handleProgress) {
   req.onload = function() {
     if (this.status === 200) {
       callback(null, this.responseText);
+    } else if (this.status === 0) {
+      // Aborted, so ignore error
     } else {
       callback(new Error(req.statusText));
     }
@@ -26,6 +28,7 @@ function loadBinary(path, callback, handleProgress) {
   };
   req.onprogress = handleProgress;
   req.send();
+  return req;
 }
 
 class RunPage extends Component {
@@ -173,6 +176,9 @@ class RunPage extends Component {
   }
 
   componentWillUnmount() {
+    if (this.currentRequest) {
+      this.currentRequest.abort();
+    }
     this.stop();
     document.removeEventListener(
       "keydown",
@@ -189,7 +195,7 @@ class RunPage extends Component {
   load = () => {
     if (this.props.match.params.rom) {
       const path = config.BASE_ROM_URL + this.props.match.params.rom;
-      loadBinary(
+      this.currentRequest = loadBinary(
         path,
         (err, data) => {
           if (err) {
@@ -204,6 +210,7 @@ class RunPage extends Component {
       let reader = new FileReader();
       reader.readAsBinaryString(this.props.location.state.file);
       reader.onload = e => {
+        this.currentRequest = null;
         this.handleLoaded(e.target.result);
       };
     } else {
