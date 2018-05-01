@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button } from "reactstrap";
+import { Button, Progress } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./RunPage.css";
 import config from "./config";
@@ -11,13 +11,15 @@ import Screen from "./Screen";
 import Speakers from "./Speakers";
 import { NES } from "jsnes";
 
-function loadBinary(path, callback) {
+function loadBinary(path, callback, handleProgress) {
   var req = new XMLHttpRequest();
   req.open("GET", path);
   req.overrideMimeType("text/plain; charset=x-user-defined");
   req.onload = function() {
     if (this.status === 200) {
       callback(null, this.responseText);
+    } else if (this.status === 0) {
+      // Aborted, so ignore error
     } else {
       callback(new Error(req.statusText));
     }
@@ -25,7 +27,9 @@ function loadBinary(path, callback) {
   req.onerror = function() {
     callback(new Error(req.statusText));
   };
+  req.onprogress = handleProgress;
   req.send();
+  return req;
 }
 
 class RunPage extends Component {
@@ -38,6 +42,8 @@ class RunPage extends Component {
       controlsModalAlt: false,
       altButtonsEnabled: false,
       altCheckbox: false
+      loading: true,
+      loadedPercent: 3
     };
   }
 
@@ -81,6 +87,17 @@ class RunPage extends Component {
             this.screenContainer = el;
           }}
         >
+          {this.state.loading ? (
+            <Progress
+              value={this.state.loadedPercent}
+              style={{
+                position: "absolute",
+                width: "70%",
+                "left": "15%",
+                "top": "48%"
+              }}
+            />
+          ) : null}
           <Screen
             ref={screen => {
               this.screen = screen;
@@ -171,6 +188,9 @@ class RunPage extends Component {
   }
 
   componentWillUnmount() {
+    if (this.currentRequest) {
+      this.currentRequest.abort();
+    }
     this.stop();
     document.removeEventListener(
       "keydown",
@@ -187,17 +207,22 @@ class RunPage extends Component {
   load = () => {
     if (this.props.match.params.rom) {
       const path = config.BASE_ROM_URL + this.props.match.params.rom;
-      loadBinary(path, (err, data) => {
-        if (err) {
-          window.alert(`Error loading ROM: ${err.toString()}`);
-        } else {
-          this.handleLoaded(data);
-        }
-      });
+      this.currentRequest = loadBinary(
+        path,
+        (err, data) => {
+          if (err) {
+            window.alert(`Error loading ROM: ${err.toString()}`);
+          } else {
+            this.handleLoaded(data);
+          }
+        },
+        this.handleProgress
+      );
     } else if (this.props.location.state && this.props.location.state.file) {
       let reader = new FileReader();
       reader.readAsBinaryString(this.props.location.state.file);
       reader.onload = e => {
+        this.currentRequest = null;
         this.handleLoaded(e.target.result);
       };
     } else {
@@ -205,8 +230,14 @@ class RunPage extends Component {
     }
   };
 
+  handleProgress = e => {
+    if (e.lengthComputable) {
+      this.setState({ loadedPercent: e.loaded / e.total * 100 });
+    }
+  };
+
   handleLoaded = data => {
-    this.setState({ uiEnabled: true, running: true });
+    this.setState({ uiEnabled: true, running: true, loading: false });
     this.nes.loadROM(data);
     this.start();
   };
