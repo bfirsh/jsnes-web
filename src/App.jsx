@@ -1,3 +1,4 @@
+import Raven from "raven-js";
 import React, { Component } from "react";
 import GoogleAnalytics from "react-ga";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -9,12 +10,24 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = { error: null };
     if (config.GOOGLE_ANALYTICS_CODE) {
       GoogleAnalytics.initialize(config.GOOGLE_ANALYTICS_CODE);
     }
   }
 
   render() {
+    if (this.state.error) {
+      return (
+        <div className="container my-4">
+          <div className="row justify-content-center">
+            <div className="col-md-8">
+              Oops - there has been an error. It has been logged to the console.
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <BrowserRouter>
         <div className="App">
@@ -27,7 +40,13 @@ class App extends Component {
     );
   }
 
-  recordPageview = ({location}) => {
+  componentDidCatch(error, errorInfo) {
+    this.setState({ error });
+    console.error(error);
+    Raven.captureException(error, { extra: errorInfo });
+  }
+
+  recordPageview = ({ location }) => {
     GoogleAnalytics.pageview(location.pathname);
     return null;
   };
