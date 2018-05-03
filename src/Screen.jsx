@@ -24,6 +24,10 @@ class Screen extends Component {
     this.initCanvas();
   }
 
+  componentDidUpdate() {
+    this.initCanvas();
+  }
+
   initCanvas() {
     this.context = this.canvas.getContext("2d");
     this.imageData = this.context.getImageData(
