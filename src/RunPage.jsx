@@ -1,3 +1,4 @@
+import Raven from "raven-js";
 import React, { Component } from "react";
 import { Button, Progress } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -89,8 +90,8 @@ class RunPage extends Component {
               style={{
                 position: "absolute",
                 width: "70%",
-                "left": "15%",
-                "top": "48%"
+                left: "15%",
+                top: "48%"
               }}
             />
           ) : null}
@@ -154,8 +155,8 @@ class RunPage extends Component {
     });
 
     this.frameTimer = new FrameTimer({
-      onGenerateFrame: this.nes.frame,
-      onWriteFrame: this.screen.writeBuffer
+      onGenerateFrame: Raven.wrap(this.nes.frame),
+      onWriteFrame: Raven.wrap(this.screen.writeBuffer)
     });
 
     this.keyboardController = new KeyboardController({
