@@ -15,7 +15,7 @@
     "react-dom": "^15.6.2",
     "react-ga": "^2.5.0",
     "react-router-dom": "^4.2.2",
-    "reactstrap": "^4.8.0",
+    "reactstrap": "^6.0.1",
     "ringbufferjs": "^1.1.0"
   },
   "devDependencies": {
