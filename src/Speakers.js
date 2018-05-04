@@ -22,9 +22,11 @@ export default class Speakers {
     if (this.scriptNode) {
       this.scriptNode.disconnect(this.audioCtx.destination);
       this.scriptNode.onaudioprocess = null;
+      this.scriptNode = null;
     }
     if (this.audioCtx) {
       this.audioCtx.close();
+      this.audioCtx = null;
     }
   }
 
