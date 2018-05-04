@@ -18,6 +18,8 @@
   },
   "devDependencies": {
     "canvas-prebuilt": "1.6.0",
+    "prettier": "^1.12.1",
+    "prettier-check": "^2.0.0",
     "react-scripts": "1.1.4"
   },
   "scripts": {
@@ -26,7 +28,8 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "prettier-check src/**/*.js && react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "format": "prettier --write src/**/*.js"
   }
 }

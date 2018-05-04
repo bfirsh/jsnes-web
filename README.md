@@ -16,3 +16,11 @@ The built app will be in `build/`.
 ## Running tests
 
     $ yarn test
+
+## Formatting code
+
+All code must conform to [Prettier](https://prettier.io/) formatting. The test suite won't pass unless it does.
+
+To automatically format all your code, run:
+
+    $ yarn run format

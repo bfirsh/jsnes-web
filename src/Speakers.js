@@ -1,7 +1,7 @@
 import RingBuffer from "ringbufferjs";
 
 export default class Speakers {
-  constructor({onBufferUnderrun}) {
+  constructor({ onBufferUnderrun }) {
     this.onBufferUnderrun = onBufferUnderrun;
     this.bufferSize = 8192;
     this.buffer = new RingBuffer(this.bufferSize * 2);
@@ -34,9 +34,9 @@ export default class Speakers {
     }
     this.buffer.enq(left);
     this.buffer.enq(right);
-  }
+  };
 
-  onaudioprocess = (e) => {
+  onaudioprocess = e => {
     var left = e.outputBuffer.getChannelData(0);
     var right = e.outputBuffer.getChannelData(1);
     var size = left.length;
