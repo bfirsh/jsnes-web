@@ -27,12 +27,12 @@ const roms = {
   "Super Mario Bros. 2 (U) (PRG0) [!].nes": "Super Mario Bros. 2",
   "Super Mario Bros. 3 (U) (PRG1) [!].nes": "Super Mario Bros. 3",
   "Tecmo Super Bowl (U).nes": "Tecmo Super Bowl",
-  "Teenage Mutant Ninja Turtles II - The Arcade Game (U) [!].nes": "Teenage Mutant Ninja Turtles II - The Arcade Game",
+  "Teenage Mutant Ninja Turtles II - The Arcade Game (U) [!].nes":
+    "Teenage Mutant Ninja Turtles II - The Arcade Game",
   "Tennis (JU) [!].nes": "Tennis",
   "Tetris (U) [!].nes": "Tetris",
   "Tetris 2 (U) [!].nes": "Tetris 2",
-  "Zelda II - The Adventure of Link (U).nes":
-    "Zelda II - The Adventure of Link"
+  "Zelda II - The Adventure of Link (U).nes": "Zelda II - The Adventure of Link"
 };
 
 class ListPage extends Component {
@@ -49,8 +49,8 @@ class ListPage extends Component {
               <h1 className="mb-3">JSNES</h1>
               <p>A JavaScript NES emulator.</p>
               <p>
-                By <a href="https://twitter.com/bfirsh">Ben Firshman</a>. Source on{" "}
-                <a href="https://github.com/bfirsh/jsnes">GitHub</a>.
+                By <a href="https://twitter.com/bfirsh">Ben Firshman</a>. Source
+                on <a href="https://github.com/bfirsh/jsnes">GitHub</a>.
               </p>
             </header>
             <ListGroup className="mb-4">
