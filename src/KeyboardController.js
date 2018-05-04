@@ -18,7 +18,7 @@ const KEYS = {
   104: [2, Controller.BUTTON_UP], // Num-8
   98: [2, Controller.BUTTON_DOWN], // Num-2
   100: [2, Controller.BUTTON_LEFT], // Num-4
-  102: [2, Controller.BUTTON_RIGHT], // Num-6
+  102: [2, Controller.BUTTON_RIGHT] // Num-6
 };
 
 export default class KeyboardController {

@@ -40,7 +40,6 @@ export default class FrameTimer {
     // } else {
     //   console.log("requestAnimationFrame is not supported");
     // }
-
   }
 
   start() {
@@ -81,7 +80,9 @@ export default class FrameTimer {
           fps >= this.desiredFPS + this.calibrationTolerance
         ) {
           console.log(
-            `Enabling bodge mode. (Desired FPS is ${this.desiredFPS}, actual FPS is ${fps})`
+            `Enabling bodge mode. (Desired FPS is ${
+              this.desiredFPS
+            }, actual FPS is ${fps})`
           );
           this.startBodgeMode();
         }
