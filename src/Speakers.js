@@ -1,4 +1,5 @@
 import RingBuffer from "ringbufferjs";
+import { handleError } from "./utils";
 
 export default class Speakers {
   constructor({ onBufferUnderrun }) {
@@ -25,7 +26,7 @@ export default class Speakers {
       this.scriptNode = null;
     }
     if (this.audioCtx) {
-      this.audioCtx.close();
+      this.audioCtx.close().catch(handleError);
       this.audioCtx = null;
     }
   }

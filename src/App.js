@@ -1,10 +1,10 @@
-import Raven from "raven-js";
 import React, { Component } from "react";
 import GoogleAnalytics from "react-ga";
 import { BrowserRouter, Route } from "react-router-dom";
 import ListPage from "./ListPage";
 import RunPage from "./RunPage";
 import config from "./config";
+import { handleError } from "./utils";
 import "./App.css";
 
 class App extends Component {
@@ -42,8 +42,7 @@ class App extends Component {
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error });
-    console.error(error);
-    Raven.captureException(error, { extra: errorInfo });
+    handleError(error, errorInfo);
   }
 
   recordPageview = ({ location }) => {
