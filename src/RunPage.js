@@ -221,7 +221,7 @@ class RunPage extends Component {
 
   handleProgress = e => {
     if (e.lengthComputable) {
-      this.setState({ loadedPercent: e.loaded / e.total * 100 });
+      this.setState({ loadedPercent: (e.loaded / e.total) * 100 });
     }
   };
 
