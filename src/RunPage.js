@@ -154,6 +154,9 @@ class RunPage extends Component {
       onAudioSample: this.speakers.writeSample
     });
 
+    // For debugging
+    window.nes = this.nes;
+
     this.frameTimer = new FrameTimer({
       onGenerateFrame: Raven.wrap(this.nes.frame),
       onWriteFrame: Raven.wrap(this.screen.writeBuffer)
@@ -191,6 +194,8 @@ class RunPage extends Component {
       this.keyboardController.handleKeyPress
     );
     window.removeEventListener("resize", this.layout);
+
+    window.nes = undefined;
   }
 
   load = () => {
