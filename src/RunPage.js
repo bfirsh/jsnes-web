@@ -40,7 +40,8 @@ class RunPage extends Component {
       paused: false,
       controlsModal: false,
       loading: true,
-      loadedPercent: 3
+      loadedPercent: 3,
+      error: null
     };
   }
 
@@ -78,45 +79,49 @@ class RunPage extends Component {
           </Button>
         </nav>
 
-        <div
-          className="screen-container"
-          ref={el => {
-            this.screenContainer = el;
-          }}
-        >
-          {this.state.loading ? (
-            <Progress
-              value={this.state.loadedPercent}
-              style={{
-                position: "absolute",
-                width: "70%",
-                left: "15%",
-                top: "48%"
+        {this.state.error ? (
+          this.state.error
+        ) : (
+          <div
+            className="screen-container"
+            ref={el => {
+              this.screenContainer = el;
+            }}
+          >
+            {this.state.loading ? (
+              <Progress
+                value={this.state.loadedPercent}
+                style={{
+                  position: "absolute",
+                  width: "70%",
+                  left: "15%",
+                  top: "48%"
+                }}
+              />
+            ) : null}
+            <Screen
+              ref={screen => {
+                this.screen = screen;
+              }}
+              onGenerateFrame={() => {
+                this.nes.frame();
+              }}
+              onMouseDown={(x, y) => {
+                // console.log("mouseDown")
+                this.nes.zapperMove(x, y);
+                this.nes.zapperFireDown();
+              }}
+              onMouseUp={() => {
+                // console.log("mouseUp")
+                this.nes.zapperFireUp();
               }}
             />
-          ) : null}
-          <Screen
-            ref={screen => {
-              this.screen = screen;
-            }}
-            onGenerateFrame={() => {
-              this.nes.frame();
-            }}
-            onMouseDown={(x, y) => {
-              // console.log("mouseDown")
-              this.nes.zapperMove(x, y);
-              this.nes.zapperFireDown();
-            }}
-            onMouseUp={() => {
-              // console.log("mouseUp")
-              this.nes.zapperFireUp();
-            }}
-          />
-          <ControlsModal
-            isOpen={this.state.controlsModal}
-            toggle={this.toggleControlsModal}
-          />
-        </div>
+            <ControlsModal
+              isOpen={this.state.controlsModal}
+              toggle={this.toggleControlsModal}
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -200,7 +205,12 @@ class RunPage extends Component {
 
   load = () => {
     if (this.props.match.params.rom) {
-      const path = config.BASE_ROM_URL + this.props.match.params.rom;
+      const romName = this.props.match.params.rom;
+      const path = config.ROMS[romName];
+      if (!path) {
+        this.setState({ error: `No such ROM: ${romName}` });
+        return;
+      }
       this.currentRequest = loadBinary(
         path,
         (err, data) => {
