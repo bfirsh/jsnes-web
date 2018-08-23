@@ -20,7 +20,7 @@
     "canvas-prebuilt": "1.6.0",
     "prettier": "^1.12.1",
     "prettier-check": "^2.0.0",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.5"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
