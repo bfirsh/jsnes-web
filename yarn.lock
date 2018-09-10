@@ -1347,11 +1347,11 @@ caniuse-lite@^1.0.30000748, caniuse-lite@^1.0.30000792:
   version "1.0.30000823"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000823.tgz#b79842a5b5a48eaa416b73f5a5d7a23f52d26014"
 
-canvas-prebuilt@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/canvas-prebuilt/-/canvas-prebuilt-1.6.0.tgz#f8dd9abe81fdc2103a39d8362df3219d6d83f788"
+canvas-prebuilt@1.6.11:
+  version "1.6.11"
+  resolved "https://registry.yarnpkg.com/canvas-prebuilt/-/canvas-prebuilt-1.6.11.tgz#9b37071aa0ddd4f7c2b4a9e279b63fb2dc30db9b"
   dependencies:
-    node-pre-gyp "^0.6.29"
+    node-pre-gyp "^0.10.0"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -4919,7 +4919,7 @@ node-pre-gyp@^0.10.0:
     semver "^5.3.0"
     tar "^4"
 
-node-pre-gyp@^0.6.29, node-pre-gyp@^0.6.39:
+node-pre-gyp@^0.6.39:
   version "0.6.39"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.39.tgz#c00e96860b23c0e1420ac7befc5044e1d78d8649"
   dependencies:
