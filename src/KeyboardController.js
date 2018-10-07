@@ -27,8 +27,22 @@ export default class KeyboardController {
     this.onButtonUp = options.onButtonUp;
   }
 
+  loadKeys = () => {
+    var keys;
+    try {
+      keys = localStorage.getItem("keys");
+      if (keys) {
+        keys = JSON.parse(keys);
+      }
+    } catch (e) {
+      console.log("Failed to get keys from localStorage.", e);
+    }
+
+    this.keys = keys || KEYS;
+  };
+
   handleKeyDown = e => {
-    var key = KEYS[e.keyCode];
+    var key = this.keys[e.keyCode];
     if (key) {
       this.onButtonDown(key[0], key[1]);
       e.preventDefault();
@@ -36,7 +50,7 @@ export default class KeyboardController {
   };
 
   handleKeyUp = e => {
-    var key = KEYS[e.keyCode];
+    var key = this.keys[e.keyCode];
     if (key) {
       this.onButtonUp(key[0], key[1]);
       e.preventDefault();

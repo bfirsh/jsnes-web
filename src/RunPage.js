@@ -171,6 +171,10 @@ class RunPage extends Component {
       onButtonDown: this.nes.buttonDown,
       onButtonUp: this.nes.buttonUp
     });
+
+    // Load keys from localStorage (if they exist)
+    this.keyboardController.loadKeys();
+
     document.addEventListener("keydown", this.keyboardController.handleKeyDown);
     document.addEventListener("keyup", this.keyboardController.handleKeyUp);
     document.addEventListener(
