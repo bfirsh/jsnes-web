@@ -12,14 +12,15 @@ import { Controller } from "jsnes";
 class ControlsModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { keys: undefined, button: undefined };
+    this.state = { keys: props.keys, button: undefined, modified: false };
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  componentDidUpdate(props, state) {
-    if (state.keys === undefined && props.keys !== undefined) {
-      this.setState({ keys: this.props.keys });
+  componentWillUnmount() {
+    if (this.state.modified) {
+      this.props.setKeys(this.state.keys);
     }
+    this.removeKeyListener("keydown", this.handleKeyDown);
   }
 
   handleClick(button) {
@@ -41,7 +42,8 @@ class ControlsModal extends Component {
         ...newKeys,
         [event.keyCode]: button
       },
-      button: undefined
+      button: undefined,
+      modified: true
     });
     document.removeEventListener("keydown", this.handleKeyDown);
   }
@@ -51,11 +53,6 @@ class ControlsModal extends Component {
   }
 
   render() {
-    // Remove key listener in case modal is closed before new button is mapped
-    if (!this.props.isOpen) {
-      this.removeKeyListener("keydown", this.handleKeyDown);
-      this.props.setKeys(this.state.keys);
-    }
     return (
       <Modal
         isOpen={this.props.isOpen}
