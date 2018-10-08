@@ -116,20 +116,14 @@ class RunPage extends Component {
                 this.nes.zapperFireUp();
               }}
             />
-            <ControlsModal
-              isOpen={this.state.controlsModal}
-              toggle={this.toggleControlsModal}
-              keys={
-                this.keyboardController
-                  ? this.keyboardController.keys
-                  : undefined
-              }
-              setKeys={
-                this.keyboardController
-                  ? this.keyboardController.setKeys
-                  : undefined
-              }
-            />
+            {this.state.controlsModal && (
+              <ControlsModal
+                isOpen={this.state.controlsModal}
+                toggle={this.toggleControlsModal}
+                keys={this.keyboardController.keys}
+                setKeys={this.keyboardController.setKeys}
+              />
+            )}
           </div>
         )}
       </div>
