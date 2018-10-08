@@ -41,6 +41,15 @@ export default class KeyboardController {
     this.keys = keys || KEYS;
   };
 
+  setKeys = newKeys => {
+    try {
+      localStorage.setItem("keys", JSON.stringify(newKeys));
+      this.keys = newKeys;
+    } catch (e) {
+      console.log("Failed to set keys in localStorage");
+    }
+  };
+
   handleKeyDown = e => {
     var key = this.keys[e.keyCode];
     if (key) {

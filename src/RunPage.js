@@ -119,6 +119,16 @@ class RunPage extends Component {
             <ControlsModal
               isOpen={this.state.controlsModal}
               toggle={this.toggleControlsModal}
+              keys={
+                this.keyboardController
+                  ? this.keyboardController.keys
+                  : undefined
+              }
+              setKeys={
+                this.keyboardController
+                  ? this.keyboardController.setKeys
+                  : undefined
+              }
             />
           </div>
         )}
