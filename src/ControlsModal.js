@@ -42,7 +42,10 @@ class ControlsModal extends Component {
     this.setState({
       keys: {
         ...newKeys,
-        [event.keyCode]: button
+        [event.keyCode]: [
+          ...button.slice(0, 2),
+          event.key.length > 1 ? event.key : String(event.key).toUpperCase()
+        ]
       },
       button: undefined,
       modified: true
