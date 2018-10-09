@@ -8,6 +8,7 @@ import {
   Table
 } from "reactstrap";
 import { Controller } from "jsnes";
+import ControlMapperRow from "./ControlMapperRow";
 
 class ControlsModal extends Component {
   constructor(props) {
@@ -70,102 +71,54 @@ class ControlsModal extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Left</td>
-                <td
-                  onClick={() => this.handleClick([1, Controller.BUTTON_LEFT])}
-                >
-                  Left
-                </td>
-                <td
-                  onClick={() => this.handleClick([2, Controller.BUTTON_LEFT])}
-                >
-                  Num-4
-                </td>
-              </tr>
-              <tr>
-                <td>Right</td>
-                <td
-                  onClick={() => this.handleClick([1, Controller.BUTTON_RIGHT])}
-                >
-                  Right
-                </td>
-                <td
-                  onClick={() => this.handleClick([2, Controller.BUTTON_RIGHT])}
-                >
-                  Num-6
-                </td>
-              </tr>
-              <tr>
-                <td>Up</td>
-                <td onClick={() => this.handleClick([1, Controller.BUTTON_UP])}>
-                  Up
-                </td>
-                <td onClick={() => this.handleClick([2, Controller.BUTTON_UP])}>
-                  Num-8
-                </td>
-              </tr>
-              <tr>
-                <td>Down</td>
-                <td
-                  onClick={() => this.handleClick([1, Controller.BUTTON_DOWN])}
-                >
-                  Down
-                </td>
-                <td
-                  onClick={() => this.handleClick([2, Controller.BUTTON_DOWN])}
-                >
-                  Num-2
-                </td>
-              </tr>
-              <tr>
-                <td>A</td>
-                <td onClick={() => this.handleClick([1, Controller.BUTTON_A])}>
-                  X
-                </td>
-                <td onClick={() => this.handleClick([2, Controller.BUTTON_A])}>
-                  Num-7
-                </td>
-              </tr>
-              <tr>
-                <td>B</td>
-                <td onClick={() => this.handleClick([1, Controller.BUTTON_B])}>
-                  Z
-                </td>
-                <td onClick={() => this.handleClick([2, Controller.BUTTON_B])}>
-                  Num-9
-                </td>
-              </tr>
-              <tr>
-                <td>Start</td>
-                <td
-                  onClick={() => this.handleClick([1, Controller.BUTTON_START])}
-                >
-                  Enter
-                </td>
-                <td
-                  onClick={() => this.handleClick([2, Controller.BUTTON_START])}
-                >
-                  Num-1
-                </td>
-              </tr>
-              <tr>
-                <td>Select</td>
-                <td
-                  onClick={() =>
-                    this.handleClick([1, Controller.BUTTON_SELECT])
-                  }
-                >
-                  Ctrl
-                </td>
-                <td
-                  onClick={() =>
-                    this.handleClick([2, Controller.BUTTON_SELECT])
-                  }
-                >
-                  Num-3
-                </td>
-              </tr>
+              <ControlMapperRow
+                buttonName="Left"
+                button={Controller.BUTTON_LEFT}
+                keys={this.state.keys}
+                handleClick={this.listenForKey}
+              />
+              <ControlMapperRow
+                buttonName="Right"
+                button={Controller.BUTTON_RIGHT}
+                keys={this.state.keys}
+                handleClick={this.listenForKey}
+              />
+              <ControlMapperRow
+                buttonName="Up"
+                button={Controller.BUTTON_UP}
+                keys={this.state.keys}
+                handleClick={this.listenForKey}
+              />
+              <ControlMapperRow
+                buttonName="Down"
+                button={Controller.BUTTON_DOWN}
+                keys={this.state.keys}
+                handleClick={this.listenForKey}
+              />
+              <ControlMapperRow
+                buttonName="A"
+                button={Controller.BUTTON_A}
+                keys={this.state.keys}
+                handleClick={this.listenForKey}
+              />
+              <ControlMapperRow
+                buttonName="B"
+                button={Controller.BUTTON_B}
+                keys={this.state.keys}
+                handleClick={this.listenForKey}
+              />
+              <ControlMapperRow
+                buttonName="Start"
+                button={Controller.BUTTON_START}
+                keys={this.state.keys}
+                handleClick={this.listenForKey}
+              />
+              <ControlMapperRow
+                buttonName="Select"
+                button={Controller.BUTTON_SELECT}
+                keys={this.state.keys}
+                handleClick={this.listenForKey}
+              />
             </tbody>
           </Table>
         </ModalBody>
