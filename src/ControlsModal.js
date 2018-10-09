@@ -15,6 +15,7 @@ class ControlsModal extends Component {
     super(props);
     this.state = { keys: props.keys, button: undefined, modified: false };
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.listenForKey = this.listenForKey.bind(this);
   }
 
   componentWillUnmount() {
@@ -24,7 +25,7 @@ class ControlsModal extends Component {
     this.removeKeyListener("keydown", this.handleKeyDown);
   }
 
-  handleClick(button) {
+  listenForKey(button) {
     this.setState({ button });
     document.addEventListener("keydown", this.handleKeyDown);
   }
