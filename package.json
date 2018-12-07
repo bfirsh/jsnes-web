@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "canvas-prebuilt": "1.6.11",
-    "prettier": "^1.12.1",
+    "prettier": "^1.15.3",
     "prettier-check": "^2.0.0",
     "react-scripts": "1.1.4"
   },
