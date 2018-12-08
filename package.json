@@ -20,16 +20,19 @@
     "canvas": "^2.2.0",
     "prettier": "^1.15.3",
     "prettier-check": "^2.0.0",
-    "react-scripts": "1.1.4"
+    "react-scripts": "2.1.1"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "node-sass-chokidar src/ -o src/ --watch",
-    "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && react-scripts build",
-    "test": "prettier-check src/**/*.js && react-scripts test --env=jsdom",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "prettier-check src/**/*.js && react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.js"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

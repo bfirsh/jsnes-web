@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import config from "./config";
-import "./index.css";
+import "./index.scss";
 
 if (config.SENTRY_URI) {
   Raven.config(config.SENTRY_URI).install();
