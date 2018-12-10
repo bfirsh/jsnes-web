@@ -6,7 +6,7 @@
   "dependencies": {
     "bootstrap": "4.1.3",
     "jsnes": "git://github.com/bfirsh/jsnes.git",
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.11.0",
     "raven-js": "^3.27.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
