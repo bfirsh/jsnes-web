@@ -7,6 +7,7 @@ import config from "./config";
 import ControlsModal from "./ControlsModal";
 import FrameTimer from "./FrameTimer";
 import KeyboardController from "./KeyboardController";
+import GamepadController from "./GamepadController";
 import Screen from "./Screen";
 import Speakers from "./Speakers";
 import { NES } from "jsnes";
@@ -122,6 +123,9 @@ class RunPage extends Component {
                 toggle={this.toggleControlsModal}
                 keys={this.keyboardController.keys}
                 setKeys={this.keyboardController.setKeys}
+                promptButton={this.gamepadController.promptButton}
+                gamepadConfig={this.gamepadController.gamepadConfig}
+                setGamepadConfig={this.gamepadController.setGamepadConfig}
               />
             )}
           </div>
@@ -147,6 +151,7 @@ class RunPage extends Component {
         console.log(
           "Buffer underrun, running another frame to try and catch up"
         );
+
         this.nes.frame();
         // desiredSize will be 2048, and the NES produces 1468 samples on each
         // frame so we might need a second frame to be run. Give up after that
@@ -171,9 +176,22 @@ class RunPage extends Component {
       onWriteFrame: Raven.wrap(this.screen.writeBuffer)
     });
 
-    this.keyboardController = new KeyboardController({
+    this.gamepadController = new GamepadController({
       onButtonDown: this.nes.buttonDown,
       onButtonUp: this.nes.buttonUp
+    });
+
+    this.gamepadController.loadGamepadConfig();
+
+    this.gamepadPolling = this.gamepadController.startPolling();
+
+    this.keyboardController = new KeyboardController({
+      onButtonDown: this.gamepadController.disableIfGamepadEnabled(
+        this.nes.buttonDown
+      ),
+      onButtonUp: this.gamepadController.disableIfGamepadEnabled(
+        this.nes.buttonUp
+      )
     });
 
     // Load keys from localStorage (if they exist)
@@ -206,6 +224,9 @@ class RunPage extends Component {
       "keypress",
       this.keyboardController.handleKeyPress
     );
+
+    this.gamepadPolling.stop();
+
     window.removeEventListener("resize", this.layout);
 
     window.nes = undefined;
