@@ -1,13 +1,13 @@
 const config = {
   ROMS: {
     "Bubble Bobble":
-      "https://cors-anywhere.herokuapp.com/http://theromdepot.com/roms/NES/US/Bubble%20Bobble%20(U).nes",
+      "https://cors-anywhere.herokuapp.com/http://www.vertigofx.com/public/games/roms/nes/Bubble%20Bobble%20(U).nes",
     Castlevania:
-      "https://cors-anywhere.herokuapp.com/http://theromdepot.com/roms/NES/US/Castlevania%20(U).nes",
+      "https://cors-anywhere.herokuapp.com/http://www.vertigofx.com/public/games/roms/nes/Castlevania%20(E).nes",
     Contra:
-      "https://cors-anywhere.herokuapp.com/http://theromdepot.com/roms/NES/US/Contra%20(U).nes",
+      "https://cors-anywhere.herokuapp.com/http://www.vertigofx.com/public/games/roms/nes/Contra%20(U).nes",
     "Donkey Kong Classics":
-      "https://cors-anywhere.herokuapp.com/http://theromdepot.com/roms/NES/US/Donkey%20Kong%20Classics%20(U).nes",
+      "https://cors-anywhere.herokuapp.com/http://www.vertigofx.com/public/games/roms/nes/Donkey%20Kong%20Classics%20(U).nes",
     "Duck Hunt":
       "https://cors-anywhere.herokuapp.com/http://www.vertigofx.com/public/games/roms/nes/Duck%20Hunt%20(JUE).nes",
     "Final Fantasy":
