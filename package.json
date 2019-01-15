@@ -17,7 +17,7 @@
     "ringbufferjs": "^1.1.0"
   },
   "devDependencies": {
-    "canvas": "^2.3.0",
+    "canvas": "^2.3.1",
     "prettier": "^1.15.3",
     "prettier-check": "^2.0.0",
     "react-scripts": "2.1.3"
