@@ -184,6 +184,10 @@ export default class GamepadController {
   };
 
   startPolling = () => {
+    if (!(navigator.getGamepads || navigator.webkitGetGamepads)) {
+      return { stop: () => {} };
+    }
+
     let stopped = false;
     const loop = () => {
       if (stopped) return;
