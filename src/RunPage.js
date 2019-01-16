@@ -1,16 +1,12 @@
-import Raven from "raven-js";
 import React, { Component } from "react";
 import { Button, Progress } from "reactstrap";
 import { Link } from "react-router-dom";
-import "./RunPage.css";
+
 import config from "./config";
 import ControlsModal from "./ControlsModal";
-import FrameTimer from "./FrameTimer";
-import KeyboardController from "./KeyboardController";
-import GamepadController from "./GamepadController";
-import Screen from "./Screen";
-import Speakers from "./Speakers";
-import { NES } from "jsnes";
+import Emulator from "./Emulator";
+
+import "./RunPage.css";
 
 function loadBinary(path, callback, handleProgress) {
   var req = new XMLHttpRequest();
@@ -33,13 +29,16 @@ function loadBinary(path, callback, handleProgress) {
   return req;
 }
 
+/*
+ * The UI for the emulator. Also responsible for loading ROM from URL or file.
+ */
 class RunPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       running: false,
       paused: false,
-      controlsModal: false,
+      controlsModalOpen: false,
       loading: true,
       loadedPercent: 3,
       error: null
@@ -99,33 +98,28 @@ class RunPage extends Component {
                   top: "48%"
                 }}
               />
+            ) : this.state.romData ? (
+              <Emulator
+                romData={this.state.romData}
+                paused={this.state.paused}
+                ref={emulator => {
+                  this.emulator = emulator;
+                }}
+              />
             ) : null}
-            <Screen
-              ref={screen => {
-                this.screen = screen;
-              }}
-              onGenerateFrame={() => {
-                this.nes.frame();
-              }}
-              onMouseDown={(x, y) => {
-                // console.log("mouseDown")
-                this.nes.zapperMove(x, y);
-                this.nes.zapperFireDown();
-              }}
-              onMouseUp={() => {
-                // console.log("mouseUp")
-                this.nes.zapperFireUp();
-              }}
-            />
+
+            {/* TODO: lift keyboard and gamepad state up */}
             {this.state.controlsModal && (
               <ControlsModal
                 isOpen={this.state.controlsModal}
                 toggle={this.toggleControlsModal}
-                keys={this.keyboardController.keys}
-                setKeys={this.keyboardController.setKeys}
-                promptButton={this.gamepadController.promptButton}
-                gamepadConfig={this.gamepadController.gamepadConfig}
-                setGamepadConfig={this.gamepadController.setGamepadConfig}
+                keys={this.emulator.keyboardController.keys}
+                setKeys={this.emulator.keyboardController.setKeys}
+                promptButton={this.emulator.gamepadController.promptButton}
+                gamepadConfig={this.emulator.gamepadController.gamepadConfig}
+                setGamepadConfig={
+                  this.emulator.gamepadController.setGamepadConfig
+                }
               />
             )}
           </div>
@@ -135,101 +129,16 @@ class RunPage extends Component {
   }
 
   componentDidMount() {
-    this.speakers = new Speakers({
-      onBufferUnderrun: (actualSize, desiredSize) => {
-        if (!this.state.running || this.state.paused) {
-          return;
-        }
-        // Skip a video frame so audio remains consistent. This happens for
-        // a variety of reasons:
-        // - Frame rate is not quite 60fps, so sometimes buffer empties
-        // - Page is not visible, so requestAnimationFrame doesn't get fired.
-        //   In this case emulator still runs at full speed, but timing is
-        //   done by audio instead of requestAnimationFrame.
-        // - System can't run emulator at full speed. In this case it'll stop
-        //    firing requestAnimationFrame.
-        console.log(
-          "Buffer underrun, running another frame to try and catch up"
-        );
-
-        this.nes.frame();
-        // desiredSize will be 2048, and the NES produces 1468 samples on each
-        // frame so we might need a second frame to be run. Give up after that
-        // though -- the system is not catching up
-        if (this.speakers.buffer.size() < desiredSize) {
-          console.log("Still buffer underrun, running a second frame");
-          this.nes.frame();
-        }
-      }
-    });
-    this.nes = new NES({
-      onFrame: this.screen.setBuffer,
-      onStatusUpdate: console.log,
-      onAudioSample: this.speakers.writeSample
-    });
-
-    // For debugging
-    window.nes = this.nes;
-
-    this.frameTimer = new FrameTimer({
-      onGenerateFrame: Raven.wrap(this.nes.frame),
-      onWriteFrame: Raven.wrap(this.screen.writeBuffer)
-    });
-
-    this.gamepadController = new GamepadController({
-      onButtonDown: this.nes.buttonDown,
-      onButtonUp: this.nes.buttonUp
-    });
-
-    this.gamepadController.loadGamepadConfig();
-
-    this.gamepadPolling = this.gamepadController.startPolling();
-
-    this.keyboardController = new KeyboardController({
-      onButtonDown: this.gamepadController.disableIfGamepadEnabled(
-        this.nes.buttonDown
-      ),
-      onButtonUp: this.gamepadController.disableIfGamepadEnabled(
-        this.nes.buttonUp
-      )
-    });
-
-    // Load keys from localStorage (if they exist)
-    this.keyboardController.loadKeys();
-
-    document.addEventListener("keydown", this.keyboardController.handleKeyDown);
-    document.addEventListener("keyup", this.keyboardController.handleKeyUp);
-    document.addEventListener(
-      "keypress",
-      this.keyboardController.handleKeyPress
-    );
-
     window.addEventListener("resize", this.layout);
     this.layout();
-
     this.load();
   }
 
   componentWillUnmount() {
+    window.removeEventListener("resize", this.layout);
     if (this.currentRequest) {
       this.currentRequest.abort();
     }
-    this.stop();
-    document.removeEventListener(
-      "keydown",
-      this.keyboardController.handleKeyDown
-    );
-    document.removeEventListener("keyup", this.keyboardController.handleKeyUp);
-    document.removeEventListener(
-      "keypress",
-      this.keyboardController.handleKeyPress
-    );
-
-    this.gamepadPolling.stop();
-
-    window.removeEventListener("resize", this.layout);
-
-    window.nes = undefined;
   }
 
   load = () => {
@@ -270,44 +179,24 @@ class RunPage extends Component {
   };
 
   handleLoaded = data => {
-    this.setState({ uiEnabled: true, running: true, loading: false });
-    this.nes.loadROM(data);
-    this.start();
-  };
-
-  start = () => {
-    this.frameTimer.start();
-    this.speakers.start();
-    this.fpsInterval = setInterval(() => {
-      console.log(`FPS: ${this.nes.getFPS()}`);
-    }, 1000);
-  };
-
-  stop = () => {
-    this.frameTimer.stop();
-    this.speakers.stop();
-    clearInterval(this.fpsInterval);
+    this.setState({ running: true, loading: false, romData: data });
   };
 
   handlePauseResume = () => {
-    if (this.state.paused) {
-      this.setState({ paused: false });
-      this.start();
-    } else {
-      this.setState({ paused: true });
-      this.stop();
-    }
+    this.setState({ paused: !this.state.paused });
   };
 
   layout = () => {
     let navbarHeight = parseFloat(window.getComputedStyle(this.navbar).height);
     this.screenContainer.style.height = `${window.innerHeight -
       navbarHeight}px`;
-    this.screen.fitInParent();
+    if (this.emulator) {
+      this.emulator.fitInParent();
+    }
   };
 
   toggleControlsModal = () => {
-    this.setState({ controlsModal: !this.state.controlsModal });
+    this.setState({ controlsModalOpen: !this.state.controlsModalOpen });
   };
 }
 
