@@ -165,7 +165,7 @@ class RunPage extends Component {
       reader.readAsBinaryString(this.props.location.state.file);
       reader.onload = e => {
         this.currentRequest = null;
-        this.handleLoaded(e.target.result);
+        this.handleLoaded(reader.result);
       };
     } else {
       window.alert("No ROM provided");

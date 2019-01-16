@@ -71,7 +71,9 @@ class Screen extends Component {
 
   fitInParent = () => {
     let parent = this.canvas.parentNode;
+    // @ts-ignore
     let parentWidth = parent.clientWidth;
+    // @ts-ignore
     let parentHeight = parent.clientHeight;
     let parentRatio = parentWidth / parentHeight;
     let desiredRatio = SCREEN_WIDTH / SCREEN_HEIGHT;
