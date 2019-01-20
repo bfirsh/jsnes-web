@@ -41,6 +41,8 @@ class RunPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      rom: null,
+      romData: null,
       running: false,
       paused: false,
       controlsModalOpen: false,
@@ -59,29 +61,40 @@ class RunPage extends Component {
             this.navbar = el;
           }}
         >
-          <ul className="navbar-nav mr-auto">
+          <ul className="navbar-nav" style={{ width: "200px" }}>
             <li className="navitem">
               <Link to="/" className="nav-link">
                 &lsaquo; Back
               </Link>
             </li>
           </ul>
-          <Button
-            outline
-            color="primary"
-            onClick={this.toggleControlsModal}
-            className="mr-3"
-          >
-            Controls
-          </Button>
-          <Button
-            outline
-            color="primary"
-            onClick={this.handlePauseResume}
-            disabled={!this.state.running}
-          >
-            {this.state.paused ? "Resume" : "Pause"}
-          </Button>
+          <ul className="navbar-nav ml-auto mr-auto">
+            <li className="navitem">
+              <span className="navbar-text mr-3">
+                {this.state.rom && this.state.rom.description}
+              </span>
+            </li>
+          </ul>
+          <ul className="navbar-nav" style={{ width: "200px" }}>
+            <li className="navitem">
+              <Button
+                outline
+                color="primary"
+                onClick={this.toggleControlsModal}
+                className="mr-3"
+              >
+                Controls
+              </Button>
+              <Button
+                outline
+                color="primary"
+                onClick={this.handlePauseResume}
+                disabled={!this.state.running}
+              >
+                {this.state.paused ? "Resume" : "Pause"}
+              </Button>
+            </li>
+          </ul>
         </nav>
 
         {this.state.error ? (
@@ -147,15 +160,16 @@ class RunPage extends Component {
   }
 
   load = () => {
-    if (this.props.match.params.rom) {
-      const romName = this.props.match.params.rom;
-      const path = config.ROMS[romName];
-      if (!path) {
-        this.setState({ error: `No such ROM: ${romName}` });
+    if (this.props.match.params.slug) {
+      const slug = this.props.match.params.slug;
+      const rom = config.ROMS[slug];
+      if (!rom) {
+        this.setState({ error: `No such ROM: ${slug}` });
         return;
       }
+      this.setState({ rom: rom });
       this.currentRequest = loadBinary(
-        path,
+        rom.url,
         (err, data) => {
           if (err) {
             this.setState({ error: `Error loading ROM: ${err.message}` });
