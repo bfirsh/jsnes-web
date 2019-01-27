@@ -35,4 +35,4 @@ Open `src/config.js` and add a new key under the defined `config.ROMS`. For exam
       url: "http://localhost:3000/roms/myrom/myrom.nes"
     }
 
-If you add your rom file now under `public/roms/myrom/myrom.nes`, the game should start playing as you navigate to http://localhost:3000/myrom
+If you add your rom file now under `public/roms/myrom/myrom.nes`, the game should start playing as you navigate to http://localhost:3000/run/myrom
