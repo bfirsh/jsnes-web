@@ -127,9 +127,9 @@ class RunPage extends Component {
             ) : null}
 
             {/* TODO: lift keyboard and gamepad state up */}
-            {this.state.controlsModal && (
+            {this.state.controlsModalOpen && (
               <ControlsModal
-                isOpen={this.state.controlsModal}
+                isOpen={this.state.controlsModalOpen}
                 toggle={this.toggleControlsModal}
                 keys={this.emulator.keyboardController.keys}
                 setKeys={this.emulator.keyboardController.setKeys}
