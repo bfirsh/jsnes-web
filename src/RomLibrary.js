@@ -6,37 +6,40 @@ const pFileReader = function(file) {
   })
 }
 
-const RomLibrary = {
-  save: function(file) {
-    const asHex = (buffer) => {
+const hashFile = function(byteString) {
+  const asHex = (buffer) => {
       return Array.from(new Uint8Array (buffer))
         .map (b => b.toString (16).padStart (2, "0"))
         .join ("")
     }
 
+  const ab = new ArrayBuffer(byteString.length)
+  var ia = new Uint8Array(ab)
+
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+
+  return crypto.subtle.digest('SHA-1', ab).then(asHex)
+}
+
+const RomLibrary = {
+  save: function(file) {
     pFileReader(file).then(function(readFile) {
       const byteString = readFile.target.result;
-      const ab = new ArrayBuffer(byteString.length)
-      var ia = new Uint8Array(ab)
+      return hashFile(byteString).then((hash) =>{ return {hash, byteString} })
+    }).then(({hash, byteString}) => {
+      const savedRomInfo = localStorage.getItem('savedRomInfo')
+      const existingLibrary = savedRomInfo ? JSON.parse(savedRomInfo) : []
 
-      for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-      }
-      const digest = crypto.subtle.digest('SHA-1', ab)
-      digest.then((buffer) => {
-        const hash = asHex(buffer)
-        const savedRomInfo = localStorage.getItem('savedRomInfo')
-        const existingLibrary = savedRomInfo ? JSON.parse(savedRomInfo) : []
+      const newRomInfo = JSON.stringify(existingLibrary.concat([{
+        name: file.name,
+        hash: hash,
+        added: Date.now()
+      }]))
 
-        const newRomInfo = JSON.stringify(existingLibrary.concat([{
-          name: file.name,
-          hash: hash,
-          added: Date.now()
-        }]))
-
-        localStorage.setItem('savedRomInfo', newRomInfo)
-        localStorage.setItem('blob-'+hash, readFile.target.result)
-      })
+      localStorage.setItem('savedRomInfo', newRomInfo)
+      localStorage.setItem('blob-'+hash, byteString)
     })
   },
   load: function() {
