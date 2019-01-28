@@ -47,6 +47,11 @@ const RomLibrary = {
     if (!localData) return []
     const savedRomInfo = JSON.parse(localStorage.getItem('savedRomInfo'))
     return savedRomInfo || []
+  },
+  delete: function(hash) {
+    const existingLibrary = this.load()
+    localStorage.removeItem('blob-'+hash)
+    localStorage.setItem('savedRomInfo', JSON.stringify(existingLibrary.filter((rom) => rom.hash !== hash)))
   }
 }
 

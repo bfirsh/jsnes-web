@@ -11,12 +11,23 @@ class ListPage extends Component {
     super(props);
     this.state = {
       romLibrary: RomLibrary.load(),
-      showRomLibraryInfo: false
+      showRomLibraryInfo: false,
+      editingRoms: false
     };
   }
   render() {
+    const editingRoms = this.state.editingRoms
+    const deleteRom = this.deleteRom
     const romLib = this.state.romLibrary.map(function(o) {
-      return <a href={"run/local-" + o.hash}><div key={o.hash} className="list-group-item">{o.name} <span className="float-right">&rsaquo;</span></div></a>
+      return <a href={"run/local-" + o.hash}>
+        <div key={o.hash} className="list-group-item">
+          {o.name}
+          {editingRoms ?
+            <Button className="float-right" size="sm" color="danger" onClick={(e) => { e.preventDefault(); deleteRom(o.hash) }}>Delete</Button>
+            : <span className="float-right">&rsaquo;</span>
+          }
+        </div>
+      </a>
     })
 
     return (
@@ -45,7 +56,15 @@ class ListPage extends Component {
             </div>
 
             {
-              romLib.length > 0 ? <div><h2>Your ROM library</h2><div className="mb-4">{romLib}</div></div> : null
+              romLib.length > 0 ?
+                <div>
+                  <h2>Your ROM library</h2>
+                  <p><Button outline color="secondary" size="sm" onClick={this.toggleRomEditing}>
+                    {this.state.editingRoms ? "Stop editing ROMs" : "Edit ROMs"}
+                  </Button></p>
+                  <div className="mb-4">{romLib}</div>
+                </div>
+                : null
             }
 
             <h2>Preinstalled ROMs</h2>
@@ -88,6 +107,13 @@ class ListPage extends Component {
     );
   }
 
+  deleteRom = (hash) => {
+    RomLibrary.delete(hash)
+    this.updateLibrary()
+  }
+
+  toggleRomEditing = () => this.setState({editingRoms: !this.state.editingRoms})
+
   updateLibrary = () => { this.setState({romLibrary: RomLibrary.load()}) }
 
   handleDragOver = e => {
@@ -102,6 +128,7 @@ class ListPage extends Component {
       ? e.dataTransfer.items[0].getAsFile()
       : e.dataTransfer.files[0];
 
+    this.setState({editingRoms: false})
     RomLibrary.save(file).then(this.updateLibrary)
   };
 }
