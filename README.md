@@ -27,6 +27,12 @@ To automatically format all your code, run:
 
 ## Adding roms
 
+### Add ROMs for yourself using localStorage
+
+Navigate to the server public root (e.g. `http://localhost:3000`), click "+ Add ROM files" and follow the instructions. The ROMs will be saved into your browser cache and other users will not be able to access them.
+
+### Add ROMs for all users
+
 Open `src/config.js` and add a new key under the defined `config.ROMS`. For example:
 
     myrom: {
