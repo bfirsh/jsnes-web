@@ -1,14 +1,20 @@
+const pFileReader = function(file) {
+  return new Promise((resolve, reject) => {
+    var reader = new FileReader();
+    reader.onload = resolve
+    reader.readAsBinaryString(file);
+  })
+}
+
 const RomLibrary = {
   save: function(file) {
-    const reader = new FileReader();
-
     const asHex = (buffer) => {
       return Array.from(new Uint8Array (buffer))
         .map (b => b.toString (16).padStart (2, "0"))
         .join ("")
     }
 
-    reader.onload = function(readFile) {
+    pFileReader(file).then(function(readFile) {
       const byteString = readFile.target.result;
       const ab = new ArrayBuffer(byteString.length)
       var ia = new Uint8Array(ab)
@@ -31,9 +37,7 @@ const RomLibrary = {
         localStorage.setItem('savedRomInfo', newRomInfo)
         localStorage.setItem('blob-'+hash, readFile.target.result)
       })
-    }
-
-    reader.readAsBinaryString(file);
+    })
   },
   load: function() {
     const localData = localStorage.getItem('savedRomInfo')
