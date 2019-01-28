@@ -25,7 +25,7 @@ const hashFile = function(byteString) {
 
 const RomLibrary = {
   save: function(file) {
-    pFileReader(file).then(function(readFile) {
+    return pFileReader(file).then(function(readFile) {
       const byteString = readFile.target.result;
       return hashFile(byteString).then((hash) =>{ return {hash, byteString} })
     }).then(({hash, byteString}) => {
