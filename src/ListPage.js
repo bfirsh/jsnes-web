@@ -44,11 +44,9 @@ class ListPage extends Component {
               }
             </div>
 
-            <h2>Your ROM library</h2>
-
-            <div className="mb-4">
-              {romLib}
-            </div>
+            {
+              romLib.length > 0 ? <div><h2>Your ROM library</h2><div className="mb-4">{romLib}</div></div> : null
+            }
 
             <h2>Preinstalled ROMs</h2>
 
