@@ -88,6 +88,8 @@ class ListPage extends Component {
     );
   }
 
+  updateLibrary = () => { this.setState({romLibrary: RomLibrary.load()}) }
+
   handleDragOver = e => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "copy";
@@ -100,7 +102,7 @@ class ListPage extends Component {
       ? e.dataTransfer.items[0].getAsFile()
       : e.dataTransfer.files[0];
 
-    RomLibrary.save(file)
+    RomLibrary.save(file).then(this.updateLibrary)
   };
 }
 
