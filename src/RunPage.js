@@ -162,23 +162,29 @@ class RunPage extends Component {
   load = () => {
     if (this.props.match.params.slug) {
       const slug = this.props.match.params.slug;
-      const rom = config.ROMS[slug];
+      const isLocalROM = /^local-/.test(slug)
+      const savedString = localStorage.getItem('blob-'+slug.split('-')[1])
+      const rom = isLocalROM ? savedString : config.ROMS[slug];
       if (!rom) {
         this.setState({ error: `No such ROM: ${slug}` });
         return;
       }
       this.setState({ rom: rom });
-      this.currentRequest = loadBinary(
-        rom.url,
-        (err, data) => {
-          if (err) {
-            this.setState({ error: `Error loading ROM: ${err.message}` });
-          } else {
-            this.handleLoaded(data);
-          }
-        },
-        this.handleProgress
-      );
+      if (isLocalROM) {
+        this.handleLoaded(rom)
+      } else {
+        this.currentRequest = loadBinary(
+          rom.url,
+          (err, data) => {
+            if (err) {
+              this.setState({ error: `Error loading ROM: ${err.message}` });
+            } else {
+              this.handleLoaded(data);
+            }
+          },
+          this.handleProgress
+        );
+      }
     } else if (this.props.location.state && this.props.location.state.file) {
       let reader = new FileReader();
       reader.readAsBinaryString(this.props.location.state.file);
