@@ -1,11 +1,24 @@
 import React, { Component } from "react";
 import "./ListPage.css";
-import { ListGroup } from "reactstrap";
+import { ListGroup, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import config from "./config";
 
+import RomLibrary from './RomLibrary'
+
 class ListPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      romLibrary: RomLibrary.load(),
+      showRomLibraryInfo: false
+    };
+  }
   render() {
+    const romLib = this.state.romLibrary.map(function(o) {
+      return <a href={"run/local-" + o.hash}><div key={o.hash} className="list-group-item">{o.name} <span className="float-right">&rsaquo;</span></div></a>
+    })
+
     return (
       <div
         className="container ListPage my-4"
@@ -21,6 +34,24 @@ class ListPage extends Component {
                 <a href="https://github.com/bfirsh/jsnes">Source on GitHub.</a>
               </p>
             </header>
+            <div>
+              <p><Button color="primary" onClick={() => this.setState({showRomLibraryInfo: !this.state.showRomLibraryInfo}) }>+ Add ROM files</Button></p>
+              { this.state.showRomLibraryInfo ?
+                <p>
+                  Drag &amp; drop your desired ROM files to this window and they will be copied into your local
+                  browser cache to be accessed later whenever you visit this page.
+                </p> : null
+              }
+            </div>
+
+            <h2>Your ROM library</h2>
+
+            <div className="mb-4">
+              {romLib}
+            </div>
+
+            <h2>Preinstalled ROMs</h2>
+
             <ListGroup className="mb-4">
               {Object.keys(config.ROMS)
                 .sort()
@@ -35,7 +66,6 @@ class ListPage extends Component {
                   </Link>
                 ))}
             </ListGroup>
-            <p>Or, drag and drop a ROM file onto the page.</p>
             <p>
               If you want to play ROMs that aren't listed here, Google might be
               able to help. (
@@ -72,7 +102,40 @@ class ListPage extends Component {
       ? e.dataTransfer.items[0].getAsFile()
       : e.dataTransfer.files[0];
 
-    this.props.history.push({ pathname: "/run", state: { file } });
+    const reader = new FileReader();
+
+    const asHex = (buffer) => {
+      return Array.from(new Uint8Array (buffer))
+        .map (b => b.toString (16).padStart (2, "0"))
+        .join ("")
+    }
+
+    reader.onload = function(readFile) {
+      const byteString = readFile.target.result;
+      const ab = new ArrayBuffer(byteString.length)
+      var ia = new Uint8Array(ab)
+
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      const digest = crypto.subtle.digest('SHA-1', ab)
+      digest.then((buffer) => {
+        const hash = asHex(buffer)
+        const savedRomInfo = localStorage.getItem('savedRomInfo')
+        const existingLibrary = savedRomInfo ? JSON.parse(savedRomInfo) : []
+
+        const newRomInfo = JSON.stringify(existingLibrary.concat([{
+          name: file.name,
+          hash: hash,
+          added: Date.now()
+        }]))
+
+        localStorage.setItem('savedRomInfo', newRomInfo)
+        localStorage.setItem('blob-'+hash, readFile.target.result)
+      })
+    }
+
+    reader.readAsBinaryString(file);
   };
 }
 
