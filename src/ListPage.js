@@ -4,7 +4,7 @@ import { ListGroup, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import config from "./config";
 
-import RomLibrary from './RomLibrary'
+import RomLibrary from "./RomLibrary";
 
 class ListPage extends Component {
   constructor(props) {
@@ -16,19 +16,32 @@ class ListPage extends Component {
     };
   }
   render() {
-    const editingRoms = this.state.editingRoms
-    const deleteRom = this.deleteRom
+    const editingRoms = this.state.editingRoms;
+    const deleteRom = this.deleteRom;
     const romLib = this.state.romLibrary.map(function(o) {
-      return <a href={"run/local-" + o.hash}>
-        <div key={o.hash} className="list-group-item">
-          {o.name}
-          {editingRoms ?
-            <Button className="float-right" size="sm" color="danger" onClick={(e) => { e.preventDefault(); deleteRom(o.hash) }}>Delete</Button>
-            : <span className="float-right">&rsaquo;</span>
-          }
-        </div>
-      </a>
-    })
+      return (
+        <a href={"run/local-" + o.hash}>
+          <div key={o.hash} className="list-group-item">
+            {o.name}
+            {editingRoms ? (
+              <Button
+                className="float-right"
+                size="sm"
+                color="danger"
+                onClick={e => {
+                  e.preventDefault();
+                  deleteRom(o.hash);
+                }}
+              >
+                Delete
+              </Button>
+            ) : (
+              <span className="float-right">&rsaquo;</span>
+            )}
+          </div>
+        </a>
+      );
+    });
 
     return (
       <div
@@ -46,26 +59,43 @@ class ListPage extends Component {
               </p>
             </header>
             <div>
-              <p><Button color="primary" onClick={() => this.setState({showRomLibraryInfo: !this.state.showRomLibraryInfo}) }>+ Add ROM files</Button></p>
-              { this.state.showRomLibraryInfo ?
+              <p>
+                <Button
+                  color="primary"
+                  onClick={() =>
+                    this.setState({
+                      showRomLibraryInfo: !this.state.showRomLibraryInfo
+                    })
+                  }
+                >
+                  + Add ROM files
+                </Button>
+              </p>
+              {this.state.showRomLibraryInfo ? (
                 <p>
-                  Drag &amp; drop your desired ROM files to this window and they will be copied into your local
-                  browser cache to be accessed later whenever you visit this page.
-                </p> : null
-              }
+                  Drag &amp; drop your desired ROM files to this window and they
+                  will be copied into your local browser cache to be accessed
+                  later whenever you visit this page.
+                </p>
+              ) : null}
             </div>
 
-            {
-              romLib.length > 0 ?
-                <div>
-                  <h2>Your ROM library</h2>
-                  <p><Button outline color="secondary" size="sm" onClick={this.toggleRomEditing}>
+            {romLib.length > 0 ? (
+              <div>
+                <h2>Your ROM library</h2>
+                <p>
+                  <Button
+                    outline
+                    color="secondary"
+                    size="sm"
+                    onClick={this.toggleRomEditing}
+                  >
                     {this.state.editingRoms ? "Stop editing ROMs" : "Edit ROMs"}
-                  </Button></p>
-                  <div className="mb-4">{romLib}</div>
-                </div>
-                : null
-            }
+                  </Button>
+                </p>
+                <div className="mb-4">{romLib}</div>
+              </div>
+            ) : null}
 
             <h2>Preinstalled ROMs</h2>
 
@@ -107,14 +137,17 @@ class ListPage extends Component {
     );
   }
 
-  deleteRom = (hash) => {
-    RomLibrary.delete(hash)
-    this.updateLibrary()
-  }
+  deleteRom = hash => {
+    RomLibrary.delete(hash);
+    this.updateLibrary();
+  };
 
-  toggleRomEditing = () => this.setState({editingRoms: !this.state.editingRoms})
+  toggleRomEditing = () =>
+    this.setState({ editingRoms: !this.state.editingRoms });
 
-  updateLibrary = () => { this.setState({romLibrary: RomLibrary.load()}) }
+  updateLibrary = () => {
+    this.setState({ romLibrary: RomLibrary.load() });
+  };
 
   handleDragOver = e => {
     e.preventDefault();
@@ -128,8 +161,8 @@ class ListPage extends Component {
       ? e.dataTransfer.items[0].getAsFile()
       : e.dataTransfer.files[0];
 
-    this.setState({editingRoms: false})
-    RomLibrary.save(file).then(this.updateLibrary)
+    this.setState({ editingRoms: false });
+    RomLibrary.save(file).then(this.updateLibrary);
   };
 }
 
