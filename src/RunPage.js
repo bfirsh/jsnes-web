@@ -162,8 +162,8 @@ class RunPage extends Component {
   load = () => {
     if (this.props.match.params.slug) {
       const slug = this.props.match.params.slug;
-      const isLocalROM = /^local-/.test(slug)
-      const savedString = localStorage.getItem('blob-'+slug.split('-')[1])
+      const isLocalROM = /^local-/.test(slug);
+      const savedString = localStorage.getItem("blob-" + slug.split("-")[1]);
       const rom = isLocalROM ? savedString : config.ROMS[slug];
       if (!rom) {
         this.setState({ error: `No such ROM: ${slug}` });
@@ -171,7 +171,7 @@ class RunPage extends Component {
       }
       this.setState({ rom: rom });
       if (isLocalROM) {
-        this.handleLoaded(rom)
+        this.handleLoaded(rom);
       } else {
         this.currentRequest = loadBinary(
           rom.url,
