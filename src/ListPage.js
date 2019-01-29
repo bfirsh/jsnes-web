@@ -74,8 +74,8 @@ class ListPage extends Component {
               {this.state.showRomLibraryInfo ? (
                 <p>
                   Drag &amp; drop your desired ROM files to this window and they
-                  will be copied into your local browser cache to be accessed
-                  later whenever you visit this page.
+                  will be copied into your local browser cache. They can be accessed
+                  later whenever you visit this page, but not by others.
                 </p>
               ) : null}
             </div>
