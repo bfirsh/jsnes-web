@@ -41,7 +41,7 @@ class RunPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rom: null,
+      romName: null,
       romData: null,
       running: false,
       paused: false,
@@ -71,7 +71,7 @@ class RunPage extends Component {
           <ul className="navbar-nav ml-auto mr-auto">
             <li className="navitem">
               <span className="navbar-text mr-3">
-                {this.state.rom && this.state.rom.description}
+                {this.state.romName}
               </span>
             </li>
           </ul>
@@ -163,18 +163,18 @@ class RunPage extends Component {
     if (this.props.match.params.slug) {
       const slug = this.props.match.params.slug;
       const isLocalROM = /^local-/.test(slug);
-      const savedString = localStorage.getItem("blob-" + slug.split("-")[1]);
-      const rom = isLocalROM ? savedString : config.ROMS[slug];
-      if (!rom) {
+      const romInfo = config.ROMS[slug]
+      if (!isLocalROM && !romInfo) {
         this.setState({ error: `No such ROM: ${slug}` });
         return;
       }
-      this.setState({ rom: rom });
       if (isLocalROM) {
-        this.handleLoaded(rom);
+        const localROMData = localStorage.getItem("blob-" + slug.split("-")[1]);
+        this.handleLoaded(localROMData);
       } else {
+        this.setState({ romName: romInfo.name });
         this.currentRequest = loadBinary(
-          rom.url,
+          romInfo.url,
           (err, data) => {
             if (err) {
               this.setState({ error: `Error loading ROM: ${err.message}` });
