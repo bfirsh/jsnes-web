@@ -61,21 +61,26 @@ class ListPage extends Component {
             <div>
               <p>
                 <Button
-                  color={this.state.showRomLibraryInfo ? "secondary" : "primary"}
+                  color={
+                    this.state.showRomLibraryInfo ? "secondary" : "primary"
+                  }
                   onClick={() =>
                     this.setState({
                       showRomLibraryInfo: !this.state.showRomLibraryInfo
                     })
                   }
                 >
-                  {this.state.showRomLibraryInfo ? "- Collapse ROM info" : "+ Add ROM files"}
+                  {this.state.showRomLibraryInfo
+                    ? "- Collapse ROM info"
+                    : "+ Add ROM files"}
                 </Button>
               </p>
               {this.state.showRomLibraryInfo ? (
                 <p>
                   Drag &amp; drop your desired ROM files to this window and they
-                  will be copied into your local browser cache. They can be accessed
-                  later whenever you visit this page, but not by others.
+                  will be copied into your local browser cache. They can be
+                  accessed later whenever you visit this page, but not by
+                  others.
                 </p>
               ) : null}
             </div>
