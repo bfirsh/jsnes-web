@@ -61,14 +61,14 @@ class ListPage extends Component {
             <div>
               <p>
                 <Button
-                  color="primary"
+                  color={this.state.showRomLibraryInfo ? "secondary" : "primary"}
                   onClick={() =>
                     this.setState({
                       showRomLibraryInfo: !this.state.showRomLibraryInfo
                     })
                   }
                 >
-                  + Add ROM files
+                  {this.state.showRomLibraryInfo ? "- Collapse ROM info" : "+ Add ROM files"}
                 </Button>
               </p>
               {this.state.showRomLibraryInfo ? (
