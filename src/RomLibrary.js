@@ -24,6 +24,9 @@ const hashFile = function(byteString) {
 };
 
 const RomLibrary = {
+  getRomInfoByHash: function(hash) {
+    return this.load().find(rom => rom.hash === hash)
+  },
   save: function(file) {
     return pFileReader(file)
       .then(function(readFile) {

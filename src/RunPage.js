@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import config from "./config";
 import ControlsModal from "./ControlsModal";
 import Emulator from "./Emulator";
+import RomLibrary from "./RomLibrary"
 
 import "./RunPage.css";
 
@@ -163,16 +164,19 @@ class RunPage extends Component {
     if (this.props.match.params.slug) {
       const slug = this.props.match.params.slug;
       const isLocalROM = /^local-/.test(slug);
-      const romInfo = config.ROMS[slug]
-      if (!isLocalROM && !romInfo) {
+      const romHash = slug.split("-")[1];
+      const romInfo = isLocalROM ? RomLibrary.getRomInfoByHash(romHash) : config.ROMS[slug]
+
+      if (!romInfo) {
         this.setState({ error: `No such ROM: ${slug}` });
         return;
       }
+      this.setState({ romName: romInfo.name });
+
       if (isLocalROM) {
-        const localROMData = localStorage.getItem("blob-" + slug.split("-")[1]);
+        const localROMData = localStorage.getItem("blob-" + romHash);
         this.handleLoaded(localROMData);
       } else {
-        this.setState({ romName: romInfo.name });
         this.currentRequest = loadBinary(
           romInfo.url,
           (err, data) => {
