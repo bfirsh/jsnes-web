@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import config from "./config";
 import ControlsModal from "./ControlsModal";
 import Emulator from "./Emulator";
-import RomLibrary from "./RomLibrary"
+import RomLibrary from "./RomLibrary";
 
 import "./RunPage.css";
 
@@ -71,9 +71,7 @@ class RunPage extends Component {
           </ul>
           <ul className="navbar-nav ml-auto mr-auto">
             <li className="navitem">
-              <span className="navbar-text mr-3">
-                {this.state.romName}
-              </span>
+              <span className="navbar-text mr-3">{this.state.romName}</span>
             </li>
           </ul>
           <ul className="navbar-nav" style={{ width: "200px" }}>
@@ -165,7 +163,9 @@ class RunPage extends Component {
       const slug = this.props.match.params.slug;
       const isLocalROM = /^local-/.test(slug);
       const romHash = slug.split("-")[1];
-      const romInfo = isLocalROM ? RomLibrary.getRomInfoByHash(romHash) : config.ROMS[slug]
+      const romInfo = isLocalROM
+        ? RomLibrary.getRomInfoByHash(romHash)
+        : config.ROMS[slug];
 
       if (!romInfo) {
         this.setState({ error: `No such ROM: ${slug}` });
