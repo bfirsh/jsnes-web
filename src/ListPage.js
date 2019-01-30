@@ -3,9 +3,52 @@ import "./ListPage.css";
 import { ListGroup } from "reactstrap";
 import { Link } from "react-router-dom";
 import config from "./config";
+import jsonp from "jsonp";
 
 class ListPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      NesOpenDBData: null
+    };
+  }
+  componentDidMount() {
+    jsonp(
+      "https://nes-open-db.github.io/api/v1/rawdump-jsonp.js",
+      { name: "NesOpenDB_rawDump" },
+      (err, data) => this.setState({ NesOpenDBData: data })
+    );
+  }
   render() {
+    const romList =
+      this.state.NesOpenDBData &&
+      this.state.NesOpenDBData.roms_index.map(function(rom) {
+        return (
+          <Link
+            key={rom.key}
+            to={
+              "/run/url/?" +
+              encodeURIComponent("https://nes-open-db.github.io") +
+              encodeURIComponent(rom.romLink)
+            }
+            className="list-group-item"
+          >
+            {rom.title}
+            <span className="float-right">&rsaquo;</span>
+          </Link>
+        );
+      });
+
+    const openDbList = this.state.NesOpenDBData ? (
+      <div>
+        <h2>
+          ROMs from <a href="https://nes-open-db.github.io/">NES Open DB</a>
+        </h2>
+        <ListGroup className="mb-4">{romList}</ListGroup>
+      </div>
+    ) : null;
+
     return (
       <div
         className="container ListPage my-4"
@@ -35,6 +78,7 @@ class ListPage extends Component {
                   </Link>
                 ))}
             </ListGroup>
+            {openDbList}
             <p>Or, drag and drop a ROM file onto the page.</p>
             <p>
               If you want to play ROMs that aren't listed here, Google might be

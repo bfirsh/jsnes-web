@@ -162,11 +162,15 @@ class RunPage extends Component {
   load = () => {
     if (this.props.match.params.slug) {
       const slug = this.props.match.params.slug;
-      const rom = config.ROMS[slug];
+      const rom =
+        slug === "url"
+          ? { url: decodeURIComponent(window.location.search.substring(1)) }
+          : config.ROMS[slug];
       if (!rom) {
         this.setState({ error: `No such ROM: ${slug}` });
         return;
       }
+      console.log("rom is", rom);
       this.setState({ rom: rom });
       this.currentRequest = loadBinary(
         rom.url,
