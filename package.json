@@ -6,6 +6,7 @@
   "dependencies": {
     "bootstrap": "4.2.1",
     "jsnes": "git://github.com/bfirsh/jsnes.git",
+    "jsonp": "^0.2.1",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "raven-js": "^3.27.0",
