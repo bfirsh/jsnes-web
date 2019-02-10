@@ -10,39 +10,10 @@ class ListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      romLibrary: RomLibrary.load(),
-      showRomLibraryInfo: false,
-      editingRoms: false
+      romLibrary: RomLibrary.load()
     };
   }
   render() {
-    const editingRoms = this.state.editingRoms;
-    const deleteRom = this.deleteRom;
-    const romLib = this.state.romLibrary.map(function(o) {
-      return (
-        <a href={"run/local-" + o.hash}>
-          <div key={o.hash} className="list-group-item">
-            {o.name}
-            {editingRoms ? (
-              <Button
-                className="float-right"
-                size="sm"
-                color="danger"
-                onClick={e => {
-                  e.preventDefault();
-                  deleteRom(o.hash);
-                }}
-              >
-                Delete
-              </Button>
-            ) : (
-              <span className="float-right">&rsaquo;</span>
-            )}
-          </div>
-        </a>
-      );
-    });
-
     return (
       <div
         className="container ListPage my-4"
@@ -58,51 +29,6 @@ class ListPage extends Component {
                 <a href="https://github.com/bfirsh/jsnes">Source on GitHub.</a>
               </p>
             </header>
-            <div>
-              <p>
-                <Button
-                  color={
-                    this.state.showRomLibraryInfo ? "secondary" : "primary"
-                  }
-                  onClick={() =>
-                    this.setState({
-                      showRomLibraryInfo: !this.state.showRomLibraryInfo
-                    })
-                  }
-                >
-                  {this.state.showRomLibraryInfo
-                    ? "- Collapse ROM info"
-                    : "+ Add ROM files"}
-                </Button>
-              </p>
-              {this.state.showRomLibraryInfo ? (
-                <p>
-                  Drag &amp; drop your desired ROM files to this window and they
-                  will be copied into your local browser cache. They can be
-                  accessed later whenever you visit this page, but not by
-                  others.
-                </p>
-              ) : null}
-            </div>
-
-            {romLib.length > 0 ? (
-              <div>
-                <h2>Your ROM library</h2>
-                <p>
-                  <Button
-                    outline
-                    color="secondary"
-                    size="sm"
-                    onClick={this.toggleRomEditing}
-                  >
-                    {this.state.editingRoms ? "Stop editing ROMs" : "Edit ROMs"}
-                  </Button>
-                </p>
-                <div className="mb-4">{romLib}</div>
-              </div>
-            ) : null}
-
-            <h2>Preinstalled ROMs</h2>
 
             <ListGroup className="mb-4">
               {Object.keys(config.ROMS)
@@ -118,24 +44,42 @@ class ListPage extends Component {
                   </Link>
                 ))}
             </ListGroup>
+
             <p>
-              If you want to play ROMs that aren't listed here, Google might be
-              able to help. (
-              <a
-                href="https://www.ign.com/articles/2018/11/13/nintendo-rom-site-lawsuit-results-in-12-million-judgement"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Only Homebrew ROMs are listed.
-              </a>
-              )
+              Or, drag and drop a ROM file onto the page to play it. (Google may
+              help you find them.)
             </p>
-            <p>
-              Have a suggestion for a ROM, or want your ROM listed here?{" "}
-              <a href="https://github.com/bfirsh/jsnes-web/issues/new">
-                Open an issue on GitHub!
-              </a>
-            </p>
+
+            {this.state.romLibrary.length > 0 ? (
+              <div>
+                <p>Previously played:</p>
+
+                <ListGroup className="mb-4">
+                  {this.state.romLibrary
+                    .sort((a, b) => new Date(b.added) - new Date(a.added))
+                    .map(rom => (
+                      <Link
+                        key={rom.hash}
+                        to={"run/local-" + rom.hash}
+                        className="list-group-item"
+                      >
+                        {rom.name}
+                        <a
+                          onClick={e => {
+                            e.preventDefault();
+                            this.deleteRom(rom.hash);
+                          }}
+                          className="delete"
+                          title="Delete"
+                        >
+                          &times;
+                        </a>
+                        <span className="float-right">&rsaquo;</span>
+                      </Link>
+                    ))}
+                </ListGroup>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -146,9 +90,6 @@ class ListPage extends Component {
     RomLibrary.delete(hash);
     this.updateLibrary();
   };
-
-  toggleRomEditing = () =>
-    this.setState({ editingRoms: !this.state.editingRoms });
 
   updateLibrary = () => {
     this.setState({ romLibrary: RomLibrary.load() });
@@ -166,8 +107,10 @@ class ListPage extends Component {
       ? e.dataTransfer.items[0].getAsFile()
       : e.dataTransfer.files[0];
 
-    this.setState({ editingRoms: false });
-    RomLibrary.save(file).then(this.updateLibrary);
+    RomLibrary.save(file).then(rom => {
+      this.updateLibrary();
+      this.props.history.push({ pathname: "run/local-" + rom.hash });
+    });
   };
 }
 
