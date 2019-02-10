@@ -171,12 +171,13 @@ class RunPage extends Component {
         this.setState({ error: `No such ROM: ${slug}` });
         return;
       }
-      this.setState({ romName: romInfo.name });
 
       if (isLocalROM) {
+        this.setState({ romName: romInfo.name });
         const localROMData = localStorage.getItem("blob-" + romHash);
         this.handleLoaded(localROMData);
       } else {
+        this.setState({ romName: romInfo.description });
         this.currentRequest = loadBinary(
           romInfo.url,
           (err, data) => {
