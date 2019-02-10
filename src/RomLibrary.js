@@ -39,18 +39,18 @@ const RomLibrary = {
         const savedRomInfo = localStorage.getItem("savedRomInfo");
         const existingLibrary = savedRomInfo ? JSON.parse(savedRomInfo) : [];
 
-        const newRomInfo = JSON.stringify(
-          existingLibrary.concat([
-            {
-              name: file.name,
-              hash: hash,
-              added: Date.now()
-            }
-          ])
-        );
+        const rom = {
+          name: file.name,
+          hash: hash,
+          added: Date.now()
+        };
+
+        const newRomInfo = JSON.stringify(existingLibrary.concat([rom]));
 
         localStorage.setItem("savedRomInfo", newRomInfo);
         localStorage.setItem("blob-" + hash, byteString);
+
+        return rom;
       });
   },
   load: function() {
