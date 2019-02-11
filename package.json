@@ -7,7 +7,7 @@
     "bootstrap": "4.2.1",
     "jsnes": "git://github.com/bfirsh/jsnes.git",
     "node-sass": "^4.11.0",
-    "prop-types": "^15.6.2",
+    "prop-types": "^15.7.1",
     "raven-js": "^3.27.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
