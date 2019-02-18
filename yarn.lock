@@ -5825,9 +5825,9 @@ jsesc@~0.5.0:
   integrity sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
 
 "jsnes@git://github.com/bfirsh/jsnes.git":
-  version "1.0.1"
-  uid "017b6b286060607cc7d7f63d080c45404a1530a8"
-  resolved "https://github.com/bfirsh/jsnes.git#017b6b286060607cc7d7f63d080c45404a1530a8"
+  version "1.1.0"
+  uid "0ae34ddb6ada25d7c93cb7c0f27f7080310ba6cb"
+  resolved "https://github.com/bfirsh/jsnes.git#0ae34ddb6ada25d7c93cb7c0f27f7080310ba6cb"
 
 json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
   version "1.0.2"
