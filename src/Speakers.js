@@ -8,6 +8,16 @@ export default class Speakers {
     this.buffer = new RingBuffer(this.bufferSize * 2);
   }
 
+  getSampleRate() {
+    if (!window.AudioContext) {
+      return 44100;
+    }
+    let myCtx = new window.AudioContext();
+    let sampleRate = myCtx.sampleRate;
+    myCtx.close();
+    return sampleRate;
+  }
+
   start() {
     // Audio is not supported
     if (!window.AudioContext) {
