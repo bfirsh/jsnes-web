@@ -2205,10 +2205,10 @@ caniuse-lite@^1.0.30000918, caniuse-lite@^1.0.30000929, caniuse-lite@^1.0.300009
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000936.tgz#5d33b118763988bf721b9b8ad436d0400e4a116b"
   integrity sha512-orX4IdpbFhdNO7bTBhSbahp1EBpqzBc+qrvTRVUFfZgA4zta7TdM6PN5ZxkEUgDnz36m+PfWGcdX7AVfFWItJw==
 
-canvas@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/canvas/-/canvas-2.3.1.tgz#da0c8a916505aa34f9365d6b77d28b969241bfd0"
-  integrity sha512-jSxwf4V9AGD6t6yBC600xFZKjrfKTR0T0RUNlX/AODs/ifrfJHIQjFEK8iF2euNy6z7K3GNv82DJgTjYZZktqA==
+canvas@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/canvas/-/canvas-2.4.0.tgz#987c090c56b6d122e666ab9f471dcab62ae9bff3"
+  integrity sha512-+xxeaKwQJyXHBdMhVhqFoGqNAAUW5vr2DbhQEusER2RR4H2m+Zn2QLKiwp43BabNhQBITQ3bp54+DYrGrI+wmA==
   dependencies:
     nan "^2.12.1"
     node-pre-gyp "^0.11.0"
