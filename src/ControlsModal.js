@@ -256,7 +256,9 @@ class ControlsModal extends Component {
               />
             </tbody>
           </Table>
-          <span><b>Info:</b> Click selected key to change mapping.</span>
+          <span>
+            <b>Info:</b> Click selected key to change mapping.
+          </span>
         </ModalBody>
         <ModalFooter>
           <Button outline color="primary" onClick={this.props.toggle}>
