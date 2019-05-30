@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./ListPage.css";
-import { ListGroup, Button } from "reactstrap";
+import { ListGroup } from "reactstrap";
 import { Link } from "react-router-dom";
 import config from "./config";
+import "./ListPage.scss";
 
 import RomLibrary from "./RomLibrary";
 
@@ -16,7 +16,7 @@ class ListPage extends Component {
   render() {
     return (
       <div
-        className="container ListPage my-4"
+        className="container list-page my-4"
         onDragOver={this.handleDragOver}
         onDrop={this.handleDrop}
       >
@@ -64,16 +64,16 @@ class ListPage extends Component {
                         className="list-group-item"
                       >
                         {rom.name}
-                        <a
+                        <button
                           onClick={e => {
                             e.preventDefault();
                             this.deleteRom(rom.hash);
                           }}
-                          className="delete"
+                          className="list-page__delete-button"
                           title="Delete"
                         >
                           &times;
-                        </a>
+                        </button>
                         <span className="float-right">&rsaquo;</span>
                       </Link>
                     ))}

@@ -9,11 +9,16 @@ const config = {
           <a
             href="http://www.gradualgames.com/p/the-legends-of-owlia_1.html"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Owlia by Gradual Games
           </a>{" "}
           /{" "}
-          <a href="http://www.infiniteneslives.com/owlia.php" target="_blank">
+          <a
+            href="http://www.infiniteneslives.com/owlia.php"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Buy the cartridge
           </a>
         </span>
@@ -27,11 +32,16 @@ const config = {
           <a
             href="http://www.gradualgames.com/p/nomolos-storming-catsle.html"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Monolos by Gradual Games
           </a>{" "}
           /{" "}
-          <a href="http://www.infiniteneslives.com/nomolos.php" target="_blank">
+          <a
+            href="http://www.infiniteneslives.com/nomolos.php"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Buy the cartridge
           </a>
         </span>
@@ -42,7 +52,11 @@ const config = {
       name: "Concentration Room",
       description: (
         <span>
-          <a href="http://www.pineight.com/croom/README" target="_blank">
+          <a
+            href="http://www.pineight.com/croom/README"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Concentration Room
           </a>{" "}
           by Damian Yerrick
@@ -55,7 +69,11 @@ const config = {
       name: "LJ65",
       description: (
         <span>
-          <a href="http://harddrop.com/wiki/LJ65" target="_blank">
+          <a
+            href="http://harddrop.com/wiki/LJ65"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Concentration Room
           </a>{" "}
           by Damian Yerrick

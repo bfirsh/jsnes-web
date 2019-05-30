@@ -1,0 +1,14 @@
+.list-page {
+  &__delete-button {
+    color: red;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 0;
+
+    &:hover {
+      color: darkred;
+    }
+  }
+}
