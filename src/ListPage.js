@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./ListPage.css";
-import { ListGroup, Button } from "reactstrap";
+import { ListGroup } from "reactstrap";
 import { Link } from "react-router-dom";
 import config from "./config";
 
@@ -64,7 +64,7 @@ class ListPage extends Component {
                         className="list-group-item"
                       >
                         {rom.name}
-                        <a
+                        <span
                           onClick={e => {
                             e.preventDefault();
                             this.deleteRom(rom.hash);
@@ -73,7 +73,7 @@ class ListPage extends Component {
                           title="Delete"
                         >
                           &times;
-                        </a>
+                        </span>
                         <span className="float-right">&rsaquo;</span>
                       </Link>
                     ))}
