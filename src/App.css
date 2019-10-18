@@ -1,3 +1,7 @@
+.App {
+  height: 100%;
+}
+
 .App,
 .modal-dialog {
   font-family: Menlo, monospace;
