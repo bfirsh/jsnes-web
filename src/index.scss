@@ -39,6 +39,10 @@ $close-text-shadow: none;
   }
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 .nav-link {
   text-decoration: none;
 }
