@@ -10,3 +10,7 @@
 .ListPage .list-group-item .delete:hover {
   color: darkred;
 }
+
+.drop-zone {
+  height: 100%;
+}
