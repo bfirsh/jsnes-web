@@ -8,7 +8,7 @@
     "jsnes": "git://github.com/bfirsh/jsnes.git",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
-    "raven-js": "^3.27.0",
+    "raven-js": "^3.27.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-ga": "^2.5.7",
