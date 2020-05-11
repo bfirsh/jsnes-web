@@ -10103,10 +10103,10 @@ rimraf@^2.6.3, rimraf@^2.7.1:
   dependencies:
     glob "^7.1.3"
 
-ringbufferjs@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ringbufferjs/-/ringbufferjs-1.1.0.tgz#83f78108cf5dd95d2f3ab4a84352ad15829721d3"
-  integrity sha512-Hd1Z8xyaQLhdKtmbOuRCwCT9rKYk7SwUXENsA9pSAj6Jv4otUh7IwOlEhj0xu/xcP7hosMnmE7AYaVp6m8MCPQ==
+ringbufferjs@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ringbufferjs/-/ringbufferjs-2.0.0.tgz#09f40e2675a99cfef430b7ec5815ac1bc2e24120"
+  integrity sha512-GCOqTzUsTHF7nrqcgtNGAFotXztLgiePpIDpyWZ7R5I02tmfJWV+/yuJc//Hlsd8G+WzI1t/dc2y/w2imDZdog==
 
 ripemd160@^2.0.0, ripemd160@^2.0.1:
   version "2.0.2"
