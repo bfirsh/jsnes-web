@@ -27,18 +27,19 @@ To automatically format all your code, run:
 
 ## Adding roms
 
-### Add ROMs for yourself using localStorage
+Open `src/config.js` and add a new key to `config.ROMS`. For example:
 
-Navigate to the server public root (e.g. `http://localhost:3000`), click "+ Add ROM files" and follow the instructions. The ROMs will be saved into your browser cache and other users will not be able to access them.
-
-### Add ROMs for all users
-
-Open `src/config.js` and add a new key under the defined `config.ROMS`. For example:
-
+```javascript
+const config = {
+  ROMS: {
+    // ...
     myrom: {
       name: "My Rom",
       description: <span>This is my own homebrew NES rom</span>,
       url: "http://localhost:3000/roms/myrom/myrom.nes"
     }
+  }
+}
+```
 
-If you add your rom file now under `public/roms/myrom/myrom.nes`, the game should start playing as you navigate to http://localhost:3000/run/myrom
+Then, add the ROM file as `public/roms/myrom/myrom.nes`. The ROM should now be available to play at http://localhost:3000/run/myrom
