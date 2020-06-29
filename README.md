@@ -25,6 +25,12 @@ To automatically format all your code, run:
 
     $ yarn run format
 
+## Embedding JSNES in your own app
+
+Unfortunately this isn't trivial at the moment. The best way is copy and paste code from this repository into a React app, then use the [`<Emulator>`](https://github.com/bfirsh/jsnes-web/blob/master/src/Emulator.js). [Here is a usage example.](https://github.com/bfirsh/jsnes-web/blob/d3c35eec11986412626cbd08668dbac700e08751/src/RunPage.js#L119-L125).
+
+A project for potential contributors (hello!): jsnes-web should be reusable and on NPM! It just needs compiling and bundling.
+
 ## Adding roms
 
 Open `src/config.js` and add a new key to `config.ROMS`. For example:
