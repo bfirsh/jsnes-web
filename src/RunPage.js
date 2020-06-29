@@ -6,34 +6,9 @@ import config from "./config";
 import ControlsModal from "./ControlsModal";
 import Emulator from "./Emulator";
 import RomLibrary from "./RomLibrary";
+import { loadBinary } from "./utils";
 
 import "./RunPage.css";
-
-function loadBinary(path, callback, handleProgress) {
-  var req = new XMLHttpRequest();
-  req.open("GET", path);
-  req.overrideMimeType("text/plain; charset=x-user-defined");
-  req.onload = function() {
-    if (this.status === 200) {
-      if (req.responseText.match(/^<!doctype html>/i)) {
-        // Got HTML back, so it is probably falling back to index.html due to 404
-        return callback(new Error("Page not found"));
-      }
-
-      callback(null, this.responseText);
-    } else if (this.status === 0) {
-      // Aborted, so ignore error
-    } else {
-      callback(new Error(req.statusText));
-    }
-  };
-  req.onerror = function() {
-    callback(new Error(req.statusText));
-  };
-  req.onprogress = handleProgress;
-  req.send();
-  return req;
-}
 
 /*
  * The UI for the emulator. Also responsible for loading ROM from URL or file.
