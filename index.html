@@ -1,0 +1,88 @@
+﻿<canvas id=canvas width=256 height=240 style="background: #000"></canvas>
+<p><input type=file id=file>
+<p><b>Controls</b>: arrow keys + A + B + Start + Esc
+<script src="https://unpkg.com/jsnes/dist/jsnes.min.js"></script>
+<script>
+// Canvas + framebuffer
+var ctx = canvas.getContext("2d");
+var imageData = ctx.getImageData(0,0,256,240);
+var frameBuffer = new ArrayBuffer(imageData.data.length);
+var frameBuffer8 = new Uint8ClampedArray(frameBuffer);
+var frameBuffer32 = new Uint32Array(frameBuffer);
+
+// AudioContext + audio buffer + samples list
+var audio = new AudioContext();
+var audioprocessor = audio.createScriptProcessor(2048, 0, 2);
+audioprocessor.connect(audio.destination);
+audioprocessor.onaudioprocess = audioEvent => {
+  if(leftSamples.length > currentSample + 2048){
+    for(var i = 0; i < 2048; i++){
+      audioEvent.outputBuffer.getChannelData(0)[i] = leftSamples[currentSample];
+      audioEvent.outputBuffer.getChannelData(1)[i] = rightSamples[currentSample];
+      currentSample++;
+    }
+  }
+}
+leftSamples = [];
+rightSamples = [];
+currentSample = 0;
+
+// Load ROM + Start emulator
+file.onchange = () => {
+  var fileReader = new FileReader();
+  fileReader.readAsBinaryString(file.files[0]);
+  fileReader.onload = () => {
+  
+    file.remove();
+    console.log(fileReader.result);
+  
+    var nes = new jsnes.NES({
+      
+      // Display each new frame on the canvas
+      onFrame: function(frameBuffer){
+        var i = 0;
+        for(var y = 0; y < 256; ++y){
+          for(var x = 0; x < 240; ++x){
+            i = y * 256 + x;
+            frameBuffer32[i] = 0xff000000 | frameBuffer[i];
+          }
+        }
+        imageData.data.set(frameBuffer8);
+        ctx.putImageData(imageData, 0, 0);
+      },
+      
+      // Add new audio samples to the Audio buffer
+      onAudioSample: function(left, right){
+        leftSamples.push(left);
+        rightSamples.push(right);
+      }
+    });
+
+    nes.loadROM(fileReader.result);
+    setInterval(nes.frame, 16);
+    
+    // Controller #1 keys listeners
+    onkeydown = e => {
+      if(e.keyCode == 37) nes.buttonDown(1, jsnes.Controller.BUTTON_LEFT);
+      else if(e.keyCode == 38) nes.buttonDown(1, jsnes.Controller.BUTTON_UP);
+      else if(e.keyCode == 39) nes.buttonDown(1, jsnes.Controller.BUTTON_RIGHT);
+      else if(e.keyCode == 40) nes.buttonDown(1, jsnes.Controller.BUTTON_DOWN);
+      else if(e.keyCode == 65) nes.buttonDown(1, jsnes.Controller.BUTTON_A);
+      else if(e.keyCode == 66) nes.buttonDown(1, jsnes.Controller.BUTTON_B);
+      else if(e.keyCode == 27) nes.buttonDown(1, jsnes.Controller.BUTTON_SELECT);
+      else if(e.keyCode == 13) nes.buttonDown(1, jsnes.Controller.BUTTON_START);
+    }
+
+    onkeyup = e => {
+      if(e.keyCode == 37) nes.buttonUp(1, jsnes.Controller.BUTTON_LEFT);
+      else if(e.keyCode == 38) nes.buttonUp(1, jsnes.Controller.BUTTON_UP);
+      else if(e.keyCode == 39) nes.buttonUp(1, jsnes.Controller.BUTTON_RIGHT);
+      else if(e.keyCode == 40) nes.buttonUp(1, jsnes.Controller.BUTTON_DOWN);
+      else if(e.keyCode == 65) nes.buttonUp(1, jsnes.Controller.BUTTON_A);
+      else if(e.keyCode == 66) nes.buttonUp(1, jsnes.Controller.BUTTON_B);
+      else if(e.keyCode == 27) nes.buttonUp(1, jsnes.Controller.BUTTON_SELECT);
+      else if(e.keyCode == 13) nes.buttonUp(1, jsnes.Controller.BUTTON_START);
+    }
+  }
+}
+</script>
