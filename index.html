@@ -23,9 +23,9 @@ audioprocessor.onaudioprocess = audioEvent => {
     }
   }
 }
-leftSamples = [];
-rightSamples = [];
-currentSample = 0;
+var leftSamples = [];
+var rightSamples = [];
+var currentSample = 0;
 
 // Load ROM + Start emulator
 file.onchange = () => {
@@ -57,7 +57,10 @@ file.onchange = () => {
       }
     });
 
+    // Send ROM to emulator
     nes.loadROM(fileReader.result);
+    
+    // 60 fps loop
     setInterval(nes.frame, 16);
     
     // Controller #1 keys listeners
