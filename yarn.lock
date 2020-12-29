@@ -6700,8 +6700,8 @@ jsesc@~0.5.0:
 
 "jsnes@git://github.com/bfirsh/jsnes.git":
   version "1.2.0"
-  uid ee248dbcb9709f0c6815638c9d8d239efa16cb17
-  resolved "git://github.com/bfirsh/jsnes.git#ee248dbcb9709f0c6815638c9d8d239efa16cb17"
+  uid "667d169fa046460317885fca6fcb1cac89e0a4fe"
+  resolved "git://github.com/bfirsh/jsnes.git#667d169fa046460317885fca6fcb1cac89e0a4fe"
 
 json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
   version "1.0.2"
