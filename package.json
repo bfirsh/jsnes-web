@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "4.2.1",
+    "bootstrap": "4.5.3",
     "jsnes": "git://github.com/bfirsh/jsnes.git",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
