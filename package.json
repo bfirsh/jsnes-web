@@ -20,7 +20,7 @@
     "canvas": "^2.6.1",
     "prettier": "^1.16.4",
     "prettier-check": "^2.0.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
