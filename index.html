@@ -86,26 +86,22 @@ file.onchange = () => {
     setInterval(nes.frame, 16);
     
     // Controller #1 keys listeners
-    onkeydown = e => {
-      if(e.keyCode == 37) nes.buttonDown(1, jsnes.Controller.BUTTON_LEFT);
-      else if(e.keyCode == 38) nes.buttonDown(1, jsnes.Controller.BUTTON_UP);
-      else if(e.keyCode == 39) nes.buttonDown(1, jsnes.Controller.BUTTON_RIGHT);
-      else if(e.keyCode == 40) nes.buttonDown(1, jsnes.Controller.BUTTON_DOWN);
-      else if(e.keyCode == 88) nes.buttonDown(1, jsnes.Controller.BUTTON_A); // X
-      else if(e.keyCode == 67) nes.buttonDown(1, jsnes.Controller.BUTTON_B); // C
-      else if(e.keyCode == 27) nes.buttonDown(1, jsnes.Controller.BUTTON_SELECT);
-      else if(e.keyCode == 13) nes.buttonDown(1, jsnes.Controller.BUTTON_START);
-    }
-
-    onkeyup = e => {
-      if(e.keyCode == 37) nes.buttonUp(1, jsnes.Controller.BUTTON_LEFT);
-      else if(e.keyCode == 38) nes.buttonUp(1, jsnes.Controller.BUTTON_UP);
-      else if(e.keyCode == 39) nes.buttonUp(1, jsnes.Controller.BUTTON_RIGHT);
-      else if(e.keyCode == 40) nes.buttonUp(1, jsnes.Controller.BUTTON_DOWN);
-      else if(e.keyCode == 88) nes.buttonUp(1, jsnes.Controller.BUTTON_A); // X
-      else if(e.keyCode == 67) nes.buttonUp(1, jsnes.Controller.BUTTON_B); // C
-      else if(e.keyCode == 27) nes.buttonUp(1, jsnes.Controller.BUTTON_SELECT);
-      else if(e.keyCode == 13) nes.buttonUp(1, jsnes.Controller.BUTTON_START);
+    onkeydown = onkeyup = e => {
+      nes[e.type == "keyup" ? "buttonUp" : "buttonDown"](
+        1,
+        jsnes.Controller["BUTTON_" + 
+          {
+            37: "LEFT",
+            38: "UP",
+            39: "RIGHT",
+            40: "DOWN",
+            88: "A", // X
+            67: "B", // C
+            27: "SELECT",
+            13: "START"
+          }[e.keyCode]
+        ]
+      )
     }
   }
 }
