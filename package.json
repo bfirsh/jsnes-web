@@ -9,7 +9,7 @@
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "raven-js": "^3.27.2",
-    "react": "^16.7.0",
+    "react": "^16.14.0",
     "react-dom": "^16.7.0",
     "react-ga": "^2.5.7",
     "react-router-dom": "^5.0.0",
