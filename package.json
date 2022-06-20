@@ -11,7 +11,7 @@
     "raven-js": "^3.27.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-ga": "^2.5.7",
+    "react-ga": "^3.3.1",
     "react-router-dom": "^5.0.0",
     "reactstrap": "^7.1.0",
     "ringbufferjs": "^1.1.0"
