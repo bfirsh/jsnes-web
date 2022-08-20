@@ -83,7 +83,8 @@ const config = {
     }
   },
   GOOGLE_ANALYTICS_CODE: process.env.REACT_APP_GOOGLE_ANALYTICS_CODE,
-  SENTRY_URI: process.env.REACT_APP_SENTRY_URI
+  SENTRY_URI: process.env.REACT_APP_SENTRY_URI,
+  BASENAME: ""
 };
 
 export default config;

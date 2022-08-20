@@ -29,7 +29,7 @@ class App extends Component {
       );
     }
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={config.BASENAME}>
         <div className="App">
           <Route exact path="/" component={ListPage} />
           <Route exact path="/run" component={RunPage} />
