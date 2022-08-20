@@ -6,8 +6,8 @@ import config from "./config";
 
 import RomLibrary from "./RomLibrary";
 
-const rootRunPath = `${config.BASENAME}/run`;
-const rootRunPathLocal = `${config.BASENAME}/local-`;
+const rootRunPath = "/run";
+const rootRunPathLocal = "/local-";
 
 class ListPage extends Component {
   constructor(props) {
