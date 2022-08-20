@@ -6,6 +6,9 @@ import config from "./config";
 
 import RomLibrary from "./RomLibrary";
 
+const rootRunPath = `${config.BASENAME}/run`;
+const rootRunPathLocal = `${config.BASENAME}/local-`;
+
 class ListPage extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +42,7 @@ class ListPage extends Component {
                   .map(key => (
                     <Link
                       key={key}
-                      to={"/run/" + encodeURIComponent(key)}
+                      to={rootRunPath + "/" +  encodeURIComponent(key)}
                       className="list-group-item"
                     >
                       {config.ROMS[key]["name"]}
@@ -63,7 +66,7 @@ class ListPage extends Component {
                       .map(rom => (
                         <Link
                           key={rom.hash}
-                          to={"run/local-" + rom.hash}
+                          to={rootRunPathLocal + rom.hash}
                           className="list-group-item"
                         >
                           {rom.name}
@@ -113,7 +116,7 @@ class ListPage extends Component {
 
     RomLibrary.save(file).then(rom => {
       this.updateLibrary();
-      this.props.history.push({ pathname: "run/local-" + rom.hash });
+      this.props.history.push({ pathname:  + rom.hash });
     });
   };
 }
