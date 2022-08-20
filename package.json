@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "Apache-2.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "bootstrap": "4.2.1",
     "jsnes": "git+ssh://github.com/bfirsh/jsnes.git",
