@@ -12,9 +12,12 @@ $link-decoration: underline;
 $link-hover-color: $gray-500;
 $link-hover-decoration: underline;
 
-$theme-colors: map-merge($theme-colors, (
-  primary: $white,
-));
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    primary: $white
+  )
+);
 
 $list-group-bg: $black;
 $list-group-border-color: $gray-300;
@@ -39,37 +42,53 @@ $close-text-shadow: none;
   }
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
+  color: #f8f9fa;
 }
+
 a:hover {
-  color: #adb5bd
+  color: #adb5bd;
 }
-.navbar-text, .navbar-text a, .navbar-text a:hover, .nav-link {
-  color: #f8f9fa
+
+.navbar-text,
+.navbar-text a,
+.nav-link {
+  color: #f8f9fa;
+}
+
+.navbar-text a:hover,
+.nav-link:hover {
+  color: #adb5bd;
 }
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
 }
+
 .navbar-nav .nav-link {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   flex-direction: row;
 }
+
 .navbar-expand {
   padding-left: 16px;
   padding-right: 16px;
 }
+
 .nav-link {
   text-decoration: none;
 }
 
 .list-group-item {
   text-decoration: none;
-  color: #f8f9fa
+  color: #f8f9fa;
 }
-.list-group-item:hover   {
+
+.list-group-item:hover {
   text-decoration: none;
 }
 
@@ -78,16 +97,23 @@ a:hover {
   border-top: none;
 }
 
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #212529;
+}
+
 .close {
   opacity: 1;
 }
 
 img.controller-icon {
-	width: 40px;
-	height: 40px;
+  width: 40px;
+  height: 40px;
   margin-top: -20px;
 }
 
 h1 {
-  font-size: 2.5rem
+  font-size: 2.5rem;
 }
