@@ -43,6 +43,9 @@ html, body, #root {
   height: 100%;
 }
 
+.navbar-text, .navbar-text a, .navbar-text a:hover, .nav-link {
+  color: #f8f9fa
+}
 .nav-link {
   text-decoration: none;
 }
