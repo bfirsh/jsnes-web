@@ -49,6 +49,10 @@ html, body, #root {
 
 .list-group-item {
   text-decoration: none;
+  color: #f8f9fa
+}
+.list-group-item:hover   {
+  text-decoration: none;
 }
 
 .table thead th {
