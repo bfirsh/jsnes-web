@@ -44,9 +44,9 @@ class RunPage extends Component {
               </Link>
             </li>
           </ul>
-          <ul className="navbar-nav ml-auto mr-auto">
+          <ul className="navbar-nav ms-auto me-auto">
             <li className="navitem">
-              <span className="navbar-text mr-3">{this.state.romName}</span>
+              <span className="navbar-text me-3">{this.state.romName}</span>
             </li>
           </ul>
           <ul className="navbar-nav" style={{ width: "200px" }}>
@@ -55,7 +55,7 @@ class RunPage extends Component {
                 outline
                 color="primary"
                 onClick={this.toggleControlsModal}
-                className="mr-3"
+                className="me-3"
               >
                 Controls
               </Button>

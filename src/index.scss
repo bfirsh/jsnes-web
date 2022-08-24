@@ -42,9 +42,24 @@ $close-text-shadow: none;
 html, body, #root {
   height: 100%;
 }
-
+a:hover {
+  color: #adb5bd
+}
 .navbar-text, .navbar-text a, .navbar-text a:hover, .nav-link {
   color: #f8f9fa
+}
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+}
+.navbar-nav .nav-link {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  flex-direction: row;
+}
+.navbar-expand {
+  padding-left: 16px;
+  padding-right: 16px;
 }
 .nav-link {
   text-decoration: none;
