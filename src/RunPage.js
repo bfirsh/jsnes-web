@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Progress } from "reactstrap";
-import { Link } from "react-router-dom";
+import {Link, useLocation, useParams, useRouteMatch} from "react-router-dom";
 
 import config from "./config";
 import ControlsModal from "./ControlsModal";
@@ -9,6 +9,12 @@ import RomLibrary from "./RomLibrary";
 import { loadBinary } from "./utils";
 
 import "./RunPage.css";
+
+function withParams(Component) {
+  return props => (
+    <Component {...props} params={useParams()} match={useRouteMatch()} location={useLocation()}/>
+  );
+}
 
 /*
  * The UI for the emulator. Also responsible for loading ROM from URL or file.
@@ -134,6 +140,7 @@ class RunPage extends Component {
   }
 
   load = () => {
+    console.log("load")
     if (this.props.match.params.slug) {
       const slug = this.props.match.params.slug;
       const isLocalROM = /^local-/.test(slug);
@@ -205,4 +212,4 @@ class RunPage extends Component {
   };
 }
 
-export default RunPage;
+export default withParams(RunPage);
