@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Progress } from "reactstrap";
-import {Link, useLocation, useParams, useRouteMatch} from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import config from "./config";
 import ControlsModal from "./ControlsModal";
@@ -12,7 +12,7 @@ import "./RunPage.css";
 
 function withParams(Component) {
   return props => (
-    <Component {...props} params={useParams()} match={useRouteMatch()} location={useLocation()}/>
+    <Component {...props} params={useParams()} location={useLocation()} />
   );
 }
 
@@ -140,9 +140,9 @@ class RunPage extends Component {
   }
 
   load = () => {
-    console.log("load")
-    if (this.props.match.params.slug) {
-      const slug = this.props.match.params.slug;
+    console.log("load");
+    if (this.props.params.slug) {
+      const slug = this.props.params.slug;
       const isLocalROM = /^local-/.test(slug);
       const romHash = slug.split("-")[1];
       const romInfo = isLocalROM

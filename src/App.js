@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import GoogleAnalytics from "react-ga";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ListPage from "./ListPage";
 import RunPage from "./RunPage";
 import config from "./config";
@@ -31,18 +31,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Switch>
-            <Route exact path="/">
-              <ListPage />
-            </Route>
-            <Route path="/run/:slug">
-              <RunPage />
-            </Route>
-            <Route path="/run">
-              <RunPage />
-            </Route>
+          <Routes>
+            <Route exact path="/" element={<ListPage />} />
+            <Route path="/run/:slug" element={<RunPage />} />
+            <Route path="/run" element={<RunPage />} />
             <Route path="/" element={this.recordPageview} />
-          </Switch>
+          </Routes>
         </div>
       </BrowserRouter>
     );
