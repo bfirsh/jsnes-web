@@ -31,6 +31,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
+          <Switch>
             <Route exact path="/">
               <ListPage />
             </Route>
@@ -41,6 +42,7 @@ class App extends Component {
               <RunPage />
             </Route>
             <Route path="/" element={this.recordPageview} />
+          </Switch>
         </div>
       </BrowserRouter>
     );

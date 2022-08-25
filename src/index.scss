@@ -59,6 +59,12 @@ a:hover {
   color: #f8f9fa;
 }
 
+.nav-link:focus {
+  color: #adb5bd !important;
+}
+
+.navbar-text a:focus,
+.navbar-text a:active,
 .navbar-text a:hover,
 .nav-link:hover {
   color: #adb5bd;
