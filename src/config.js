@@ -95,7 +95,7 @@ const config = {
 
     // default case, we don't have a base path
     // good for localhost
-    return ""
+    return "";
   }
 };
 

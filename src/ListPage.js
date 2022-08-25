@@ -42,7 +42,7 @@ class ListPage extends Component {
                   .map(key => (
                     <Link
                       key={key}
-                      to={rootRunPath + "/" +  encodeURIComponent(key)}
+                      to={rootRunPath + "/" + encodeURIComponent(key)}
                       className="list-group-item"
                     >
                       {config.ROMS[key]["name"]}
@@ -116,7 +116,7 @@ class ListPage extends Component {
 
     RomLibrary.save(file).then(rom => {
       this.updateLibrary();
-      this.props.history.push({ pathname:  + rom.hash });
+      this.props.history.push({ pathname: +rom.hash });
     });
   };
 }
