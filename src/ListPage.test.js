@@ -1,16 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { StaticRouter, Route } from "react-router-dom";
+import {createRoot} from "react-dom/client";
+import { Routes, Route } from "react-router-dom";
 import ListPage from "./ListPage";
 
 describe("ListPage", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(
-      <StaticRouter location="/" context={{}}>
+    const root = createRoot(div)
+    root.render(
+      <Routes location="/" context={{}}>
         <Route exact path="/" component={ListPage} />
-      </StaticRouter>,
-      div
+      </Routes>
     );
   });
 });
