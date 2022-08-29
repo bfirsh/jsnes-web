@@ -83,7 +83,20 @@ const config = {
     }
   },
   GOOGLE_ANALYTICS_CODE: process.env.REACT_APP_GOOGLE_ANALYTICS_CODE,
-  SENTRY_URI: process.env.REACT_APP_SENTRY_URI
+  SENTRY_URI: process.env.REACT_APP_SENTRY_URI,
+  BASENAME: () => {
+    const url = window.location.href;
+    // we're on github pages, which means we have a subpath
+    if (url.includes("github.io")) {
+      const parts = url.split("/");
+      // ["https:/","/","...github.io/",$money]
+      return `/${parts[3]}`;
+    }
+
+    // default case, we don't have a base path
+    // good for localhost
+    return "";
+  }
 };
 
 export default config;
