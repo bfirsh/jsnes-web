@@ -22,32 +22,36 @@ var frameBuffer32 = new Uint32Array(frameBuffer);
 // AudioContext + audio buffers + samples lists
 // =============================================
 
-var audio = new AudioContext();
-var audioprocessor = audio.createScriptProcessor(512, 0, 2);
-audioprocessor.connect(audio.destination);
-
-// When the Audio processor requests new samples to play
-audioprocessor.onaudioprocess = audioEvent => {
-
-  // Ensure that we've buffered enough samples
-  if(leftSamples.length > currentSample + 512){
-    for(var i = 0; i < 512; i++){
-    
-      // Output (play) the buffers
-      audioEvent.outputBuffer.getChannelData(0)[i] = leftSamples[currentSample];
-      audioEvent.outputBuffer.getChannelData(1)[i] = rightSamples[currentSample];
-      currentSample++;
-    }
-  }
-}
-var leftSamples = [];
-var rightSamples = [];
+// Created after file selection
+var audio, audioprocessor;
+var samples = [];
 var currentSample = 0;
 
 // Load ROM + Start emulator
 // =========================
 
 file.onchange = () => {
+
+  // Start audio
+  audio = new AudioContext({sampleRate: 44100});
+  audioprocessor = audio.createScriptProcessor(512, 0, 1);
+  audioprocessor.connect(audio.destination);
+  
+  // When the Audio processor requests new samples to play
+  audioprocessor.onaudioprocess = audioEvent => {
+
+    // Ensure that we've buffered enough samples
+    if(samples.length > currentSample + 512){
+      for(var i = 0; i < 512; i++){
+      
+        // Output (play) the buffers
+        audioEvent.outputBuffer.getChannelData(0)[i] = samples[currentSample];
+        currentSample++;
+      }
+    }
+  }
+
+  // Read file
   var fileReader = new FileReader();
   fileReader.readAsBinaryString(file.files[0]);
   fileReader.onload = () => {
@@ -70,10 +74,8 @@ file.onchange = () => {
       },
       
       // Add new audio samples to the Audio buffers
-      onAudioSample: function(left, right){
-        //console.log(left, right);
-        leftSamples.push(left);
-        rightSamples.push(right);
+      onAudioSample: function(s){
+        samples.push(s);
       },
       
       // Pass the browser's sample rate to the emulator
@@ -106,18 +108,4 @@ file.onchange = () => {
     }
   }
 }
-
-
-// Or: load ROM from disk
-/*
-filename = "roms/smb.nes";
-file = new XMLHttpRequest;
-file.open('GET', filename);
-file.overrideMimeType("text/plain; charset=x-user-defined");
-file.send();
-file.onload = function(){
-  nes.loadROM(file.responseText);
-  setInterval(nes.frame, 16);
-}
-*/
 </script>
