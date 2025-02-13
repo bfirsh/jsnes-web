@@ -32,6 +32,7 @@ class Emulator extends Component {
         onMouseUp={() => {
           this.nes.zapperFireUp();
         }}
+        canvasClassName={this.props.canvasClassName}
       />
     );
   }
@@ -171,7 +172,8 @@ class Emulator extends Component {
 
 Emulator.propTypes = {
   paused: PropTypes.bool,
-  romData: PropTypes.string.isRequired
+  romData: PropTypes.string.isRequired,
+  canvasClassName: PropTypes.string
 };
 
 export default Emulator;
