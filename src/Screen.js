@@ -8,7 +8,7 @@ class Screen extends Component {
   render() {
     return (
       <canvas
-        className="Screen"
+        className={this.props.canvasClassName ?? "Screen"}
         width={SCREEN_WIDTH}
         height={SCREEN_HEIGHT}
         onMouseDown={this.handleMouseDown}
