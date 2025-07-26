@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Progress } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import config from "./config";
 import ControlsModal from "./ControlsModal";
@@ -9,6 +9,12 @@ import RomLibrary from "./RomLibrary";
 import { loadBinary } from "./utils";
 
 import "./RunPage.css";
+
+function withParams(Component) {
+  return props => (
+    <Component {...props} params={useParams()} location={useLocation()} />
+  );
+}
 
 /*
  * The UI for the emulator. Also responsible for loading ROM from URL or file.
@@ -44,9 +50,9 @@ class RunPage extends Component {
               </Link>
             </li>
           </ul>
-          <ul className="navbar-nav ml-auto mr-auto">
+          <ul className="navbar-nav ms-auto me-auto">
             <li className="navitem">
-              <span className="navbar-text mr-3">{this.state.romName}</span>
+              <span className="navbar-text me-3">{this.state.romName}</span>
             </li>
           </ul>
           <ul className="navbar-nav" style={{ width: "200px" }}>
@@ -55,7 +61,7 @@ class RunPage extends Component {
                 outline
                 color="primary"
                 onClick={this.toggleControlsModal}
-                className="mr-3"
+                className="me-3"
               >
                 Controls
               </Button>
@@ -134,8 +140,9 @@ class RunPage extends Component {
   }
 
   load = () => {
-    if (this.props.match.params.slug) {
-      const slug = this.props.match.params.slug;
+    console.log("load");
+    if (this.props.params.slug) {
+      const slug = this.props.params.slug;
       const isLocalROM = /^local-/.test(slug);
       const romHash = slug.split("-")[1];
       const romInfo = isLocalROM
@@ -205,4 +212,4 @@ class RunPage extends Component {
   };
 }
 
-export default RunPage;
+export default withParams(RunPage);
