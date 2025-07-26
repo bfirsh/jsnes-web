@@ -4,18 +4,18 @@ A React-based web UI for [JSNES](https://github.com/bfirsh/jsnes).
 
 ## Running in development
 
-    $ yarn install
-    $ yarn start
+    $ npm install
+    $ npm start
 
 ## Building for production
 
-    $ yarn build
+    $ npm run build
 
 The built app will be in `build/`.
 
 ## Running tests
 
-    $ yarn test
+    $ npm test
 
 ## Formatting code
 
@@ -23,7 +23,7 @@ All code must conform to [Prettier](https://prettier.io/) formatting. The test s
 
 To automatically format all your code, run:
 
-    $ yarn run format
+    $ npm run format
 
 ## Embedding JSNES in your own app
 

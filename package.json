@@ -27,9 +27,6 @@
   "overrides": {
     "@svgr/webpack": "$@svgr/webpack"
   },
-  "resolutions": {
-    "@svgr/webpack": "^6.3.1"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
