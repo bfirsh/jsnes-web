@@ -1,4 +1,4 @@
-import {createRoot} from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import { Routes, Route } from "react-router-dom";
 import RunPage from "./RunPage";
 
