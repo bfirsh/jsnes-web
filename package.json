@@ -4,6 +4,7 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "5.2.0",
     "jsnes": "git+ssh://git@github.com/bfirsh/jsnes.git",
     "prop-types": "^15.8.1",
@@ -17,11 +18,11 @@
     "sass": "^1.54.5"
   },
   "devDependencies": {
-    "canvas": "^2.9.3",
+    "@svgr/webpack": "^6.3.1",
+    "canvas": "^3.1.2",
     "prettier": "^1.16.4",
     "prettier-check": "^2.0.0",
-    "react-scripts": "5.0.1",
-    "@svgr/webpack": "^6.3.1"
+    "react-scripts": "5.0.1"
   },
   "overrides": {
     "@svgr/webpack": "$@svgr/webpack"
