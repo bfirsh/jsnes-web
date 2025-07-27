@@ -18,7 +18,7 @@ const KEYS = {
   104: [2, Controller.BUTTON_UP, "Num-8"], // Num-8
   98: [2, Controller.BUTTON_DOWN, "Num-2"], // Num-2
   100: [2, Controller.BUTTON_LEFT, "Num-4"], // Num-4
-  102: [2, Controller.BUTTON_RIGHT, "Num-6"] // Num-6
+  102: [2, Controller.BUTTON_RIGHT, "Num-6"], // Num-6
 };
 
 export default class KeyboardController {
@@ -41,7 +41,7 @@ export default class KeyboardController {
     this.keys = keys || KEYS;
   };
 
-  setKeys = newKeys => {
+  setKeys = (newKeys) => {
     try {
       localStorage.setItem("keys", JSON.stringify(newKeys));
       this.keys = newKeys;
@@ -50,7 +50,7 @@ export default class KeyboardController {
     }
   };
 
-  handleKeyDown = e => {
+  handleKeyDown = (e) => {
     var key = this.keys[e.keyCode];
     if (key) {
       this.onButtonDown(key[0], key[1]);
@@ -58,7 +58,7 @@ export default class KeyboardController {
     }
   };
 
-  handleKeyUp = e => {
+  handleKeyUp = (e) => {
     var key = this.keys[e.keyCode];
     if (key) {
       this.onButtonUp(key[0], key[1]);
@@ -66,7 +66,7 @@ export default class KeyboardController {
     }
   };
 
-  handleKeyPress = e => {
+  handleKeyPress = (e) => {
     e.preventDefault();
   };
 }

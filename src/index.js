@@ -9,7 +9,7 @@ if (config.SENTRY_URI) {
   Raven.config(config.SENTRY_URI).install();
 }
 
-Raven.context(function() {
+Raven.context(function () {
   const container = document.getElementById("root");
   const root = createRoot(container);
   root.render(<App />);

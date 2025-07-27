@@ -6,7 +6,7 @@ export default class GamepadController {
     this.buttonCallback = null;
   }
 
-  disableIfGamepadEnabled = callback => {
+  disableIfGamepadEnabled = (callback) => {
     var self = this;
     return (playerId, buttonId) => {
       if (!self.gamepadConfig) {
@@ -21,7 +21,7 @@ export default class GamepadController {
     };
   };
 
-  _getPlayerNumberFromGamepad = gamepad => {
+  _getPlayerNumberFromGamepad = (gamepad) => {
     if (this.gamepadConfig.playerGamepadId[0] === gamepad.id) {
       return 1;
     }
@@ -66,7 +66,7 @@ export default class GamepadController {
               gamepadId: gamepad.id,
               type: "axis",
               code: code,
-              value: axis
+              value: axis,
             });
           }
 
@@ -75,7 +75,7 @@ export default class GamepadController {
               gamepadId: gamepad.id,
               type: "axis",
               code: code,
-              value: axis
+              value: axis,
             });
           }
         }
@@ -87,7 +87,7 @@ export default class GamepadController {
             this.buttonCallback({
               gamepadId: gamepad.id,
               type: "button",
-              code: code
+              code: code,
             });
           }
         }
@@ -101,8 +101,8 @@ export default class GamepadController {
           usedPlayers.push(playerNumber);
 
           if (this.gamepadConfig.configs[gamepad.id]) {
-            const configButtons = this.gamepadConfig.configs[gamepad.id]
-              .buttons;
+            const configButtons =
+              this.gamepadConfig.configs[gamepad.id].buttons;
 
             for (let i = 0; i < configButtons.length; i++) {
               const configButton = configButtons[i];
@@ -141,19 +141,19 @@ export default class GamepadController {
       }
 
       this.gamepadState[gamepadIndex] = {
-        buttons: buttons.map(b => {
+        buttons: buttons.map((b) => {
           return { pressed: b.pressed };
         }),
-        axes: gamepad.axes.slice(0)
+        axes: gamepad.axes.slice(0),
       };
     }
   };
 
-  promptButton = f => {
+  promptButton = (f) => {
     if (!f) {
       this.buttonCallback = f;
     } else {
-      this.buttonCallback = buttonInfo => {
+      this.buttonCallback = (buttonInfo) => {
         this.buttonCallback = null;
         f(buttonInfo);
       };
@@ -174,7 +174,7 @@ export default class GamepadController {
     this.gamepadConfig = gamepadConfig;
   };
 
-  setGamepadConfig = gamepadConfig => {
+  setGamepadConfig = (gamepadConfig) => {
     try {
       localStorage.setItem("gamepadConfig", JSON.stringify(gamepadConfig));
       this.gamepadConfig = gamepadConfig;
@@ -200,7 +200,7 @@ export default class GamepadController {
     return {
       stop: () => {
         stopped = true;
-      }
+      },
     };
   };
 }

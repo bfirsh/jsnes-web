@@ -10,7 +10,7 @@ describe("RunPage", () => {
     root.render(
       <Routes location="/roms/foo.nes" context={{}}>
         <Route exact path="/run/:rom" component={RunPage} />
-      </Routes>
+      </Routes>,
     );
   });
 });

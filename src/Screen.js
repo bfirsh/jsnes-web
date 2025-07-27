@@ -13,7 +13,7 @@ class Screen extends Component {
         height={SCREEN_HEIGHT}
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.props.onMouseUp}
-        ref={canvas => {
+        ref={(canvas) => {
           this.canvas = canvas;
         }}
       />
@@ -34,7 +34,7 @@ class Screen extends Component {
       0,
       0,
       SCREEN_WIDTH,
-      SCREEN_HEIGHT
+      SCREEN_HEIGHT,
     );
 
     this.context.fillStyle = "black";
@@ -53,7 +53,7 @@ class Screen extends Component {
     }
   }
 
-  setBuffer = buffer => {
+  setBuffer = (buffer) => {
     var i = 0;
     for (var y = 0; y < SCREEN_HEIGHT; ++y) {
       for (var x = 0; x < SCREEN_WIDTH; ++x) {
@@ -92,7 +92,7 @@ class Screen extends Component {
     return img;
   }
 
-  handleMouseDown = e => {
+  handleMouseDown = (e) => {
     if (!this.props.onMouseDown) return;
     // Make coordinates unscaled
     let scale = SCREEN_WIDTH / parseFloat(this.canvas.style.width);
