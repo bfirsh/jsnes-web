@@ -19,7 +19,7 @@ class Emulator extends Component {
   render() {
     return (
       <Screen
-        ref={screen => {
+        ref={(screen) => {
           this.screen = screen;
         }}
         onGenerateFrame={() => {
@@ -54,7 +54,7 @@ class Emulator extends Component {
         // - System can't run emulator at full speed. In this case it'll stop
         //    firing requestAnimationFrame.
         console.log(
-          "Buffer underrun, running another frame to try and catch up"
+          "Buffer underrun, running another frame to try and catch up",
         );
 
         this.frameTimer.generateFrame();
@@ -65,14 +65,14 @@ class Emulator extends Component {
           console.log("Still buffer underrun, running a second frame");
           this.frameTimer.generateFrame();
         }
-      }
+      },
     });
 
     this.nes = new NES({
       onFrame: this.screen.setBuffer,
       onStatusUpdate: console.log,
       onAudioSample: this.speakers.writeSample,
-      sampleRate: this.speakers.getSampleRate()
+      sampleRate: this.speakers.getSampleRate(),
     });
 
     // For debugging. (["nes"] instead of .nes to avoid VS Code type errors.)
@@ -80,13 +80,13 @@ class Emulator extends Component {
 
     this.frameTimer = new FrameTimer({
       onGenerateFrame: Raven.wrap(this.nes.frame),
-      onWriteFrame: Raven.wrap(this.screen.writeBuffer)
+      onWriteFrame: Raven.wrap(this.screen.writeBuffer),
     });
 
     // Set up gamepad and keyboard
     this.gamepadController = new GamepadController({
       onButtonDown: this.nes.buttonDown,
-      onButtonUp: this.nes.buttonUp
+      onButtonUp: this.nes.buttonUp,
     });
 
     this.gamepadController.loadGamepadConfig();
@@ -94,11 +94,11 @@ class Emulator extends Component {
 
     this.keyboardController = new KeyboardController({
       onButtonDown: this.gamepadController.disableIfGamepadEnabled(
-        this.nes.buttonDown
+        this.nes.buttonDown,
       ),
       onButtonUp: this.gamepadController.disableIfGamepadEnabled(
-        this.nes.buttonUp
-      )
+        this.nes.buttonUp,
+      ),
     });
 
     // Load keys from localStorage (if they exist)
@@ -108,7 +108,7 @@ class Emulator extends Component {
     document.addEventListener("keyup", this.keyboardController.handleKeyUp);
     document.addEventListener(
       "keypress",
-      this.keyboardController.handleKeyPress
+      this.keyboardController.handleKeyPress,
     );
 
     this.nes.loadROM(this.props.romData);
@@ -121,12 +121,12 @@ class Emulator extends Component {
     // Unbind keyboard
     document.removeEventListener(
       "keydown",
-      this.keyboardController.handleKeyDown
+      this.keyboardController.handleKeyDown,
     );
     document.removeEventListener("keyup", this.keyboardController.handleKeyUp);
     document.removeEventListener(
       "keypress",
-      this.keyboardController.handleKeyPress
+      this.keyboardController.handleKeyPress,
     );
 
     // Stop gamepad
@@ -171,7 +171,7 @@ class Emulator extends Component {
 
 Emulator.propTypes = {
   paused: PropTypes.bool,
-  romData: PropTypes.string.isRequired
+  romData: PropTypes.string.isRequired,
 };
 
 export default Emulator;

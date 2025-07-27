@@ -1,4 +1,4 @@
-const pFileReader = function(file) {
+const pFileReader = function (file) {
   return new Promise((resolve, reject) => {
     var reader = new FileReader();
     reader.onload = resolve;
@@ -6,10 +6,10 @@ const pFileReader = function(file) {
   });
 };
 
-const hashFile = function(byteString) {
-  const asHex = buffer => {
+const hashFile = function (byteString) {
+  const asHex = (buffer) => {
     return Array.from(new Uint8Array(buffer))
-      .map(b => b.toString(16).padStart(2, "0"))
+      .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
   };
 
@@ -24,14 +24,14 @@ const hashFile = function(byteString) {
 };
 
 const RomLibrary = {
-  getRomInfoByHash: function(hash) {
-    return this.load().find(rom => rom.hash === hash);
+  getRomInfoByHash: function (hash) {
+    return this.load().find((rom) => rom.hash === hash);
   },
-  save: function(file) {
+  save: function (file) {
     return pFileReader(file)
-      .then(function(readFile) {
+      .then(function (readFile) {
         const byteString = readFile.target.result;
-        return hashFile(byteString).then(hash => {
+        return hashFile(byteString).then((hash) => {
           return { hash, byteString };
         });
       })
@@ -42,7 +42,7 @@ const RomLibrary = {
         const rom = {
           name: file.name,
           hash: hash,
-          added: Date.now()
+          added: Date.now(),
         };
 
         const newRomInfo = JSON.stringify(existingLibrary.concat([rom]));
@@ -53,20 +53,20 @@ const RomLibrary = {
         return rom;
       });
   },
-  load: function() {
+  load: function () {
     const localData = localStorage.getItem("savedRomInfo");
     if (!localData) return [];
     const savedRomInfo = JSON.parse(localStorage.getItem("savedRomInfo"));
     return savedRomInfo || [];
   },
-  delete: function(hash) {
+  delete: function (hash) {
     const existingLibrary = this.load();
     localStorage.removeItem("blob-" + hash);
     localStorage.setItem(
       "savedRomInfo",
-      JSON.stringify(existingLibrary.filter(rom => rom.hash !== hash))
+      JSON.stringify(existingLibrary.filter((rom) => rom.hash !== hash)),
     );
-  }
+  },
 };
 
 export default RomLibrary;

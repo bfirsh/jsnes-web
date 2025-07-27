@@ -11,7 +11,7 @@ import { loadBinary } from "./utils";
 import "./RunPage.css";
 
 function withParams(Component) {
-  return props => (
+  return (props) => (
     <Component {...props} params={useParams()} location={useLocation()} />
   );
 }
@@ -30,7 +30,7 @@ class RunPage extends Component {
       controlsModalOpen: false,
       loading: true,
       loadedPercent: 3,
-      error: null
+      error: null,
     };
   }
 
@@ -39,7 +39,7 @@ class RunPage extends Component {
       <div className="RunPage">
         <nav
           className="navbar navbar-expand"
-          ref={el => {
+          ref={(el) => {
             this.navbar = el;
           }}
         >
@@ -82,7 +82,7 @@ class RunPage extends Component {
         ) : (
           <div
             className="screen-container"
-            ref={el => {
+            ref={(el) => {
               this.screenContainer = el;
             }}
           >
@@ -93,14 +93,14 @@ class RunPage extends Component {
                   position: "absolute",
                   width: "70%",
                   left: "15%",
-                  top: "48%"
+                  top: "48%",
                 }}
               />
             ) : this.state.romData ? (
               <Emulator
                 romData={this.state.romData}
                 paused={this.state.paused}
-                ref={emulator => {
+                ref={(emulator) => {
                   this.emulator = emulator;
                 }}
               />
@@ -169,13 +169,13 @@ class RunPage extends Component {
               this.handleLoaded(data);
             }
           },
-          this.handleProgress
+          this.handleProgress,
         );
       }
     } else if (this.props.location.state && this.props.location.state.file) {
       let reader = new FileReader();
       reader.readAsBinaryString(this.props.location.state.file);
-      reader.onload = e => {
+      reader.onload = (e) => {
         this.currentRequest = null;
         this.handleLoaded(reader.result);
       };
@@ -184,13 +184,13 @@ class RunPage extends Component {
     }
   };
 
-  handleProgress = e => {
+  handleProgress = (e) => {
     if (e.lengthComputable) {
       this.setState({ loadedPercent: (e.loaded / e.total) * 100 });
     }
   };
 
-  handleLoaded = data => {
+  handleLoaded = (data) => {
     this.setState({ running: true, loading: false, romData: data });
   };
 
@@ -200,8 +200,9 @@ class RunPage extends Component {
 
   layout = () => {
     let navbarHeight = parseFloat(window.getComputedStyle(this.navbar).height);
-    this.screenContainer.style.height = `${window.innerHeight -
-      navbarHeight}px`;
+    this.screenContainer.style.height = `${
+      window.innerHeight - navbarHeight
+    }px`;
     if (this.emulator) {
       this.emulator.fitInParent();
     }

@@ -23,7 +23,7 @@ const config = {
           </a>
         </span>
       ),
-      url: "https://cdn.jsdelivr.net/gh/bfirsh/jsnes-roms@master/owlia.nes"
+      url: "https://cdn.jsdelivr.net/gh/bfirsh/jsnes-roms@master/owlia.nes",
     },
     nomolos: {
       name: "Nomolos: Storming the Catsle",
@@ -46,7 +46,7 @@ const config = {
           </a>
         </span>
       ),
-      url: "https://cdn.jsdelivr.net/gh/bfirsh/jsnes-roms@master/nomolos.nes"
+      url: "https://cdn.jsdelivr.net/gh/bfirsh/jsnes-roms@master/nomolos.nes",
     },
     croom: {
       name: "Concentration Room",
@@ -62,8 +62,7 @@ const config = {
           by Damian Yerrick
         </span>
       ),
-      url:
-        "https://cdn.jsdelivr.net/gh/bfirsh/jsnes-roms@master/croom/croom.nes"
+      url: "https://cdn.jsdelivr.net/gh/bfirsh/jsnes-roms@master/croom/croom.nes",
     },
     lj65: {
       name: "LJ65",
@@ -79,11 +78,11 @@ const config = {
           by Damian Yerrick
         </span>
       ),
-      url: "https://cdn.jsdelivr.net/gh/bfirsh/jsnes-roms@master/lj65/lj65.nes"
-    }
+      url: "https://cdn.jsdelivr.net/gh/bfirsh/jsnes-roms@master/lj65/lj65.nes",
+    },
   },
   GOOGLE_ANALYTICS_CODE: process.env.REACT_APP_GOOGLE_ANALYTICS_CODE,
-  SENTRY_URI: process.env.REACT_APP_SENTRY_URI
+  SENTRY_URI: process.env.REACT_APP_SENTRY_URI,
 };
 
 export default config;

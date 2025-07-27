@@ -9,7 +9,7 @@ describe("ListPage", () => {
     root.render(
       <Routes location="/" context={{}}>
         <Route exact path="/" component={ListPage} />
-      </Routes>
+      </Routes>,
     );
   });
 });

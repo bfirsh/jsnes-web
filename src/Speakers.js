@@ -50,7 +50,7 @@ export default class Speakers {
     this.buffer.enq(right);
   };
 
-  onaudioprocess = e => {
+  onaudioprocess = (e) => {
     var left = e.outputBuffer.getChannelData(0);
     var right = e.outputBuffer.getChannelData(1);
     var size = left.length;

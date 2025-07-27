@@ -32,7 +32,7 @@ export default class FrameTimer {
     this.lastFrameTime += this.interval;
   }
 
-  onAnimationFrame = time => {
+  onAnimationFrame = (time) => {
     this.requestAnimationFrame();
     // how many ms after 60fps frame time
     let excess = time % this.interval;
@@ -48,7 +48,7 @@ export default class FrameTimer {
     }
 
     let numFrames = Math.round(
-      (newFrameTime - this.lastFrameTime) / this.interval
+      (newFrameTime - this.lastFrameTime) / this.interval,
     );
 
     // This can happen a lot on a 144Hz display
@@ -67,9 +67,12 @@ export default class FrameTimer {
     // until next frame draw
     let timeToNextFrame = this.interval - excess;
     for (let i = 1; i < numFrames; i++) {
-      setTimeout(() => {
-        this.generateFrame();
-      }, (i * timeToNextFrame) / numFrames);
+      setTimeout(
+        () => {
+          this.generateFrame();
+        },
+        (i * timeToNextFrame) / numFrames,
+      );
     }
     if (numFrames > 1) console.log("SKIP", numFrames - 1, this.lastFrameTime);
   };
