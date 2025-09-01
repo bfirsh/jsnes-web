@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "5.2.0",
+    "bootstrap": "5.3.8",
     "jsnes": "git+ssh://git@github.com/bfirsh/jsnes.git",
     "prop-types": "^15.8.1",
     "raven-js": "^3.27.2",
