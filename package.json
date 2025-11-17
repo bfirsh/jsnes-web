@@ -12,7 +12,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-ga": "^3.3.1",
-    "react-router-dom": "^6.3.0",
+    "react-router-dom": "^7.9.6",
     "reactstrap": "^9.1.3",
     "ringbufferjs": "^2.0.0",
     "sass": "^1.54.5"
