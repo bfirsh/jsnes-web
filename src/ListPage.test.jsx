@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { Routes, Route } from "react-router-dom";
+import { MemoryRouter, Routes, Route } from "react-router-dom";
 import ListPage from "./ListPage";
 
 describe("ListPage", () => {
@@ -7,9 +7,11 @@ describe("ListPage", () => {
     const div = document.createElement("div");
     const root = createRoot(div);
     root.render(
-      <Routes location="/" context={{}}>
-        <Route exact path="/" component={ListPage} />
-      </Routes>,
+      <MemoryRouter initialEntries={["/"]}>
+        <Routes>
+          <Route path="/" element={<ListPage />} />
+        </Routes>
+      </MemoryRouter>,
     );
   });
 });

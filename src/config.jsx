@@ -97,8 +97,8 @@ const config = {
       url: "https://cdn.jsdelivr.net/gh/bfirsh/jsnes-roms@master/lj65/lj65.nes",
     },
   },
-  GOOGLE_ANALYTICS_CODE: process.env.REACT_APP_GOOGLE_ANALYTICS_CODE,
-  SENTRY_URI: process.env.REACT_APP_SENTRY_URI,
+  GOOGLE_ANALYTICS_CODE: import.meta.env.VITE_GOOGLE_ANALYTICS_CODE,
+  SENTRY_URI: import.meta.env.VITE_SENTRY_URI,
 };
 
 export default config;

@@ -18,30 +18,21 @@
     "sass": "^1.94.2"
   },
   "devDependencies": {
-    "@svgr/webpack": "^8.1.0",
-    "canvas": "^3.2.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
+    "@vitejs/plugin-react": "^5.1.2",
+    "jsdom": "^27.4.0",
     "prettier": "^3.6.2",
     "prettier-check": "^2.0.0",
-    "react-scripts": "^5.0.1",
-    "yaml": "^2.8.2"
-  },
-  "overrides": {
-    "@svgr/webpack": "$@svgr/webpack",
-    "jsdom": {
-      "canvas": "$canvas"
-    }
+    "vite": "^7.3.0",
+    "vitest": "^4.0.16"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "prettier-check src/**/*.js && react-scripts test",
-    "eject": "react-scripts eject",
-    "format": "prettier --write src/**/*.js"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "prettier-check 'src/**/*.{js,jsx}' && vitest run",
+    "format": "prettier --write 'src/**/*.{js,jsx}'"
+  }
 }
