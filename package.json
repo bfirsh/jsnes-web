@@ -6,7 +6,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.2.0",
-    "jsnes": "git+ssh://git@github.com/bfirsh/jsnes.git",
+    "jsnes": "github:bfirsh/jsnes",
     "prop-types": "^15.8.1",
     "raven-js": "^3.27.2",
     "react": "^19.2.3",
