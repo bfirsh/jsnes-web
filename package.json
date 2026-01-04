@@ -26,7 +26,10 @@
     "yaml": "^2.8.2"
   },
   "overrides": {
-    "@svgr/webpack": "$@svgr/webpack"
+    "@svgr/webpack": "$@svgr/webpack",
+    "jsdom": {
+      "canvas": "$canvas"
+    }
   },
   "scripts": {
     "start": "react-scripts start",
