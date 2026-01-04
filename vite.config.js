@@ -6,6 +6,18 @@ export default defineConfig({
   build: {
     outDir: "build",
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: [
+          "import",
+          "global-builtin",
+          "color-functions",
+          "if-function",
+        ],
+      },
+    },
+  },
   server: {
     port: 3000,
     open: true,
