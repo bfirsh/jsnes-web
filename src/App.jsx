@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GoogleAnalytics from "react-ga";
+import ReactGA from "react-ga4";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ListPage from "./ListPage";
 import RunPage from "./RunPage";
@@ -12,7 +12,7 @@ class App extends Component {
     super(props);
     this.state = { error: null };
     if (config.GOOGLE_ANALYTICS_CODE) {
-      GoogleAnalytics.initialize(config.GOOGLE_ANALYTICS_CODE);
+      ReactGA.initialize(config.GOOGLE_ANALYTICS_CODE);
     }
   }
 
@@ -48,7 +48,7 @@ class App extends Component {
   }
 
   recordPageview = ({ location }) => {
-    GoogleAnalytics.pageview(location.pathname);
+    ReactGA.send({ hitType: "pageview", page: location.pathname });
     return null;
   };
 }
