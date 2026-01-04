@@ -14,6 +14,8 @@ export default defineConfig({
           "global-builtin",
           "color-functions",
           "if-function",
+          "abs-percent",
+          "function-units",
         ],
       },
     },

@@ -1,20 +1,46 @@
-// Override Bootstrap variables before importing
-@use "bootstrap/scss/bootstrap" with (
-  $enable-rounded: false,
-  $body-bg: #000,
-  $body-color: #f8f9fa,
-  $link-color: #f8f9fa,
-  $link-decoration: underline,
-  $link-hover-color: #6c757d,
-  $link-hover-decoration: underline,
-  $list-group-bg: #000,
-  $list-group-border-color: #dee2e6,
-  $table-border-color: #212529,
-  $modal-content-bg: #000,
-  $modal-header-border-width: 0,
-  $modal-footer-border-width: 0,
-  $btn-close-color: #fff
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+// Bootstrap customization, where we're supposed to
+$enable-rounded: false;
+$enable-print-styles: false;
+
+$body-bg: $black;
+$body-color: $gray-100;
+$link-color: $gray-100;
+$link-decoration: underline;
+$link-hover-color: $gray-500;
+$link-hover-decoration: underline;
+
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    primary: $white
+  )
 );
+
+$list-group-bg: $black;
+$list-group-border-color: $gray-300;
+
+$table-border-color: $gray-900;
+
+$modal-content-bg: $black;
+$modal-header-border-width: 0;
+$modal-footer-border-width: 0;
+
+$close-color: $white;
+$close-text-shadow: none;
+
+@import "bootstrap/scss/bootstrap";
+
+// Bootstrap customization, where we're not supposed to
+
+// Fix hover color being white
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    @include button-outline-variant($value, $black);
+  }
+}
 
 html,
 body,
@@ -96,9 +122,4 @@ img.controller-icon {
 
 h1 {
   font-size: 2.5rem;
-}
-
-// Fix hover color being white for outline buttons
-.btn-outline-primary {
-  --bs-btn-hover-bg: #000;
 }
