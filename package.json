@@ -19,10 +19,11 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "canvas": "^3.1.2",
+    "canvas": "^2.11.2",
     "prettier": "^3.6.2",
     "prettier-check": "^2.0.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "yaml": "^2.8.2"
   },
   "overrides": {
     "@svgr/webpack": "$@svgr/webpack"
