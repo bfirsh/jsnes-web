@@ -2,6 +2,22 @@ import React from "react";
 
 const config = {
   ROMS: {
+    accuracycoin: {
+      name: "AccuracyCoin",
+      description: (
+        <span>
+          <a
+            href="https://github.com/100thCoin/AccuracyCoin"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            AccuracyCoin
+          </a>{" "}
+          - NES accuracy tests
+        </span>
+      ),
+      url: "https://cdn.jsdelivr.net/gh/bfirsh/jsnes-roms@master/AccuracyCoin/AccuracyCoin.nes",
+    },
     owlia: {
       name: "The Legends of Owlia",
       description: (
