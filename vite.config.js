@@ -3,8 +3,14 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ["jsnes"],
+  },
   build: {
     outDir: "build",
+    commonjsOptions: {
+      include: [/jsnes/, /node_modules/],
+    },
   },
   css: {
     preprocessorOptions: {
