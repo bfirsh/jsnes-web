@@ -30,7 +30,7 @@
     "jsdom": "^27.4.0",
     "prettier": "^3.6.2",
     "vite": "^7.3.0",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.17"
   },
   "scripts": {
     "start": "vite",
