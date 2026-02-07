@@ -23,7 +23,14 @@ class Emulator extends Component {
           this.screen = screen;
         }}
         onGenerateFrame={() => {
-          this.nes.frame();
+          try {
+            this.nes.frame();
+          } catch (e) {
+            this.stop();
+            if (this.props.onError) {
+              this.props.onError(e);
+            }
+          }
         }}
         onMouseDown={(x, y) => {
           this.nes.zapperMove(x, y);
@@ -79,7 +86,16 @@ class Emulator extends Component {
     window["nes"] = this.nes;
 
     this.frameTimer = new FrameTimer({
-      onGenerateFrame: Raven.wrap(this.nes.frame),
+      onGenerateFrame: Raven.wrap(() => {
+        try {
+          this.nes.frame();
+        } catch (e) {
+          this.stop();
+          if (this.props.onError) {
+            this.props.onError(e);
+          }
+        }
+      }),
       onWriteFrame: Raven.wrap(this.screen.writeBuffer),
     });
 

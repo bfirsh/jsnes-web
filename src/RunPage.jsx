@@ -62,6 +62,7 @@ class RunPage extends Component {
                 color="primary"
                 onClick={this.toggleControlsModal}
                 className="me-3"
+                disabled={!!this.state.error}
               >
                 Controls
               </Button>
@@ -77,51 +78,61 @@ class RunPage extends Component {
           </ul>
         </nav>
 
-        {this.state.error ? (
-          this.state.error
-        ) : (
-          <div
-            className="screen-container"
-            ref={(el) => {
-              this.screenContainer = el;
-            }}
-          >
-            {this.state.loading ? (
-              <Progress
-                value={this.state.loadedPercent}
-                style={{
-                  position: "absolute",
-                  width: "70%",
-                  left: "15%",
-                  top: "48%",
-                }}
-              />
-            ) : this.state.romData ? (
-              <Emulator
-                romData={this.state.romData}
-                paused={this.state.paused}
-                ref={(emulator) => {
-                  this.emulator = emulator;
-                }}
-              />
-            ) : null}
+        <div
+          className="screen-container"
+          ref={(el) => {
+            this.screenContainer = el;
+          }}
+        >
+          {this.state.error ? (
+            <div
+              style={{
+                position: "absolute",
+                width: "70%",
+                left: "15%",
+                top: "40%",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              {this.state.error}
+            </div>
+          ) : this.state.loading ? (
+            <Progress
+              value={this.state.loadedPercent}
+              style={{
+                position: "absolute",
+                width: "70%",
+                left: "15%",
+                top: "48%",
+              }}
+            />
+          ) : this.state.romData ? (
+            <Emulator
+              romData={this.state.romData}
+              paused={this.state.paused}
+              onError={this.handleEmulatorError}
+              ref={(emulator) => {
+                this.emulator = emulator;
+              }}
+            />
+          ) : null}
 
-            {/* TODO: lift keyboard and gamepad state up */}
-            {this.state.controlsModalOpen && (
-              <ControlsModal
-                isOpen={this.state.controlsModalOpen}
-                toggle={this.toggleControlsModal}
-                keys={this.emulator.keyboardController.keys}
-                setKeys={this.emulator.keyboardController.setKeys}
-                promptButton={this.emulator.gamepadController.promptButton}
-                gamepadConfig={this.emulator.gamepadController.gamepadConfig}
-                setGamepadConfig={
-                  this.emulator.gamepadController.setGamepadConfig
-                }
-              />
-            )}
-          </div>
-        )}
+          {/* TODO: lift keyboard and gamepad state up */}
+          {this.state.controlsModalOpen && (
+            <ControlsModal
+              isOpen={this.state.controlsModalOpen}
+              toggle={this.toggleControlsModal}
+              keys={this.emulator.keyboardController.keys}
+              setKeys={this.emulator.keyboardController.setKeys}
+              promptButton={this.emulator.gamepadController.promptButton}
+              gamepadConfig={this.emulator.gamepadController.gamepadConfig}
+              setGamepadConfig={
+                this.emulator.gamepadController.setGamepadConfig
+              }
+            />
+          )}
+        </div>
       </div>
     );
   }
@@ -206,6 +217,14 @@ class RunPage extends Component {
     if (this.emulator) {
       this.emulator.fitInParent();
     }
+  };
+
+  handleEmulatorError = (error) => {
+    this.setState({
+      error: `The game has crashed: ${error.message}`,
+      running: false,
+      paused: false,
+    });
   };
 
   toggleControlsModal = () => {
