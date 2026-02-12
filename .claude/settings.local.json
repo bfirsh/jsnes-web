@@ -5,7 +5,9 @@
       "Bash(ls:*)",
       "Bash(npm run build:*)",
       "Bash(npm test:*)",
-      "Bash(npm ls:*)"
+      "Bash(npm ls:*)",
+      "Bash(find:*)",
+      "Bash(npx prettier:*)"
     ],
     "deny": []
   }
