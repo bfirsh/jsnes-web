@@ -1,5 +1,7 @@
 # JSNES Web UI
 
+**Note:** This is now deprecated, and has been moved to the `web/` directory in the main repository: https://github.com/bfirsh/jsnes
+
 A React-based web UI for [JSNES](https://github.com/bfirsh/jsnes).
 
 ## Running in development
