@@ -9,7 +9,7 @@
     "jsnes": "github:bfirsh/jsnes",
     "prop-types": "^15.8.1",
     "raven-js": "^3.27.2",
-    "react": "^19.2.3",
+    "react": "^19.2.4",
     "react-dom": "^19.2.3",
     "react-ga4": "^2.1.0",
     "react-router-dom": "^7.13.0",
